@@ -2,6 +2,9 @@
 #include <ArduinoJson.h>
 #include <LittleFS.h>
 #include <SHA256.h>
+#if defined(ESP32)
+#include <esp_task_wdt.h>
+#endif
 #if defined(VENDO_USE_W5500)
 #include <Ethernet.h>
 #include <Updater.h>
@@ -35,7 +38,7 @@ const uint8_t W5500_RESET_PIN = D2;
 #define VENDO_PROVISION_KEY "CHANGE-ME-FROM-VENDO-ENV"
 #endif
 #ifndef VENDO_FIRMWARE_VERSION
-#define VENDO_FIRMWARE_VERSION "0.2.14"
+#define VENDO_FIRMWARE_VERSION "0.2.15"
 #endif
 #ifndef VENDO_DEFAULT_WIFI_SSID
 #define VENDO_DEFAULT_WIFI_SSID "COMFAST_7E1D_2G"
@@ -61,6 +64,51 @@ uint32_t nextFirmwareAttempt = 0;
 uint16_t currentPulseCount = 0;
 uint8_t coinPin = DEFAULT_COIN_PIN, enablePin = DEFAULT_ENABLE_PIN;
 bool slotEnabled = false, forcedDisabled = false;
+bool setupComplete = false;
+void setSlot(bool enabled);
+void feedWatchdog() {
+  if (!setupComplete) return;
+#if defined(ESP32)
+  esp_task_wdt_reset();
+#else
+  ESP.wdtFeed();
+#endif
+}
+uint32_t nextReconnectAttempt = 0;
+uint32_t healthySince = 0;
+uint8_t recoveryRestarts = 0;
+const uint32_t RECOVERY_GRACE_MS = 30UL * 60 * 1000;
+const uint32_t HEARTBEAT_RECOVERY_MS = 10UL * 60 * 1000;
+
+bool hasUnreportedCoins() {
+  noInterrupts();
+  const bool pending = pendingPulses > 0;
+  interrupts();
+  return pending || currentPulseCount > 0 || currentPulseId.length() > 0;
+}
+
+void recoverStation() {
+  const uint32_t now = millis();
+  if (now - lastHeartbeatSuccess <= FAIL_CLOSED_MS) {
+    if (!healthySince) healthySince = now;
+    if (now - healthySince > HEARTBEAT_RECOVERY_MS && recoveryRestarts) {
+      LittleFS.remove("/recovery-count");
+      recoveryRestarts = 0;
+    }
+    return;
+  }
+  healthySince = 0;
+  setSlot(false);
+  if (now < RECOVERY_GRACE_MS || now - lastHeartbeatSuccess < HEARTBEAT_RECOVERY_MS ||
+      recoveryRestarts >= 3 || hasUnreportedCoins()) return;
+  File counter = LittleFS.open("/recovery-count", "w");
+  if (!counter) { Serial.println("Recovery: cannot save restart limit"); return; }
+  counter.print(++recoveryRestarts);
+  counter.close();
+  Serial.println("Recovery: heartbeat unavailable, restarting with coin slot OFF");
+  delay(100);
+  ESP.restart();
+}
 
 String bytesToHex(const uint8_t *value, size_t length) {
   static const char digits[] = "0123456789abcdef";
@@ -108,6 +156,7 @@ bool writeVerifiedFirmware(Stream &stream, int length, const String &expectedDig
       if (Update.write(buffer, received) != received) { cancelFirmwareUpdate(); return false; }
       written += received; lastData = millis();
     } else if (millis() - lastData > 15000) { cancelFirmwareUpdate(); return false; }
+    feedWatchdog();
     delay(1);
   }
   uint8_t result[32]; digest.finalize(result, sizeof(result));
@@ -379,7 +428,11 @@ bool heartbeat() {
     const uint32_t commandId = command["id"] | 0;
     if (action == "disable_coin") forcedDisabled = true;
     if (action == "enable_coin") forcedDisabled = false;
-    if (action == "restart") { acknowledge(commandId); delay(150); ESP.restart(); }
+    if (action == "restart") {
+      if (slotEnabled || hasUnreportedCoins()) continue;
+      setSlot(false);
+      acknowledge(commandId); delay(150); ESP.restart();
+    }
     if (action == "firmware_update") {
       const String url = command["payload"]["url"].as<String>();
       const String targetVersion = command["payload"]["version"].as<String>();
@@ -387,7 +440,7 @@ bool heartbeat() {
       const String signature = command["payload"]["signature"].as<String>();
       if (targetVersion == VENDO_FIRMWARE_VERSION) acknowledge(commandId);
       else if (!validOtaManifest(expectedDigest, signature)) Serial.println("OTA: rejected unsigned or invalid manifest");
-      else if (url.length() && millis() >= nextFirmwareAttempt) {
+      else if (url.length() && millis() >= nextFirmwareAttempt && !slotEnabled && !hasUnreportedCoins()) {
         nextFirmwareAttempt = millis() + 60000;
         Serial.printf("OTA: installing version %s\n", targetVersion.c_str());
         installFirmware(url, expectedDigest);
@@ -412,6 +465,11 @@ bool sendPulse(uint16_t count) {
 }
 
 void connectWiFi() {
+  if (setupComplete && !networkConnected()) {
+    setSlot(false);
+    if (int32_t(millis() - nextReconnectAttempt) < 0) return;
+    nextReconnectAttempt = millis() + 30000;
+  }
 #if defined(VENDO_USE_W5500)
   if (networkConnected()) {
     const int leaseStatus = Ethernet.maintain();
@@ -462,12 +520,19 @@ void connectWiFi() {
     return;
   }
 
+  if (setupComplete) {
+    Serial.println("Recovery: WiFi unavailable, retrying in 30 seconds");
+    return;
+  }
   Serial.println("WiFi: open network unavailable; starting setup portal");
   WiFiManager manager;
   manager.setConfigPortalTimeout(180);
   manager.setConnectTimeout(20);
   const String setupName = String("VendoOS-Setup-") + hardwareId.substring(hardwareId.length() - 4);
-  if (!manager.autoConnect(setupName.c_str())) { delay(1000); ESP.restart(); }
+  if (!manager.autoConnect(setupName.c_str())) {
+    Serial.println("Recovery: setup timed out, continuing connection retries");
+    return;
+  }
   serverBase = String("http://") + WiFi.gatewayIP().toString() + ":3080";
   Serial.println(String("Controller: ") + serverBase);
 #endif
@@ -476,6 +541,8 @@ void connectWiFi() {
 void setup() {
   Serial.begin(115200);
   LittleFS.begin();
+  File counter = LittleFS.open("/recovery-count", "r");
+  if (counter) { recoveryRestarts = uint8_t(constrain(counter.parseInt(), 0L, 3L)); counter.close(); }
 #ifdef ESP8266
   hardwareId = String("ESP8266-") + String(ESP.getChipId(), HEX);
   bootId = String(ESP.getChipId(), HEX) + "-" + String(ESP.random(), HEX);
@@ -493,9 +560,17 @@ void setup() {
   heartbeat();
   lastHeartbeatAttempt = millis();
   heartbeatDelayMs = heartbeatJitterMs ? random(heartbeatJitterMs + 1) : 0;
+  setupComplete = true;
+#if defined(ESP32)
+  esp_task_wdt_init(60, true);
+  esp_task_wdt_add(NULL);
+#else
+  ESP.wdtEnable(8000);
+#endif
 }
 
 void loop() {
+  feedWatchdog();
   connectWiFi();
   if (networkConnected() && deviceToken.length() < 20) provision();
   noInterrupts(); const bool hasPulse = pendingPulses > 0; interrupts();
@@ -526,5 +601,6 @@ void loop() {
     heartbeatDelayMs = heartbeatJitterMs ? random(heartbeatJitterMs + 1) : 0;
   }
   if (millis() - lastHeartbeatSuccess > FAIL_CLOSED_MS) setSlot(false);
+  recoverStation();
   delay(5);
 }
