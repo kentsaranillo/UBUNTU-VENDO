@@ -1,0 +1,30 @@
+[Unit]
+Description=VendoOS managed VLAN and DHCP sync
+After=vendo-network.service vendo-firewall.service
+Requires=vendo-network.service vendo-firewall.service
+Before=vendo-dnsmasq.service
+
+[Service]
+Type=simple
+User=root
+Group=vendo
+WorkingDirectory=/opt/debian-vendoos
+EnvironmentFile=/etc/debian-vendoos/vendo.env
+ExecStart=/usr/local/bin/node /opt/debian-vendoos/vlan-sync.js
+ExecStartPost=/bin/sh -c 'i=0; while [ "$i" -lt 3000 ]; do test -s /run/debian-vendoos/dnsmasq-vlans.conf && exit 0; i=$((i+1)); sleep 0.1; done; exit 1'
+Restart=always
+RestartSec=3
+StartLimitIntervalSec=0
+TimeoutStartSec=5min
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+RuntimeDirectory=debian-vendoos
+RuntimeDirectoryMode=0755
+RuntimeDirectoryPreserve=yes
+ReadWritePaths=/run/debian-vendoos /var/lib/debian-vendoos
+CapabilityBoundingSet=CAP_NET_ADMIN
+AmbientCapabilities=CAP_NET_ADMIN
+
+[Install]
+WantedBy=multi-user.target

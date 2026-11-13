@@ -1,0 +1,16 @@
+[Unit]
+Description=VendoOS WiFi access point
+After=vendo-network.service
+Requires=vendo-network.service
+
+[Service]
+Type=simple
+EnvironmentFile=/etc/debian-vendoos/vendo.env
+ExecCondition=/bin/sh -c '[ "$HOTSPOT_MODE" = "wifi" ]'
+ExecStart=/usr/sbin/hostapd /etc/debian-vendoos/hostapd.conf
+Restart=on-failure
+RestartSec=2
+CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_RAW
+
+[Install]
+WantedBy=multi-user.target

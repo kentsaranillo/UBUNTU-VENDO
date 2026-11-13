@@ -1,0 +1,15 @@
+[Unit]
+Description=Load the isolated VendoOS nftables rules
+After=vendo-network.service
+Requires=vendo-network.service
+Before=debian-vendoos.service vendo-access-sync.service
+
+[Service]
+Type=oneshot
+ExecStart=/opt/debian-vendoos/deploy/debian/apply-firewall.sh
+ExecReload=/opt/debian-vendoos/deploy/debian/apply-firewall.sh
+RemainAfterExit=yes
+CapabilityBoundingSet=CAP_NET_ADMIN
+
+[Install]
+WantedBy=multi-user.target

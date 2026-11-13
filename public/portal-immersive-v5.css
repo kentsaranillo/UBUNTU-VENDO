@@ -1,0 +1,204 @@
+/* VendoOS immersive portal system v5
+   Full-bleed media, typography and interaction replace decorative shapes. */
+
+/* Shared experience */
+.promo-portal{
+  --v5-accent:#24d3ad;
+  --v5-accent-2:#61a9ff;
+  --v5-bg:#090d11;
+  --v5-panel:rgba(12,17,22,.88);
+  --v5-line:rgba(255,255,255,.14);
+  --v5-text:#f7fafc;
+  --v5-muted:#aeb8c2;
+  min-height:100dvh;
+  padding:0!important;
+  background:var(--v5-bg)!important;
+  color:var(--v5-text);
+}
+.promo-portal .portal-shell{width:min(100%,1120px)!important;min-height:100dvh}
+.promo-portal .portal-card{
+  position:relative!important;
+  display:grid!important;
+  grid-template-columns:minmax(0,1.18fr) minmax(360px,.82fr)!important;
+  grid-template-areas:"hero status" "hero actions" "hero voucher" "hero notice" "hero footer"!important;
+  min-height:100dvh!important;
+  overflow:hidden!important;
+  border:0!important;
+  border-radius:0!important;
+  color:var(--v5-text)!important;
+  background:var(--v5-panel)!important;
+  box-shadow:none!important;
+  clip-path:none!important;
+}
+.promo-portal .theme-ornaments,.promo-portal .portal-spectrum{display:none!important}
+.promo-portal .portal-card::before,.promo-portal .portal-card::after,
+.promo-portal .status-panel::before,.promo-portal .status-panel::after,
+.promo-portal .command-status::before,.promo-portal .command-status::after,
+.promo-portal .portal-actions::before,.promo-portal .portal-actions::after,
+.promo-portal .voucher-form::before,.promo-portal .voucher-form::after{content:none!important;display:none!important}
+.promo-portal .portal-promo,.promo-portal .portal-promo.hidden{
+  grid-area:hero!important;
+  position:relative!important;
+  display:block!important;
+  height:100%!important;
+  min-height:100dvh!important;
+  margin:0!important;
+  overflow:hidden!important;
+  border:0!important;
+  border-radius:0!important;
+  clip-path:none!important;
+  transform:none!important;
+}
+.promo-portal .portal-promo>.portal-hero{display:block!important;width:100%!important;height:100%!important;padding:0!important;background:transparent!important}
+.promo-portal .portal-promo>.portal-hero>img{display:block!important;width:100%!important;height:100%!important;object-fit:cover!important;object-position:center!important;filter:saturate(1.05) contrast(1.02);transform:scale(1.002);transition:transform 8s cubic-bezier(.2,.7,.2,1)}
+.promo-portal .portal-promo:hover>.portal-hero>img{transform:scale(1.035)}
+.promo-portal .promo-shade{display:block!important;background:linear-gradient(180deg,rgba(0,0,0,.06),rgba(0,0,0,.16) 45%,rgba(0,0,0,.88))!important}
+.promo-portal .promo-copy{inset:auto 7% 7%!important;max-width:620px!important;color:#fff!important;text-align:left!important;transform:none!important}
+.promo-portal .promo-brand{justify-content:flex-start!important;gap:10px!important}
+.promo-portal .brand-mark{width:36px!important;height:36px!important;border:1px solid #ffffff55!important;border-radius:0!important;background:#0008!important;box-shadow:none!important}
+.promo-portal .promo-copy h1{max-width:580px;margin:16px 0 0!important;color:#fff!important;font:700 clamp(2.4rem,6vw,5.7rem)/.92 system-ui,-apple-system,"Segoe UI",sans-serif!important;letter-spacing:-.065em!important;text-wrap:balance}
+.promo-portal .promo-copy>p{margin-top:12px!important;color:#fff!important;font-size:.78rem!important;font-weight:750!important;letter-spacing:.17em!important}
+.promo-portal .portal-promo .status-pill{top:24px!important;right:24px!important;border:0!important;border-radius:0!important;padding:9px 12px!important;color:#fff!important;background:#0009!important;backdrop-filter:blur(14px)!important;box-shadow:none!important}
+.promo-portal .announcement{display:none!important}
+.promo-portal .status-panel{
+  grid-area:status!important;
+  align-self:end!important;
+  margin:0!important;
+  padding:clamp(28px,5vh,56px) clamp(24px,4vw,52px) 18px!important;
+  border:0!important;
+  border-radius:0!important;
+  color:var(--v5-text)!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  text-align:left!important;
+  transform:none!important;
+}
+.promo-portal .command-status{display:grid!important;grid-template-columns:auto 1fr!important;grid-template-areas:"orb eyebrow" "orb title" "orb detail"!important;column-gap:12px!important;align-items:center!important;min-height:0!important;text-align:left!important}
+.promo-portal .status-orb{grid-area:orb!important;width:12px!important;height:12px!important;margin:0!important;border:0!important;border-radius:50%!important;color:transparent!important;background:var(--v5-accent)!important;box-shadow:0 0 0 0 color-mix(in srgb,var(--v5-accent) 45%,transparent)!important;animation:v5-live 2s ease-out infinite!important}
+.promo-portal .command-status .eyebrow{grid-area:eyebrow!important;margin:0!important;color:var(--v5-muted)!important;font-size:.65rem!important;letter-spacing:.18em!important}
+.promo-portal .status-panel h2{grid-area:title!important;margin:2px 0!important;color:var(--v5-text)!important;font-size:clamp(1.3rem,3vw,2.15rem)!important;line-height:1.05!important;letter-spacing:-.035em!important;text-transform:none!important;text-shadow:none!important}
+.promo-portal #commandStatusDetail{grid-area:detail!important;color:var(--v5-muted)!important;font-size:.78rem!important}
+.promo-portal .access-title{display:flex!important;margin:26px 0 8px!important;padding:0 0 10px!important;border:0!important;border-bottom:1px solid var(--v5-line)!important;color:var(--v5-muted)!important;background:none!important}
+.promo-portal .access-title span{display:none!important}
+.promo-portal .credit-label{margin:13px 0 4px!important;color:var(--v5-muted)!important;font-size:.66rem!important;letter-spacing:.18em!important;text-align:left!important}
+.promo-portal .time-display.digit-time{display:flex!important;justify-content:flex-start!important;gap:clamp(14px,2.5vw,28px)!important;margin:4px 0 15px!important;color:var(--v5-text)!important;text-shadow:none!important}
+.promo-portal .time-display.digit-time>span{display:grid!important;grid-template-columns:auto auto!important;align-items:end!important;justify-content:start!important;gap:4px!important;min-width:0!important;aspect-ratio:auto!important;padding:0!important;border:0!important;border-radius:0!important;color:inherit!important;background:none!important;box-shadow:none!important;transform:none!important}
+.promo-portal .time-display.digit-time strong{color:inherit!important;font-size:clamp(1.75rem,4.3vw,3.35rem)!important;font-weight:680!important;line-height:.9!important;letter-spacing:-.06em!important}
+.promo-portal .time-display.digit-time small{padding-bottom:2px!important;color:var(--v5-muted)!important;font-size:.55rem!important;font-weight:750!important}
+.promo-portal #expiryText{margin:0 0 14px!important;color:var(--v5-muted)!important;font-size:.76rem!important;text-align:left!important}
+.promo-portal .pause-button{width:auto!important;min-height:40px!important;padding:0!important;border:0!important;border-bottom:1px solid var(--v5-line)!important;border-radius:0!important;color:var(--v5-text)!important;background:transparent!important;box-shadow:none!important;text-align:left!important}
+.promo-portal .pause-button:hover:not(:disabled){color:var(--v5-accent)!important;background:transparent!important}
+.promo-portal .portal-actions{grid-area:actions!important;display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;gap:10px!important;margin:0!important;padding:10px clamp(24px,4vw,52px)!important}
+.promo-portal .portal-actions .button{display:flex!important;align-items:center!important;justify-content:flex-start!important;gap:12px!important;min-height:58px!important;padding:11px 16px!important;border:1px solid var(--v5-line)!important;border-radius:0!important;color:var(--v5-text)!important;background:transparent!important;box-shadow:none!important;text-align:left!important;clip-path:none!important;transform:none!important;transition:background .18s ease,border-color .18s ease,color .18s ease!important}
+.promo-portal .portal-actions .coin-cta{border-color:var(--v5-accent)!important;color:#07100d!important;background:var(--v5-accent)!important}
+.promo-portal .portal-actions .coin-cta::after{display:none!important}
+.promo-portal .portal-actions .button:hover:not(:disabled){transform:none!important;border-color:var(--v5-text)!important;background:var(--v5-text)!important;color:#0a1014!important;filter:none!important}
+.promo-portal .portal-actions .button:active:not(:disabled){opacity:.78}
+.promo-portal .portal-actions .button:disabled{border-color:var(--v5-line)!important;color:#7d8790!important;background:#181d21!important;opacity:1!important}
+.promo-portal .button-icon{display:grid!important;place-items:center!important;width:30px!important;height:30px!important;flex:0 0 30px!important;border:1px solid currentColor!important;border-radius:0!important;color:inherit!important;background:transparent!important}
+.promo-portal .action-copy{display:grid!important;gap:2px!important}
+.promo-portal .action-copy strong{font-size:.78rem!important;letter-spacing:.08em!important}
+.promo-portal .action-copy small{display:block!important;color:inherit!important;font-size:.67rem!important;opacity:.72}
+.promo-portal .action-arrow{margin-left:auto!important;color:inherit!important}
+.promo-portal .rates-cta{width:58px!important;min-width:58px!important;padding:12px!important}
+.promo-portal .rates-cta .action-copy,.promo-portal .rates-cta .action-arrow{position:absolute!important;width:1px!important;height:1px!important;overflow:hidden!important;clip:rect(0 0 0 0)!important}
+.promo-portal .rates-cta .button-icon{margin:auto!important}
+.promo-portal .coin-hint{grid-column:1/-1!important;grid-row:auto!important;margin:0!important;color:var(--v5-muted)!important;font-size:.68rem!important;text-align:left!important}
+.promo-portal .voucher-form{grid-area:voucher!important;margin:0!important;padding:8px clamp(24px,4vw,52px) 22px!important;border:0!important;border-radius:0!important;background:transparent!important;transform:none!important}
+.promo-portal .voucher-form::before{display:none!important}
+.promo-portal .voucher-form label{margin:0 0 7px!important;color:var(--v5-muted)!important;font-size:.67rem!important;letter-spacing:.13em!important}
+.promo-portal .voucher-row{display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;gap:0!important;margin:0!important;overflow:visible!important;border:0!important;border-bottom:1px solid var(--v5-line)!important;border-radius:0!important;background:transparent!important}
+.promo-portal .voucher-row input{min-width:0!important;height:50px!important;border:0!important;border-radius:0!important;padding:0 2px!important;color:var(--v5-text)!important;background:transparent!important;box-shadow:none!important}
+.promo-portal .voucher-row input:focus{outline:0!important;border-bottom:2px solid var(--v5-accent)!important}
+.promo-portal .voucher-row .button{min-width:92px!important;height:50px!important;border:0!important;border-radius:0!important;color:var(--v5-accent)!important;background:transparent!important;box-shadow:none!important}
+.promo-portal .voucher-row .button:hover{color:var(--v5-text)!important;background:transparent!important}
+.promo-portal .notice{grid-area:notice!important;margin:0!important;padding:0 clamp(24px,4vw,52px) 10px!important;color:var(--v5-muted)!important;text-align:left!important}
+.promo-portal .portal-footer{grid-area:footer!important;align-self:end!important;margin:0!important;padding:12px clamp(24px,4vw,52px) 24px!important;border:0!important;color:var(--v5-muted)!important;background:transparent!important;text-align:left!important}
+
+/* Interactive bottom sheets */
+.promo-portal .modal{align-items:flex-end!important;padding:0!important;background:#05080bcc!important;backdrop-filter:blur(12px)!important}
+.promo-portal .modal-card{width:min(100%,620px)!important;max-height:88dvh!important;border:1px solid var(--v5-line)!important;border-bottom:0!important;border-radius:0!important;padding:28px clamp(20px,5vw,42px) max(28px,env(safe-area-inset-bottom))!important;color:var(--v5-text)!important;background:#11171c!important;box-shadow:0 -30px 90px #000a!important;animation:v5-sheet .28s cubic-bezier(.2,.8,.2,1)!important}
+.promo-portal .modal-card h2{color:var(--v5-text)!important;font-size:1.7rem!important}
+.promo-portal .modal-close{border:0!important;border-radius:0!important;color:var(--v5-text)!important;background:transparent!important}
+.promo-portal .rate-card{border:0!important;border-bottom:1px solid var(--v5-line)!important;border-radius:0!important;color:var(--v5-text)!important;background:transparent!important}
+.promo-portal .coin-animation{width:auto!important;height:auto!important;margin:12px auto!important;border-radius:0!important;color:var(--v5-accent)!important;background:transparent!important;box-shadow:none!important;animation:none!important;font-size:3rem!important}
+
+/* Distinct art direction without decorative geometry. */
+.portal-theme-dark{--v5-accent:#ff3d9f;--v5-accent-2:#905cff;--v5-bg:#08050a;--v5-panel:rgba(16,8,17,.94)}
+.portal-theme-dark .portal-promo>.portal-hero>img{filter:saturate(1.25) contrast(1.08) brightness(.82)}
+.portal-theme-dark .promo-copy h1{text-transform:uppercase}
+
+.portal-theme-lite{--v5-accent:#0a8f75;--v5-accent-2:#1b7fab;--v5-bg:#edf2f1;--v5-panel:rgba(249,252,251,.98);--v5-line:#cad6d3;--v5-text:#10201d;--v5-muted:#60716d}
+.portal-theme-lite .portal-card{background:#f9fcfb!important}
+.portal-theme-lite .portal-promo{min-height:100dvh!important}
+.portal-theme-lite .promo-shade{background:linear-gradient(180deg,transparent 45%,rgba(4,18,15,.82))!important}
+.portal-theme-lite .promo-copy{color:#fff!important}
+.portal-theme-lite .status-panel h2,.portal-theme-lite .voucher-row input,.portal-theme-lite .portal-footer{color:var(--v5-text)!important}
+.portal-theme-lite .portal-actions .coin-cta{color:#fff!important}
+.portal-theme-lite .portal-actions .button:hover:not(:disabled){color:#fff!important;background:#10201d!important}
+
+.portal-theme-storybook-adventure{--v5-accent:#f3b63f;--v5-accent-2:#28b9cc;--v5-bg:#081b27;--v5-panel:rgba(6,20,29,.94)}
+.portal-theme-storybook-adventure .promo-copy h1{font-family:Georgia,"Times New Roman",serif!important;font-style:italic!important;font-weight:500!important;letter-spacing:-.045em!important}
+.portal-theme-storybook-adventure .portal-promo>.portal-hero>img{filter:saturate(1.3) contrast(1.04)}
+
+.portal-theme-holiday-christmas{--v5-accent:#f4d06f;--v5-accent-2:#e6575f;--v5-bg:#071b17;--v5-panel:rgba(6,27,23,.95)}
+.portal-theme-holiday-christmas .portal-promo>.portal-hero>img{filter:saturate(1.12) brightness(.9)}
+.portal-theme-holiday-christmas .promo-copy h1{font-family:Georgia,"Times New Roman",serif!important;font-weight:500!important}
+
+.portal-theme-holiday-new-year{--v5-accent:#f6d477;--v5-accent-2:#7d9cff;--v5-bg:#050815;--v5-panel:rgba(5,9,24,.96)}
+.portal-theme-holiday-new-year .time-display.digit-time strong{font-size:clamp(2.1rem,5vw,4rem)!important}
+.portal-theme-holiday-new-year .promo-copy h1{font-weight:300!important;letter-spacing:-.045em!important}
+
+.portal-theme-holiday-valentine{--v5-accent:#ff769f;--v5-accent-2:#ffb6cb;--v5-bg:#1e0912;--v5-panel:rgba(30,8,17,.94)}
+.portal-theme-holiday-valentine .promo-copy h1{font-family:Georgia,"Times New Roman",serif!important;font-style:italic!important;font-weight:400!important}
+
+.portal-theme-holiday-lunar{--v5-accent:#f6c84d;--v5-accent-2:#ed3e3e;--v5-bg:#250305;--v5-panel:rgba(50,4,7,.96)}
+.portal-theme-holiday-lunar .promo-copy h1{font-weight:820!important;letter-spacing:-.04em!important}
+
+.portal-theme-holiday-easter{--v5-accent:#84e3c4;--v5-accent-2:#b695ef;--v5-bg:#11131d;--v5-panel:rgba(19,21,31,.94)}
+.portal-theme-holiday-easter .portal-promo>.portal-hero>img{filter:saturate(.92) brightness(1.03)}
+.portal-theme-holiday-easter .promo-copy h1{font-weight:530!important}
+
+.portal-theme-holiday-eid{--v5-accent:#d9bd6b;--v5-accent-2:#49c6a5;--v5-bg:#03120f;--v5-panel:rgba(3,21,17,.96)}
+.portal-theme-holiday-eid .promo-copy h1{font-family:Georgia,"Times New Roman",serif!important;font-weight:500!important}
+
+.portal-theme-holiday-halloween{--v5-accent:#f38b44;--v5-accent-2:#9b5de5;--v5-bg:#08060b;--v5-panel:rgba(10,7,13,.96)}
+.portal-theme-holiday-halloween .portal-promo>.portal-hero>img{filter:saturate(1.15) contrast(1.12) brightness(.72)}
+.portal-theme-holiday-halloween .promo-copy h1{font-weight:850!important;text-transform:uppercase}
+
+.portal-theme-holiday-fiesta{--v5-accent:#ffca3a;--v5-accent-2:#23c6b8;--v5-bg:#071a20;--v5-panel:rgba(7,27,34,.94)}
+.portal-theme-holiday-fiesta .portal-promo>.portal-hero>img{filter:saturate(1.35) contrast(1.04)}
+.portal-theme-holiday-fiesta .promo-copy h1{font-weight:850!important}
+
+@keyframes v5-live{70%{box-shadow:0 0 0 9px transparent}}
+@keyframes v5-sheet{from{opacity:0;transform:translateY(44px)}}
+
+/* Mobile becomes a one-handed media app with a persistent action area. */
+@media(max-width:899px){
+  .promo-portal .portal-shell{width:100%!important}
+  .promo-portal .portal-card{display:block!important;min-height:100dvh!important;padding-bottom:calc(160px + env(safe-area-inset-bottom))!important;background:var(--v5-bg)!important}
+  .promo-portal .portal-promo,.promo-portal .portal-promo.hidden{height:42dvh!important;min-height:300px!important;max-height:440px!important}
+  .promo-portal .promo-copy{inset:auto 20px 24px!important}
+  .promo-portal .promo-copy h1{font-size:clamp(2.25rem,12vw,4rem)!important}
+  .promo-portal .portal-promo .status-pill{top:max(16px,env(safe-area-inset-top))!important;right:16px!important}
+  .promo-portal .status-panel{padding:26px 20px 18px!important}
+  .promo-portal .time-display.digit-time{justify-content:space-between!important;gap:8px!important}
+  .promo-portal .time-display.digit-time strong{font-size:clamp(1.85rem,10vw,3rem)!important}
+  .promo-portal .portal-actions{position:fixed!important;z-index:12!important;right:0!important;bottom:0!important;left:0!important;grid-template-columns:minmax(0,1fr) 64px!important;padding:12px 16px max(12px,env(safe-area-inset-bottom))!important;border-top:1px solid var(--v5-line)!important;background:color-mix(in srgb,var(--v5-bg) 86%,transparent)!important;backdrop-filter:blur(18px)!important}
+  .promo-portal .portal-actions .button{min-height:58px!important}
+  .promo-portal .portal-actions .rates-cta{width:64px!important;min-width:64px!important}
+  .promo-portal .coin-hint{display:none!important}
+  .promo-portal .voucher-form{padding:10px 20px 24px!important}
+  .promo-portal .notice{padding-inline:20px!important}
+  .promo-portal .portal-footer{padding:10px 20px 24px!important}
+}
+@media(max-width:360px){
+  .promo-portal .portal-promo,.promo-portal .portal-promo.hidden{height:38dvh!important;min-height:260px!important}
+  .promo-portal .promo-copy h1{font-size:2.15rem!important}
+  .promo-portal .status-panel{padding-inline:16px!important}
+  .promo-portal .portal-actions{padding-inline:10px!important}
+  .promo-portal .voucher-form{padding-inline:16px!important}
+}
+@media(prefers-reduced-motion:reduce){
+  .promo-portal *{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}

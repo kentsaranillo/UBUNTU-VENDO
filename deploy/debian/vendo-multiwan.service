@@ -1,0 +1,29 @@
+[Unit]
+Description=VendoOS Multi-WAN health, failover and weighted load balancing
+After=network-online.target vendo-network.service vendo-firewall.service
+Wants=network-online.target
+Requires=vendo-network.service vendo-firewall.service
+
+[Service]
+Type=simple
+User=root
+Group=vendo
+WorkingDirectory=/opt/debian-vendoos
+EnvironmentFile=/etc/debian-vendoos/vendo.env
+ExecStart=/usr/local/bin/node /opt/debian-vendoos/multiwan-sync.js
+Restart=always
+RestartSec=3
+StartLimitIntervalSec=0
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+RuntimeDirectory=debian-vendoos
+RuntimeDirectoryMode=0755
+RuntimeDirectoryPreserve=yes
+ReadWritePaths=/run/debian-vendoos /run/systemd/network /run/udev/rules.d /etc/netplan /etc/ppp
+CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_RAW
+AmbientCapabilities=CAP_NET_ADMIN CAP_NET_RAW
+
+[Install]
+WantedBy=multi-user.target

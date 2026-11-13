@@ -1,0 +1,15 @@
+[Unit]
+Description=VendoOS DHCP and captive DNS
+After=vendo-network.service vendo-vlan-sync.service
+Requires=vendo-network.service vendo-vlan-sync.service
+
+[Service]
+Type=simple
+ExecStart=/usr/sbin/dnsmasq --keep-in-foreground --conf-file=/etc/debian-vendoos/dnsmasq.conf
+Restart=on-failure
+RestartSec=2
+StartLimitIntervalSec=0
+CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE CAP_NET_RAW CAP_SETUID CAP_SETGID
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,24 @@
+[Unit]
+Description=Debian VendoOS firewall entitlement sync
+After=debian-vendoos.service vendo-firewall.service
+Requires=debian-vendoos.service vendo-firewall.service
+
+[Service]
+Type=simple
+User=vendo
+Group=vendo
+WorkingDirectory=/opt/debian-vendoos
+EnvironmentFile=/etc/debian-vendoos/vendo.env
+ExecStart=/usr/local/bin/node /opt/debian-vendoos/access-sync.js
+Restart=always
+RestartSec=2
+StartLimitIntervalSec=0
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/debian-vendoos
+CapabilityBoundingSet=CAP_NET_ADMIN
+AmbientCapabilities=CAP_NET_ADMIN
+
+[Install]
+WantedBy=multi-user.target

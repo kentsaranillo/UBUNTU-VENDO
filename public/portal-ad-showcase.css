@@ -1,0 +1,699 @@
+/* A light, promotion-first layout using the existing brand, banner and message fields. */
+.promo-portal.portal-theme-ad-showcase,
+.portal-editor-preview.portal-theme-ad-showcase {
+  --surface: #fffdf9;
+  --surface-2: #fff5e9;
+  --ink: #253448;
+  --muted: #69788a;
+  --line: #e8dfd4;
+  --portal-primary: #ef7b32;
+  --portal-accent: #138c84;
+  color: var(--ink) !important;
+  background: #f6f1e9 !important;
+}
+
+.promo-portal.portal-theme-ad-showcase .portal-shell,
+.portal-editor-preview.portal-theme-ad-showcase .portal-shell {
+  width: min(100%, 470px) !important;
+  max-width: 470px !important;
+}
+
+.promo-portal.portal-theme-ad-showcase .portal-card,
+.portal-editor-preview.portal-theme-ad-showcase .portal-card {
+  display: grid !important;
+  grid-template-areas: "hero" "ad" "status" "actions" "voucher" "footer" !important;
+  grid-template-columns: minmax(0, 1fr) !important;
+  gap: 0 !important;
+  overflow: hidden !important;
+  border: 1px solid #e9dfd3 !important;
+  border-radius: 22px !important;
+  color: var(--ink) !important;
+  background: #fffdf9 !important;
+  box-shadow: 0 20px 55px #5b47311a !important;
+}
+
+.promo-portal.portal-theme-ad-showcase .portal-promo,
+.portal-editor-preview.portal-theme-ad-showcase .portal-promo {
+  grid-area: hero !important;
+  display: block !important;
+  width: 100% !important;
+  height: clamp(170px, 43vw, 230px) !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
+  border-bottom: 4px solid #ef7b32 !important;
+  background: linear-gradient(135deg, #f3aa5d, #f8d6a7) !important;
+}
+
+.promo-portal.portal-theme-ad-showcase .portal-promo > .portal-hero,
+.portal-editor-preview.portal-theme-ad-showcase .portal-promo > .portal-hero {
+  position: absolute !important;
+  inset: 0 !important;
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  padding: 0 !important;
+  background: transparent !important;
+}
+
+.promo-portal.portal-theme-ad-showcase .portal-promo > .portal-hero > img,
+.portal-editor-preview.portal-theme-ad-showcase .portal-promo > .portal-hero > img {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  filter: none !important;
+}
+
+.promo-portal.portal-theme-ad-showcase .promo-shade,
+.portal-editor-preview.portal-theme-ad-showcase .promo-shade {
+  display: none !important;
+  background: none !important;
+}
+
+.promo-portal.portal-theme-ad-showcase .ad-promo,
+.portal-editor-preview.portal-theme-ad-showcase .ad-promo {
+  grid-area: ad !important;
+  display: grid !important;
+  gap: 3px !important;
+  margin: 12px 16px 0 !important;
+  padding: 12px 14px !important;
+  border: 1px solid #f1d8bf !important;
+  border-radius: 14px !important;
+  background: linear-gradient(120deg, #fff8ef, #fffdf9) !important;
+}
+
+.promo-portal.portal-theme-ad-showcase .ad-promo.hidden,
+.portal-editor-preview.portal-theme-ad-showcase .ad-promo.hidden {
+  display: none !important;
+}
+
+.promo-portal.portal-theme-ad-showcase .ad-promo-brand,
+.portal-editor-preview.portal-theme-ad-showcase .ad-promo-brand {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  min-width: 0 !important;
+}
+
+.promo-portal.portal-theme-ad-showcase .ad-promo-brand span,
+.portal-editor-preview.portal-theme-ad-showcase .ad-promo-brand span {
+  flex: 0 0 auto !important;
+  border-radius: 999px !important;
+  padding: 3px 7px !important;
+  color: #fff !important;
+  background: #ef7b32 !important;
+  font-size: .55rem !important;
+  font-weight: 900 !important;
+  letter-spacing: .1em !important;
+}
+
+.promo-portal.portal-theme-ad-showcase .ad-promo-brand strong,
+.portal-editor-preview.portal-theme-ad-showcase .ad-promo-brand strong {
+  overflow: hidden !important;
+  color: #138078 !important;
+  font-size: .68rem !important;
+  font-weight: 900 !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+.promo-portal.portal-theme-ad-showcase .ad-promo h2,
+.portal-editor-preview.portal-theme-ad-showcase .ad-promo h2 {
+  margin: 2px 0 0 !important;
+  color: #24364a !important;
+  font-size: clamp(1.15rem, 5vw, 1.55rem) !important;
+  font-weight: 950 !important;
+  line-height: 1.08 !important;
+  text-shadow: none !important;
+}
+
+.promo-portal.portal-theme-ad-showcase .ad-promo > p,
+.portal-editor-preview.portal-theme-ad-showcase .ad-promo > p {
+  margin: 0 !important;
+  color: #657587 !important;
+  font-size: .7rem !important;
+  font-weight: 650 !important;
+  line-height: 1.25 !important;
+}
+
+.promo-portal.portal-theme-ad-showcase .ad-promo .ad-promo-message:not(.hidden),
+.portal-editor-preview.portal-theme-ad-showcase .ad-promo .ad-promo-message:not(.hidden) {
+  margin-top: 4px !important;
+  border-top: 1px solid #f0e0d0 !important;
+  padding-top: 6px !important;
+  color: #bd5b22 !important;
+  font-weight: 850 !important;
+}
+
+.promo-portal.portal-theme-ad-showcase .announcement,
+.portal-editor-preview.portal-theme-ad-showcase .announcement {
+  display: none !important;
+}
+
+.promo-portal.portal-theme-ad-showcase .status-panel,
+.portal-editor-preview.portal-theme-ad-showcase .status-panel {
+  grid-area: status !important;
+  margin: 8px 14px 0 !important;
+  border: 1px solid #eee4d9 !important;
+  border-radius: 16px !important;
+  padding: 11px 14px 10px !important;
+  color: #26374b !important;
+  background: #ffffff !important;
+  box-shadow: 0 5px 18px #4653620d !important;
+}
+
+.promo-portal.portal-theme-ad-showcase .status-panel .eyebrow,
+.portal-editor-preview.portal-theme-ad-showcase .status-panel .eyebrow {
+  color: #758394 !important;
+}
+
+.promo-portal.portal-theme-ad-showcase .status-panel h2,
+.portal-editor-preview.portal-theme-ad-showcase .status-panel h2 {
+  color: #178276 !important;
+  font-size: clamp(1.2rem, 5vw, 1.7rem) !important;
+  font-weight: 950 !important;
+  text-shadow: none !important;
+}
+
+.promo-portal.portal-theme-ad-showcase .status-orb,
+.portal-editor-preview.portal-theme-ad-showcase .status-orb {
+  border-color: #d8f2e9 !important;
+  background: #168c68 !important;
+  box-shadow: none !important;
+}
+
+.promo-portal.portal-theme-ad-showcase .credit-label,
+.portal-editor-preview.portal-theme-ad-showcase .credit-label {
+  color: #66788a !important;
+}
+
+.promo-portal.portal-theme-ad-showcase .time-display,
+.portal-editor-preview.portal-theme-ad-showcase .time-display {
+  color: #24618a !important;
+  text-shadow: none !important;
+}
+
+.promo-portal.portal-theme-ad-showcase .portal-actions,
+.portal-editor-preview.portal-theme-ad-showcase .portal-actions {
+  grid-area: actions !important;
+  gap: 7px !important;
+  padding: 8px 16px 0 !important;
+}
+
+.promo-portal.portal-theme-ad-showcase .portal-actions .coin-cta,
+.portal-editor-preview.portal-theme-ad-showcase .portal-actions .coin-cta {
+  min-height: 56px !important;
+  border: 0 !important;
+  border-radius: 13px !important;
+  color: #fff !important;
+  background: linear-gradient(110deg, #ef7b32, #f29c3b) !important;
+  box-shadow: 0 7px 16px #ef7b3238 !important;
+}
+
+.promo-portal.portal-theme-ad-showcase .portal-actions .rates-cta,
+.portal-editor-preview.portal-theme-ad-showcase .portal-actions .rates-cta {
+  min-height: 44px !important;
+  border: 1px solid #cee5df !important;
+  border-radius: 12px !important;
+  color: #176f67 !important;
+  background: #eff8f5 !important;
+  box-shadow: none !important;
+}
+
+.promo-portal.portal-theme-ad-showcase .voucher-form,
+.portal-editor-preview.portal-theme-ad-showcase .voucher-form {
+  grid-area: voucher !important;
+  margin: 8px 16px 0 !important;
+  border-top: 1px solid #ece3d9 !important;
+  padding: 9px 0 10px !important;
+}
+
+.promo-portal.portal-theme-ad-showcase .voucher-form label,
+.portal-editor-preview.portal-theme-ad-showcase .voucher-form label {
+  color: #657587 !important;
+}
+
+.promo-portal.portal-theme-ad-showcase .voucher-row,
+.portal-editor-preview.portal-theme-ad-showcase .voucher-row {
+  border-color: #dedbd5 !important;
+  border-radius: 11px !important;
+  background: #fff !important;
+}
+
+.promo-portal.portal-theme-ad-showcase .voucher-row input,
+.portal-editor-preview.portal-theme-ad-showcase .voucher-row input {
+  color: #26374b !important;
+  background: #fff !important;
+}
+
+.promo-portal.portal-theme-ad-showcase .voucher-row .button,
+.portal-editor-preview.portal-theme-ad-showcase .voucher-row .button {
+  color: #fff !important;
+  background: #176f67 !important;
+}
+
+.promo-portal.portal-theme-ad-showcase .portal-footer {
+  grid-area: footer !important;
+  border-top: 1px solid #eee4d9 !important;
+  color: #748292 !important;
+  background: #fffaf4 !important;
+}
+
+.promo-portal.portal-theme-ad-showcase .portal-footer strong {
+  color: #176f67 !important;
+}
+
+.promo-portal.portal-theme-ad-showcase .notice,
+.promo-portal.portal-theme-ad-showcase .portal-spectrum {
+  display: none !important;
+}
+
+@media (max-width: 600px) {
+  .promo-portal.portal-theme-ad-showcase {
+    display: block !important;
+    min-height: 100svh !important;
+    padding: 0 !important;
+    overflow-y: auto !important;
+    background: #fffaf4 !important;
+  }
+
+  .promo-portal.portal-theme-ad-showcase .portal-shell {
+    width: 100% !important;
+    max-width: none !important;
+    min-height: 100svh !important;
+  }
+
+  .promo-portal.portal-theme-ad-showcase .portal-card {
+    min-height: 100svh !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+  }
+
+  .promo-portal.portal-theme-ad-showcase .portal-promo {
+    height: clamp(145px, 24svh, 205px) !important;
+  }
+
+  .promo-portal.portal-theme-ad-showcase .ad-promo {
+    margin: 9px 12px 0 !important;
+    padding: 9px 11px !important;
+  }
+
+  .promo-portal.portal-theme-ad-showcase .status-panel {
+    margin: 6px 12px 0 !important;
+    padding: 8px 10px 7px !important;
+  }
+
+  .promo-portal.portal-theme-ad-showcase .status-orb {
+    width: 38px !important;
+    height: 38px !important;
+    margin-bottom: 4px !important;
+    border-width: 4px !important;
+    font-size: 1rem !important;
+  }
+
+  .promo-portal.portal-theme-ad-showcase .credit-label {
+    margin: 5px 0 3px !important;
+    font-size: .58rem !important;
+  }
+
+  .promo-portal.portal-theme-ad-showcase .time-display.digit-time {
+    gap: 4px !important;
+    margin: 3px 0 !important;
+  }
+
+  .promo-portal.portal-theme-ad-showcase .time-display.digit-time > span {
+    padding: 4px 2px !important;
+    color: #24618a !important;
+    background: #eef5f9 !important;
+  }
+
+  .promo-portal.portal-theme-ad-showcase .time-display.digit-time strong {
+    font-size: clamp(1.15rem, 5.5vw, 1.55rem) !important;
+  }
+
+  .promo-portal.portal-theme-ad-showcase .portal-actions {
+    gap: 6px !important;
+    padding: 6px 12px 0 !important;
+  }
+
+  .promo-portal.portal-theme-ad-showcase .portal-actions .coin-cta {
+    min-height: 52px !important;
+  }
+
+  .promo-portal.portal-theme-ad-showcase .portal-actions .rates-cta {
+    min-height: 40px !important;
+  }
+
+  .promo-portal.portal-theme-ad-showcase .voucher-form {
+    margin: 6px 12px 0 !important;
+    padding: 7px 0 !important;
+  }
+
+  .promo-portal.portal-theme-ad-showcase .voucher-row input,
+  .promo-portal.portal-theme-ad-showcase .voucher-row .button {
+    height: 40px !important;
+    min-height: 40px !important;
+  }
+
+  .promo-portal.portal-theme-ad-showcase .portal-footer {
+    padding: 7px 12px max(7px, env(safe-area-inset-bottom)) !important;
+  }
+}
+
+.theme-thumbnail-ad-showcase {
+  background: linear-gradient(140deg, #fff6e8, #ef7b32 58%, #138c84) !important;
+}
+
+.theme-thumbnail-ad-showcase i {
+  background: #fff !important;
+}
+
+.theme-thumbnail-ad-showcase b {
+  background: #ef7b32 !important;
+}
+
+.theme-thumbnail-ad-showcase em {
+  background: #138c84 !important;
+}
+
+/* Campaign-first layout: readable copy on the artwork's open left side. */
+.promo-portal.portal-theme-ad-showcase .portal-card,
+.portal-editor-preview.portal-theme-ad-showcase .portal-card {
+  grid-template-areas: "hero" "status" "actions" "voucher" "footer" !important;
+}
+
+.promo-portal.portal-theme-ad-showcase .portal-promo,
+.portal-editor-preview.portal-theme-ad-showcase .portal-promo {
+  position: relative !important;
+  isolation: isolate !important;
+  height: clamp(190px, 43vw, 245px) !important;
+}
+
+.promo-portal.portal-theme-ad-showcase .ad-promo,
+.portal-editor-preview.portal-theme-ad-showcase .ad-promo {
+  position: absolute !important;
+  inset: 11px auto 11px 12px !important;
+  z-index: 5 !important;
+  display: flex !important;
+  width: min(48%, 228px) !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  justify-content: center !important;
+  gap: 5px !important;
+  margin: 0 !important;
+  border: 1px solid #ffffffd9 !important;
+  border-radius: 16px !important;
+  padding: 12px !important;
+  background: #fffaf2ed !important;
+  box-shadow: 0 10px 28px #20324626 !important;
+  backdrop-filter: blur(7px) !important;
+}
+
+.promo-portal.portal-theme-ad-showcase .ad-promo.hidden,
+.portal-editor-preview.portal-theme-ad-showcase .ad-promo.hidden {
+  display: none !important;
+}
+
+.promo-portal.portal-theme-ad-showcase .ad-promo-brand,
+.portal-editor-preview.portal-theme-ad-showcase .ad-promo-brand {
+  flex-wrap: wrap !important;
+  gap: 4px !important;
+}
+
+.promo-portal.portal-theme-ad-showcase .ad-promo-brand span,
+.portal-editor-preview.portal-theme-ad-showcase .ad-promo-brand span {
+  border-radius: 999px !important;
+  padding: 4px 7px !important;
+  color: #fff !important;
+  background: #ef702c !important;
+  font-size: .5rem !important;
+  letter-spacing: .11em !important;
+}
+
+.promo-portal.portal-theme-ad-showcase .ad-promo-brand strong,
+.portal-editor-preview.portal-theme-ad-showcase .ad-promo-brand strong {
+  flex-basis: 100% !important;
+  color: #147b72 !important;
+  font-size: .65rem !important;
+  text-transform: uppercase !important;
+}
+
+.promo-portal.portal-theme-ad-showcase .ad-promo h2,
+.portal-editor-preview.portal-theme-ad-showcase .ad-promo h2 {
+  margin: 0 !important;
+  color: #203448 !important;
+  font-size: clamp(1.18rem, 5.2vw, 1.62rem) !important;
+  font-weight: 1000 !important;
+  letter-spacing: -.035em !important;
+  line-height: .98 !important;
+  text-transform: uppercase !important;
+}
+
+.promo-portal.portal-theme-ad-showcase .ad-promo > p,
+.portal-editor-preview.portal-theme-ad-showcase .ad-promo > p {
+  color: #4c6474 !important;
+  font-size: .64rem !important;
+  font-weight: 800 !important;
+  line-height: 1.2 !important;
+}
+
+.promo-portal.portal-theme-ad-showcase .ad-promo .ad-promo-message:not(.hidden),
+.portal-editor-preview.portal-theme-ad-showcase .ad-promo .ad-promo-message:not(.hidden) {
+  margin-top: 1px !important;
+  border: 0 !important;
+  border-radius: 8px !important;
+  padding: 5px 7px !important;
+  color: #fff !important;
+  background: #138c84 !important;
+  font-size: .53rem !important;
+  font-weight: 900 !important;
+}
+
+.promo-portal.portal-theme-ad-showcase .portal-actions .coin-cta,
+.portal-editor-preview.portal-theme-ad-showcase .portal-actions .coin-cta {
+  color: #fff !important;
+  background: linear-gradient(105deg, #f05b2e, #f59d29) !important;
+  box-shadow: 0 7px 18px #ed722d38 !important;
+}
+
+.promo-portal.portal-theme-ad-showcase .portal-actions .coin-cta .action-copy strong,
+.portal-editor-preview.portal-theme-ad-showcase .portal-actions .coin-cta .action-copy strong {
+  font-weight: 1000 !important;
+  letter-spacing: .06em !important;
+}
+
+.ad-theme-guide {
+  margin: 0 0 16px !important;
+  border: 1px solid #efc99f !important;
+  border-radius: 14px !important;
+  padding: 14px !important;
+  color: #32465a !important;
+  background: linear-gradient(135deg, #fff6e8, #f0fbf8) !important;
+}
+
+.ad-theme-guide[hidden] { display: none !important; }
+.ad-theme-guide .eyebrow { margin: 0 0 8px !important; color: #bf652d !important; font-weight: 950 !important; }
+.ad-theme-guide ol { display: grid !important; gap: 8px !important; margin: 0 !important; padding-left: 22px !important; }
+.ad-theme-guide li { padding-left: 3px !important; }
+.ad-theme-guide li strong,.ad-theme-guide li span { display: block !important; }
+.ad-theme-guide li strong { color: #203448 !important; font-size: .78rem !important; }
+.ad-theme-guide li span { margin-top: 2px !important; color: #6b7c8a !important; font-size: .72rem !important; line-height: 1.35 !important; }
+.ad-guide-example { display: grid !important; gap: 3px !important; margin: 12px 0 !important; border-left: 4px solid #ef7b32 !important; padding: 7px 10px !important; background: #ffffffbd !important; }
+.ad-guide-example span { color: #c4642d !important; font-size: .56rem !important; font-weight: 950 !important; letter-spacing: .1em !important; }
+.ad-guide-example strong { color: #147b72 !important; font-size: .66rem !important; }
+.ad-guide-example b { color: #203448 !important; font-size: .9rem !important; }
+.ad-guide-example small { color: #64788b !important; font-size: .67rem !important; }
+.ad-theme-guide #useSampleAdCopy { width: 100% !important; border-color: #158b80 !important; color: #fff !important; background: #158b80 !important; font-weight: 900 !important; }
+
+@media (max-width: 600px) {
+  .promo-portal.portal-theme-ad-showcase .portal-promo { height: clamp(170px, 25svh, 215px) !important; }
+  .promo-portal.portal-theme-ad-showcase .ad-promo { inset: 9px auto 9px 9px !important; width: 51% !important; gap: 4px !important; border-radius: 14px !important; padding: 9px !important; }
+  .promo-portal.portal-theme-ad-showcase .ad-promo h2 { font-size: clamp(1.12rem, 6vw, 1.48rem) !important; }
+  .promo-portal.portal-theme-ad-showcase .ad-promo > p { font-size: .57rem !important; }
+  .promo-portal.portal-theme-ad-showcase .ad-promo .ad-promo-message:not(.hidden) { padding: 4px 6px !important; font-size: .49rem !important; }
+}
+
+/* Keep access actions in a simple primary, secondary, voucher sequence. */
+.promo-portal.portal-theme-ad-showcase .portal-actions,
+.portal-editor-preview.portal-theme-ad-showcase .portal-actions {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 7px !important;
+  padding: 10px 16px 0 !important;
+}
+
+.promo-portal.portal-theme-ad-showcase .portal-actions .coin-cta,
+.portal-editor-preview.portal-theme-ad-showcase .portal-actions .coin-cta {
+  order: 1 !important;
+  display: flex !important;
+  justify-content: flex-start !important;
+  min-height: 64px !important;
+  padding: 9px 16px !important;
+  border: 0 !important;
+  border-radius: 15px !important;
+  color: #fff !important;
+  background: linear-gradient(105deg, #ef672f, #f39a29) !important;
+  box-shadow: 0 7px 16px #ed722d30 !important;
+  text-align: left !important;
+}
+
+.promo-portal.portal-theme-ad-showcase .portal-actions .coin-cta .button-icon,
+.portal-editor-preview.portal-theme-ad-showcase .portal-actions .coin-cta .button-icon {
+  display: grid !important;
+  width: 38px !important;
+  height: 38px !important;
+  flex: 0 0 38px !important;
+  place-items: center !important;
+  border: 1px solid #ffffff8c !important;
+  border-radius: 12px !important;
+  color: #fff !important;
+  background: #ffffff21 !important;
+  font-size: 0 !important;
+}
+
+.promo-portal.portal-theme-ad-showcase .portal-actions .coin-cta .button-icon::after,
+.portal-editor-preview.portal-theme-ad-showcase .portal-actions .coin-cta .button-icon::after {
+  content: "＋" !important;
+  font-size: 1.4rem !important;
+  font-weight: 850 !important;
+}
+
+.promo-portal.portal-theme-ad-showcase .portal-actions .coin-cta .action-copy,
+.portal-editor-preview.portal-theme-ad-showcase .portal-actions .coin-cta .action-copy {
+  flex: 1 1 auto !important;
+  text-align: left !important;
+}
+
+.promo-portal.portal-theme-ad-showcase .portal-actions .coin-cta .action-copy strong,
+.portal-editor-preview.portal-theme-ad-showcase .portal-actions .coin-cta .action-copy strong {
+  color: #fff !important;
+  font-size: .88rem !important;
+  font-weight: 1000 !important;
+  letter-spacing: .075em !important;
+  text-shadow: none !important;
+}
+
+.promo-portal.portal-theme-ad-showcase .portal-actions .coin-cta .action-arrow,
+.portal-editor-preview.portal-theme-ad-showcase .portal-actions .coin-cta .action-arrow {
+  display: block !important;
+  color: #fff !important;
+  font-size: 1.7rem !important;
+  font-weight: 850 !important;
+}
+
+.promo-portal.portal-theme-ad-showcase .portal-actions .coin-cta:disabled,
+.portal-editor-preview.portal-theme-ad-showcase .portal-actions .coin-cta:disabled {
+  border: 1px solid #d7dfe4 !important;
+  color: #758595 !important;
+  background: #e9eef1 !important;
+  box-shadow: none !important;
+}
+
+.promo-portal.portal-theme-ad-showcase .portal-actions .coin-cta:disabled .action-copy strong,
+.portal-editor-preview.portal-theme-ad-showcase .portal-actions .coin-cta:disabled .action-copy strong {
+  color: #758595 !important;
+}
+
+.promo-portal.portal-theme-ad-showcase .portal-actions .coin-cta:disabled .button-icon,
+.portal-editor-preview.portal-theme-ad-showcase .portal-actions .coin-cta:disabled .button-icon {
+  border-color: #bec9d0 !important;
+  color: #758595 !important;
+  background: #ffffff80 !important;
+}
+
+.promo-portal.portal-theme-ad-showcase .portal-actions .coin-hint,
+.portal-editor-preview.portal-theme-ad-showcase .portal-actions .coin-hint {
+  order: 2 !important;
+  align-self: center !important;
+  margin: -2px 0 0 !important;
+  color: #798896 !important;
+  font-size: .64rem !important;
+  line-height: 1.2 !important;
+  text-align: center !important;
+}
+
+.promo-portal.portal-theme-ad-showcase .portal-actions .rates-cta,
+.portal-editor-preview.portal-theme-ad-showcase .portal-actions .rates-cta {
+  order: 3 !important;
+  display: flex !important;
+  justify-content: flex-start !important;
+  min-height: 52px !important;
+  padding: 7px 14px !important;
+  border: 1px solid #b8ddd5 !important;
+  border-radius: 14px !important;
+  color: #176f67 !important;
+  background: #eff8f5 !important;
+  box-shadow: none !important;
+  text-align: left !important;
+}
+
+.promo-portal.portal-theme-ad-showcase .portal-actions .rates-cta .button-icon,
+.portal-editor-preview.portal-theme-ad-showcase .portal-actions .rates-cta .button-icon {
+  display: grid !important;
+  width: 34px !important;
+  height: 34px !important;
+  flex: 0 0 34px !important;
+  place-items: center !important;
+  border: 1px solid #aed4cb !important;
+  border-radius: 10px !important;
+  color: #147b72 !important;
+  background: #fff !important;
+}
+
+.promo-portal.portal-theme-ad-showcase .portal-actions .rates-cta .action-copy,
+.portal-editor-preview.portal-theme-ad-showcase .portal-actions .rates-cta .action-copy {
+  flex: 1 1 auto !important;
+  text-align: left !important;
+}
+
+.promo-portal.portal-theme-ad-showcase .portal-actions .rates-cta .action-copy strong,
+.portal-editor-preview.portal-theme-ad-showcase .portal-actions .rates-cta .action-copy strong {
+  color: #176f67 !important;
+  font-size: .75rem !important;
+  font-weight: 950 !important;
+  letter-spacing: .07em !important;
+}
+
+.promo-portal.portal-theme-ad-showcase .portal-actions .rates-cta .action-copy small,
+.portal-editor-preview.portal-theme-ad-showcase .portal-actions .rates-cta .action-copy small {
+  display: block !important;
+  margin-top: 2px !important;
+  color: #687f83 !important;
+  font-size: .59rem !important;
+  font-weight: 650 !important;
+}
+
+.promo-portal.portal-theme-ad-showcase .portal-actions .rates-cta .action-arrow,
+.portal-editor-preview.portal-theme-ad-showcase .portal-actions .rates-cta .action-arrow {
+  display: block !important;
+  color: #16877c !important;
+  font-size: 1.4rem !important;
+}
+
+.promo-portal.portal-theme-ad-showcase .voucher-form,
+.portal-editor-preview.portal-theme-ad-showcase .voucher-form {
+  margin-top: 8px !important;
+  border-top: 1px solid #eee4d9 !important;
+  padding-top: 9px !important;
+}
+
+.promo-portal.portal-theme-ad-showcase .voucher-form label,
+.portal-editor-preview.portal-theme-ad-showcase .voucher-form label {
+  margin-bottom: 5px !important;
+  color: #657587 !important;
+  font-size: .63rem !important;
+  font-weight: 900 !important;
+  letter-spacing: .08em !important;
+  text-transform: uppercase !important;
+}
+
+@media (max-width: 600px) {
+  .promo-portal.portal-theme-ad-showcase .portal-actions,
+  .portal-editor-preview.portal-theme-ad-showcase .portal-actions { padding: 8px 12px 0 !important; }
+  .promo-portal.portal-theme-ad-showcase .portal-actions .coin-cta,
+  .portal-editor-preview.portal-theme-ad-showcase .portal-actions .coin-cta { min-height: 60px !important; }
+  .promo-portal.portal-theme-ad-showcase .portal-actions .rates-cta,
+  .portal-editor-preview.portal-theme-ad-showcase .portal-actions .rates-cta { min-height: 48px !important; }
+}

@@ -1,0 +1,15 @@
+[Unit]
+Description=Configure the VendoOS customer interface
+After=network-online.target
+Wants=network-online.target
+Before=vendo-dnsmasq.service vendo-hostapd.service vendo-firewall.service
+
+[Service]
+Type=oneshot
+EnvironmentFile=/etc/debian-vendoos/vendo.env
+ExecStart=/opt/debian-vendoos/deploy/debian/setup-network.sh
+RemainAfterExit=yes
+CapabilityBoundingSet=CAP_NET_ADMIN
+
+[Install]
+WantedBy=multi-user.target

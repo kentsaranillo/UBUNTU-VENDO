@@ -1,0 +1,28 @@
+[Unit]
+Description=Debian VendoOS controller
+After=network-online.target vendo-network.service vendo-firewall.service vendo-dnsmasq.service
+Wants=network-online.target
+Requires=vendo-network.service vendo-firewall.service
+
+[Service]
+Type=simple
+User=vendo
+Group=vendo
+WorkingDirectory=/opt/debian-vendoos
+EnvironmentFile=/etc/debian-vendoos/vendo.env
+RuntimeDirectory=debian-vendoos/restore-requests debian-vendoos/restore-status
+RuntimeDirectoryMode=0750
+RuntimeDirectoryPreserve=yes
+ExecStart=/usr/local/bin/node /opt/debian-vendoos/server.js
+Restart=always
+RestartSec=3
+StartLimitIntervalSec=0
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/debian-vendoos /var/backups/debian-vendoos /run/debian-vendoos/restore-requests /run/debian-vendoos/restore-status
+CapabilityBoundingSet=
+
+[Install]
+WantedBy=multi-user.target

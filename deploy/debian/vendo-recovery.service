@@ -1,0 +1,8 @@
+[Unit]
+Description=Recover essential VendoOS network services
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/opt/debian-vendoos/deploy/debian/recover-services.sh

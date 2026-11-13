@@ -1,0 +1,1497 @@
+.promo-portal.portal-theme-battle-royale {
+  --v5-bg: #080f18;
+  --v5-panel: #111e2d;
+  --v5-accent: #ffa847;
+  --v5-text: #f4f8ff;
+  --v5-muted: #b2c5d7;
+  --v5-line: #354c63;
+  --battle-state: #ff8682;
+}
+
+.portal-theme-battle-royale[data-access-state="active"] { --battle-state: #78e7ab; }
+.portal-theme-battle-royale[data-access-state="paused"] { --battle-state: #ffc36f; }
+
+.promo-portal.portal-theme-battle-royale .promo-copy h1 {
+  font-family: Impact, "Arial Black", system-ui, sans-serif !important;
+  letter-spacing: .01em !important;
+  text-transform: uppercase;
+}
+
+.promo-portal.portal-theme-battle-royale .portal-promo {
+  border-bottom: 4px solid var(--v5-accent) !important;
+}
+
+.promo-portal.portal-theme-battle-royale .status-panel h2 {
+  color: var(--battle-state) !important;
+  font-weight: 900 !important;
+  letter-spacing: .045em !important;
+  text-transform: uppercase !important;
+}
+
+.promo-portal.portal-theme-battle-royale .status-orb {
+  background: var(--battle-state) !important;
+  animation: none !important;
+}
+
+.promo-portal.portal-theme-battle-royale .access-title { display: none !important; }
+
+.promo-portal.portal-theme-battle-royale .credit-label { margin-top: 20px !important; }
+
+.promo-portal.portal-theme-battle-royale .time-display.digit-time {
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: 6px !important;
+}
+
+.promo-portal.portal-theme-battle-royale .time-display.digit-time > span {
+  grid-template-columns: minmax(0, 1fr) !important;
+  justify-items: center !important;
+  gap: 6px !important;
+  padding: 9px 2px !important;
+  border: 1px solid var(--v5-line) !important;
+  border-top: 2px solid #70d5ff !important;
+  background: #172b40 !important;
+}
+
+.promo-portal.portal-theme-battle-royale .time-display.digit-time strong {
+  font: 800 clamp(1.1rem, 4vw, 2.1rem)/1 ui-monospace, monospace !important;
+  letter-spacing: -.05em !important;
+}
+
+.promo-portal.portal-theme-battle-royale .portal-actions {
+  grid-template-columns: minmax(0, 1fr) !important;
+}
+
+.promo-portal.portal-theme-battle-royale .portal-actions .rates-cta {
+  width: 100% !important;
+  background: #1c3851 !important;
+}
+
+.promo-portal.portal-theme-battle-royale .portal-actions .coin-cta {
+  min-height: 68px !important;
+  border: 2px solid #ffd18e !important;
+  color: #241306 !important;
+  background: linear-gradient(105deg, #ffbd62, #ffa12e) !important;
+  box-shadow: 0 5px 18px #ff9f2e55, inset 0 1px #fff8 !important;
+}
+
+.promo-portal.portal-theme-battle-royale .portal-actions .coin-cta .button-icon {
+  width: 36px !important;
+  height: 36px !important;
+  flex-basis: 36px !important;
+  border: 0 !important;
+  color: #fff !important;
+  background: #182b3d !important;
+  font-size: 1.2rem !important;
+}
+
+.promo-portal.portal-theme-battle-royale .portal-actions .coin-cta .action-copy strong {
+  font-size: .94rem !important;
+  font-weight: 950 !important;
+  letter-spacing: .1em !important;
+}
+
+.promo-portal.portal-theme-battle-royale .portal-actions .coin-cta .action-copy small {
+  color: #40260b !important;
+  font-size: .72rem !important;
+  font-weight: 750 !important;
+  opacity: 1 !important;
+}
+
+.promo-portal.portal-theme-battle-royale .portal-actions .rates-cta:hover {
+  color: #101b25 !important;
+  background: #70d5ff !important;
+}
+
+.promo-portal.portal-theme-battle-royale .rates-cta .action-copy,
+.promo-portal.portal-theme-battle-royale .rates-cta .action-arrow {
+  position: static !important;
+  width: auto !important;
+  height: auto !important;
+  overflow: visible !important;
+  clip: auto !important;
+}
+
+.promo-portal.portal-theme-battle-royale .rates-cta .button-icon { margin: 0 !important; }
+
+.promo-portal.portal-theme-battle-royale .voucher-row {
+  border: 1px solid var(--v5-line) !important;
+  background: #0c1722 !important;
+}
+
+.promo-portal.portal-theme-battle-royale .voucher-row input { padding-inline: 12px !important; }
+
+.promo-portal.portal-theme-battle-royale .voucher-row .button {
+  border-left: 1px solid var(--v5-line) !important;
+}
+
+.promo-portal.portal-theme-battle-royale :is(button, select):focus-visible {
+  outline: 2px solid #70d5ff !important;
+  outline-offset: 2px;
+}
+
+.promo-portal.portal-theme-battle-royale .portal-card {
+  grid-template-areas: "hero status" "hero station" "hero actions" "hero voucher" "hero notice" "hero footer" !important;
+}
+
+.promo-portal.portal-theme-battle-royale #stationPicker {
+  grid-area: station;
+  margin: 0;
+  padding: 0 clamp(24px, 4vw, 52px);
+}
+
+.theme-thumbnail.theme-thumbnail-battle-royale {
+  background: linear-gradient(135deg, #111e2d, #1c3851 65%, #ffa847) !important;
+}
+
+@media (max-width: 899px) {
+  .promo-portal.portal-theme-battle-royale,
+  .promo-portal.portal-theme-battle-royale .portal-shell {
+    width: 100% !important;
+    max-width: 100vw !important;
+    overflow-x: clip !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .portal-card {
+    padding-bottom: env(safe-area-inset-bottom) !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .portal-promo,
+  .promo-portal.portal-theme-battle-royale .portal-promo.hidden {
+    height: 36dvh !important;
+    min-height: 250px !important;
+    max-height: 380px !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .portal-actions {
+    position: static !important;
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    padding: 8px 20px 16px !important;
+    border-top: 0 !important;
+    background: transparent !important;
+    backdrop-filter: none !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .portal-actions .button,
+  .promo-portal.portal-theme-battle-royale .portal-actions .rates-cta {
+    width: 100% !important;
+    min-width: 0 !important;
+    min-height: 54px !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .voucher-form,
+  .promo-portal.portal-theme-battle-royale #stationPicker {
+    min-width: 0 !important;
+    padding-right: 20px !important;
+    padding-left: 20px !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .voucher-row input {
+    width: 100% !important;
+    font-size: 16px !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .promo-portal.portal-theme-battle-royale,
+  .promo-portal.portal-theme-battle-royale .portal-shell {
+    height: 100svh !important;
+    min-height: 100svh !important;
+    max-height: 100svh !important;
+    overflow: hidden !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .portal-shell {
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .portal-card {
+    display: grid !important;
+    flex: 1 1 auto !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    grid-template-rows: minmax(105px, 24svh) auto auto auto minmax(24px, 1fr) !important;
+    grid-template-areas: "hero" "status" "actions" "voucher" "footer" !important;
+    align-content: stretch !important;
+    min-height: 0 !important;
+    height: 100% !important;
+    overflow: hidden !important;
+    padding-bottom: env(safe-area-inset-bottom) !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .portal-promo,
+  .promo-portal.portal-theme-battle-royale .portal-promo.hidden {
+    grid-area: hero !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 0 !important;
+    max-height: none !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .promo-copy {
+    inset: auto 16px 14px !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .promo-copy h1 {
+    margin-top: 6px !important;
+    font-size: clamp(1.5rem, 7vw, 2.3rem) !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .promo-copy > p { margin-top: 5px !important; }
+
+  .promo-portal.portal-theme-battle-royale .status-panel {
+    grid-area: status !important;
+    align-self: stretch !important;
+    padding: 10px 18px 4px !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .command-status {
+    column-gap: 8px !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .status-panel .eyebrow {
+    font-size: .55rem !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .status-panel h2 {
+    margin: 0 !important;
+    font-size: clamp(1.1rem, 5vw, 1.5rem) !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale #commandStatusDetail { font-size: .68rem !important; }
+
+  .promo-portal.portal-theme-battle-royale .credit-label {
+    margin: 9px 0 4px !important;
+    font-size: .57rem !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .time-display.digit-time {
+    gap: 5px !important;
+    margin: 3px 0 7px !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .time-display.digit-time > span {
+    grid-template-columns: auto auto !important;
+    justify-content: center !important;
+    gap: 3px !important;
+    padding: 5px 2px !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .time-display.digit-time strong {
+    font-size: clamp(1.2rem, 6vw, 1.7rem) !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .time-display.digit-time small {
+    font-size: .47rem !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale #expiryText,
+  .promo-portal.portal-theme-battle-royale .pause-button {
+    display: none !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .portal-actions {
+    grid-area: actions !important;
+    align-self: stretch !important;
+    gap: 6px !important;
+    padding: 5px 18px !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .portal-actions .button,
+  .promo-portal.portal-theme-battle-royale .portal-actions .rates-cta {
+    min-height: 42px !important;
+    padding: 6px 12px !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .portal-actions .coin-cta {
+    min-height: 58px !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .button-icon {
+    width: 25px !important;
+    height: 25px !important;
+    flex-basis: 25px !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .action-copy strong { font-size: .7rem !important; }
+
+  .promo-portal.portal-theme-battle-royale .action-copy small,
+  .promo-portal.portal-theme-battle-royale .coin-hint,
+  .promo-portal.portal-theme-battle-royale .action-arrow { display: none !important; }
+
+  .promo-portal.portal-theme-battle-royale .portal-actions .coin-cta .action-copy small {
+    display: block !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .voucher-form {
+    grid-area: voucher !important;
+    align-self: stretch !important;
+    padding: 6px 18px !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .voucher-form label { margin-bottom: 3px !important; }
+
+  .promo-portal.portal-theme-battle-royale .voucher-row input,
+  .promo-portal.portal-theme-battle-royale .voucher-row .button {
+    height: 42px !important;
+    min-height: 42px !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .notice { display: none !important; }
+
+  .promo-portal.portal-theme-battle-royale .portal-footer {
+    grid-area: footer !important;
+    align-self: end !important;
+    padding: 4px 18px !important;
+    font-size: .65rem !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale #stationPicker {
+    position: absolute !important;
+    top: 2px !important;
+    right: 8px !important;
+    z-index: 2 !important;
+    width: min(58%, 220px) !important;
+    padding: 0 !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale #stationPicker label {
+    display: none !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale #stationPicker select {
+    min-height: 32px !important;
+    padding: 4px 24px 4px 8px !important;
+    font-size: .72rem !important;
+  }
+}
+
+/* Light rate and coin sheets that match the blue portal controls. */
+.promo-portal.portal-theme-battle-royale .modal {
+  background: #173b58a8 !important;
+  backdrop-filter: blur(5px) !important;
+}
+
+.promo-portal.portal-theme-battle-royale .modal-card {
+  border: 1px solid #c7d4df !important;
+  border-radius: 22px 22px 0 0 !important;
+  color: #183b56 !important;
+  background: #f8fbfd !important;
+  box-shadow: 0 -12px 34px #102e4530 !important;
+}
+
+.promo-portal.portal-theme-battle-royale .modal-card h2 {
+  color: #173f60 !important;
+  text-shadow: none !important;
+}
+
+.promo-portal.portal-theme-battle-royale .modal-card .eyebrow {
+  color: #30739e !important;
+}
+
+.promo-portal.portal-theme-battle-royale .modal-close,
+.promo-portal.portal-theme-battle-royale .icon-button {
+  border: 1px solid #b8c9d6 !important;
+  border-radius: 10px !important;
+  color: #173f60 !important;
+  background: #fff !important;
+}
+
+.promo-portal.portal-theme-battle-royale .rate-card {
+  border: 1px solid #c6d5e0 !important;
+  border-radius: 12px !important;
+  color: #173b58 !important;
+  background: #edf4f8 !important;
+}
+
+.promo-portal.portal-theme-battle-royale .rate-card strong {
+  color: #173b58 !important;
+}
+
+.promo-portal.portal-theme-battle-royale .rate-card span,
+.promo-portal.portal-theme-battle-royale .lease span {
+  color: #62798b !important;
+}
+
+.promo-portal.portal-theme-battle-royale .rate-price,
+.promo-portal.portal-theme-battle-royale .coin-total,
+.promo-portal.portal-theme-battle-royale .lease strong {
+  color: #126b9f !important;
+  font-weight: 900 !important;
+  text-shadow: none !important;
+}
+
+.promo-portal.portal-theme-battle-royale .coin-animation {
+  color: #fff !important;
+  background: linear-gradient(145deg, #2987b7, #14577f) !important;
+  box-shadow: 0 0 0 10px #dcecf5 !important;
+}
+
+.promo-portal.portal-theme-battle-royale .lease {
+  border: 1px solid #d0dce5 !important;
+  border-radius: 10px !important;
+  background: #edf4f8 !important;
+}
+
+.promo-portal.portal-theme-battle-royale .coin-modal-card > .button {
+  border: 1px solid #0e4c71 !important;
+  border-radius: 999px !important;
+  color: #fff !important;
+  background: #173f60 !important;
+  font-weight: 850 !important;
+  text-shadow: none !important;
+}
+
+.promo-portal.portal-theme-battle-royale[data-access-state="active"] {
+  --battle-state: #16834a;
+}
+
+.promo-portal.portal-theme-battle-royale[data-access-state="active"] .status-panel h2 {
+  color: #16834a !important;
+  font-weight: 1000 !important;
+  text-shadow: none !important;
+}
+
+.promo-portal.portal-theme-battle-royale .promo-shade,
+.portal-editor-preview.portal-theme-battle-royale .promo-shade {
+  background: transparent !important;
+}
+
+/* Use one centered, stacked portal on desktop and mobile. */
+@media (min-width: 601px) {
+  .promo-portal.portal-theme-battle-royale {
+    display: grid !important;
+    place-items: center !important;
+    min-height: 100vh !important;
+    min-height: 100dvh !important;
+    padding: 0 !important;
+    background: #e9eef2 !important;
+    color: #173b58 !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .portal-shell {
+    display: block !important;
+    width: min(100%, 520px) !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+    min-height: 0 !important;
+    max-height: 100dvh !important;
+    margin: 0 auto !important;
+    overflow: hidden !important;
+    background: #fff !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .portal-card {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    grid-template-rows: minmax(180px, 30dvh) auto auto auto minmax(18px, 1fr) !important;
+    grid-template-areas: "hero" "status" "actions" "voucher" "notice" !important;
+    align-content: stretch !important;
+    gap: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 0 !important;
+    overflow: hidden !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    color: #173b58 !important;
+    background: #fff !important;
+    box-shadow: none !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .portal-promo,
+  .promo-portal.portal-theme-battle-royale .portal-promo.hidden {
+    grid-area: hero !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 0 !important;
+    max-height: none !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .status-panel {
+    grid-area: status !important;
+    align-self: stretch !important;
+    padding: 14px 28px 6px !important;
+    color: #173b58 !important;
+    background: #fff !important;
+    text-align: center !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .command-status {
+    grid-template-columns: 1fr !important;
+    grid-template-areas: "eyebrow" "title" "detail" !important;
+    gap: 3px !important;
+    text-align: center !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .status-orb { display: none !important; }
+
+  .promo-portal.portal-theme-battle-royale .command-status .eyebrow {
+    color: #637b8d !important;
+    font-size: .62rem !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .status-panel h2 {
+    margin: 0 !important;
+    color: var(--battle-state) !important;
+    font-family: Impact, "Arial Black", system-ui, sans-serif !important;
+    font-size: clamp(1.8rem, 4vw, 2.7rem) !important;
+    font-weight: 1000 !important;
+    text-align: center !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale #commandStatusDetail {
+    color: #637b8d !important;
+    font-size: .72rem !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .credit-label {
+    margin: 9px 0 5px !important;
+    color: #173b58 !important;
+    text-align: center !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .time-display.digit-time {
+    gap: 8px !important;
+    margin: 3px auto 5px !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .time-display.digit-time > span {
+    gap: 4px !important;
+    padding: 7px 3px !important;
+    border: 1px solid #7894aa !important;
+    border-top: 2px solid #aec1d0 !important;
+    border-radius: 8px !important;
+    color: #f6fbff !important;
+    background: linear-gradient(145deg, #315b7b, #173c5b) !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .time-display.digit-time strong {
+    font-size: clamp(1.35rem, 3.5vw, 1.8rem) !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale #pauseButton {
+    min-height: 42px !important;
+    margin: 5px 0 0 !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .portal-actions {
+    grid-area: actions !important;
+    align-content: start !important;
+    gap: 8px !important;
+    padding: 7px 28px !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .portal-actions .coin-cta {
+    min-height: 54px !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .portal-actions .rates-cta {
+    min-height: 46px !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .voucher-form {
+    grid-area: voucher !important;
+    align-self: start !important;
+    padding: 8px 28px !important;
+    border: 0 !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .voucher-form label {
+    color: #526d82 !important;
+    text-align: center !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .voucher-row {
+    border: 1px solid #8ba0b1 !important;
+    border-radius: 999px !important;
+    background: #fff !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .voucher-row input {
+    height: 46px !important;
+    padding-inline: 14px !important;
+    color: #183c58 !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .voucher-row .button {
+    min-width: 90px !important;
+    height: 46px !important;
+    border: 0 !important;
+    border-left: 1px solid #c5d1db !important;
+    border-radius: 0 999px 999px 0 !important;
+    color: #fff !important;
+    background: #173f60 !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .notice {
+    grid-area: notice !important;
+    align-self: start !important;
+    padding: 0 28px !important;
+    color: #637b8d !important;
+    text-align: center !important;
+  }
+}
+
+/* Match the supplied portrait template at every screen width. */
+.promo-portal.portal-theme-battle-royale {
+  background: #fff !important;
+}
+
+.promo-portal.portal-theme-battle-royale .portal-shell {
+  width: min(100%, 750px) !important;
+  max-width: 750px !important;
+  background: #fff !important;
+}
+
+.promo-portal.portal-theme-battle-royale .portal-card {
+  background: #fff !important;
+}
+
+.promo-portal.portal-theme-battle-royale .portal-actions .coin-cta {
+  border: 1px solid #7291a8 !important;
+  border-radius: 999px !important;
+  color: #fff !important;
+  background: linear-gradient(180deg, #126f9f, #07527d) !important;
+  box-shadow: 0 2px 4px #102e451c !important;
+}
+
+.promo-portal.portal-theme-battle-royale .portal-actions .rates-cta,
+.promo-portal.portal-theme-battle-royale #pauseButton {
+  border: 1px solid #7894aa !important;
+  border-radius: 999px !important;
+  color: #fff !important;
+  background: linear-gradient(180deg, #214e71, #153c5d) !important;
+  box-shadow: 0 2px 4px #102e451c !important;
+}
+
+.promo-portal.portal-theme-battle-royale .portal-actions .coin-cta:hover:not(:disabled),
+.promo-portal.portal-theme-battle-royale .portal-actions .rates-cta:hover:not(:disabled),
+.promo-portal.portal-theme-battle-royale #pauseButton:hover:not(:disabled) {
+  border-color: #173f60 !important;
+  color: #fff !important;
+  background: #0b5c88 !important;
+}
+
+.promo-portal.portal-theme-battle-royale #pauseButton:disabled {
+  display: none !important;
+}
+
+.promo-portal.portal-theme-battle-royale .status-panel {
+  background: #fff !important;
+}
+
+.promo-portal.portal-theme-battle-royale .time-display.digit-time {
+  width: min(100%, 460px) !important;
+  margin: 8px auto !important;
+  padding: 10px !important;
+  border: 1px solid #8298aa !important;
+  border-radius: 16px !important;
+  background: linear-gradient(135deg, #dce7ef, #c8d9e6) !important;
+  box-shadow: inset 0 1px 3px #ffffffaa !important;
+}
+
+.promo-portal.portal-theme-battle-royale .time-display.digit-time > span {
+  min-height: 66px !important;
+  align-content: center !important;
+  border-radius: 7px !important;
+  background: linear-gradient(145deg, #315b7b, #173c5b) !important;
+}
+
+.promo-portal.portal-theme-battle-royale .time-display.digit-time strong {
+  font-weight: 900 !important;
+}
+
+.promo-portal.portal-theme-battle-royale .rates-cta .button-icon,
+.promo-portal.portal-theme-battle-royale .rates-cta .action-arrow {
+  display: none !important;
+}
+
+.promo-portal.portal-theme-battle-royale .rates-cta .action-copy {
+  text-align: center !important;
+}
+
+.promo-portal.portal-theme-battle-royale .rates-cta .action-copy small {
+  display: none !important;
+}
+
+@media (min-width: 601px) {
+  .promo-portal.portal-theme-battle-royale .portal-shell {
+    width: min(100%, 750px) !important;
+    max-width: 750px !important;
+    height: 100dvh !important;
+    max-height: 100dvh !important;
+    background: #fff !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .portal-card {
+    grid-template-rows: minmax(220px, 39dvh) auto auto auto minmax(0, 1fr) !important;
+    background: #fff !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .status-panel {
+    padding: 12px 40px 4px !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .portal-actions {
+    padding: 7px 46px !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .portal-actions .coin-cta {
+    min-height: 56px !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .portal-actions .rates-cta,
+  .promo-portal.portal-theme-battle-royale #pauseButton {
+    min-height: 48px !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .voucher-form {
+    padding: 8px 46px !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .promo-portal.portal-theme-battle-royale .time-display.digit-time {
+    padding: 7px !important;
+    border-radius: 12px !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .time-display.digit-time > span {
+    min-height: 54px !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .portal-actions .coin-cta {
+    min-height: 52px !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .promo-portal.portal-theme-battle-royale,
+  .promo-portal.portal-theme-battle-royale .portal-shell {
+    height: 100dvh !important;
+    min-height: 0 !important;
+    max-height: 100dvh !important;
+    overflow: hidden !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .portal-card {
+    grid-template-rows: minmax(135px, 31svh) auto auto auto auto !important;
+    align-content: space-between !important;
+    gap: 0 !important;
+    min-height: 0 !important;
+    height: 100% !important;
+    padding-top: env(safe-area-inset-top) !important;
+    padding-bottom: env(safe-area-inset-bottom) !important;
+  }
+}
+
+@media (max-width: 600px) and (max-height: 640px) {
+  .promo-portal.portal-theme-battle-royale .portal-card {
+    grid-template-rows: minmax(112px, 23svh) auto auto auto auto !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .status-panel {
+    padding: 3px 18px 2px !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .status-panel h2 {
+    font-size: clamp(1.35rem, 7vw, 1.8rem) !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .credit-label {
+    margin: 3px 0 !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .time-display.digit-time {
+    margin: 1px auto 2px !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .time-display.digit-time > span {
+    padding: 3px 2px !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .portal-actions {
+    gap: 4px !important;
+    padding-block: 3px !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .portal-actions .coin-cta {
+    min-height: 46px !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .portal-actions .rates-cta {
+    min-height: 38px !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .voucher-form {
+    padding-block: 3px !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .voucher-row input,
+  .promo-portal.portal-theme-battle-royale .voucher-row .button {
+    height: 38px !important;
+    min-height: 38px !important;
+  }
+}
+
+/* Remove identity copy and align the connection controls with the rates action. */
+.promo-portal.portal-theme-battle-royale .promo-copy,
+.portal-editor-preview.portal-theme-battle-royale .promo-copy,
+.promo-portal.portal-theme-battle-royale .portal-footer,
+.portal-editor-preview.portal-theme-battle-royale .portal-footer {
+  display: none !important;
+}
+
+.promo-portal.portal-theme-battle-royale *,
+.portal-editor-preview.portal-theme-battle-royale * {
+  text-shadow: none !important;
+}
+
+.promo-portal.portal-theme-battle-royale .portal-promo > .portal-hero,
+.portal-editor-preview.portal-theme-battle-royale .portal-promo > .portal-hero {
+  border-bottom: 3px solid var(--v5-accent) !important;
+}
+
+.promo-portal.portal-theme-battle-royale .portal-actions .coin-cta .action-copy strong,
+.portal-editor-preview.portal-theme-battle-royale .portal-actions .coin-cta .action-copy strong {
+  font-weight: 1000 !important;
+  letter-spacing: .12em !important;
+  text-shadow: none !important;
+}
+
+.promo-portal.portal-theme-battle-royale #coinButton .button-icon,
+.portal-editor-preview.portal-theme-battle-royale #previewCoinButton .button-icon {
+  display: none !important;
+}
+
+.promo-portal.portal-theme-battle-royale .coin-cta .action-copy small,
+.portal-editor-preview.portal-theme-battle-royale .coin-cta .action-copy small {
+  display: none !important;
+}
+
+.promo-portal.portal-theme-battle-royale .portal-actions .action-copy strong,
+.promo-portal.portal-theme-battle-royale #pauseButton,
+.promo-portal.portal-theme-battle-royale .voucher-row .button,
+.portal-editor-preview.portal-theme-battle-royale .portal-actions .action-copy strong,
+.portal-editor-preview.portal-theme-battle-royale .preview-pause {
+  font-weight: 900 !important;
+}
+
+.promo-portal.portal-theme-battle-royale .portal-actions .coin-cta .action-copy strong,
+.portal-editor-preview.portal-theme-battle-royale .portal-actions .coin-cta .action-copy strong {
+  font-weight: 1000 !important;
+  letter-spacing: .12em !important;
+}
+
+.promo-portal.portal-theme-battle-royale #pauseButton,
+.portal-editor-preview.portal-theme-battle-royale #previewPauseButton {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  min-height: 46px !important;
+  margin-top: 5px !important;
+  padding: 8px 14px !important;
+  border: 1px solid #7591a7 !important;
+  border-radius: 999px !important;
+  color: #fff !important;
+  background: linear-gradient(180deg, #214e71, #153c5d) !important;
+  box-shadow: inset 0 1px #ffffff22, 0 2px 4px #0a243522 !important;
+  font-weight: 850 !important;
+  letter-spacing: .06em !important;
+  text-align: center !important;
+}
+
+.promo-portal.portal-theme-battle-royale #pauseButton:disabled,
+.portal-editor-preview.portal-theme-battle-royale #previewPauseButton:disabled {
+  color: #e4edf5 !important;
+  background: #526b80 !important;
+  opacity: .72 !important;
+}
+
+@media (max-width: 600px) {
+  .promo-portal.portal-theme-battle-royale .status-panel {
+    padding-bottom: 3px !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale #pauseButton {
+    min-height: 39px !important;
+    margin-top: 3px !important;
+    padding-block: 5px !important;
+    font-size: .72rem !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .portal-actions .coin-cta .action-copy strong {
+    font-size: .92rem !important;
+    font-weight: 1000 !important;
+  }
+}
+
+/* The admin embeds the phone preview in a desktop sized panel, so viewport media
+   queries cannot make its narrow preview behave like a phone. */
+.portal-editor-preview.portal-theme-battle-royale .portal-card {
+  display: flex !important;
+  flex-direction: column !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
+}
+.portal-editor-preview.portal-theme-battle-royale .portal-promo,
+.portal-editor-preview.portal-theme-battle-royale .portal-promo.hidden {
+  flex: 0 0 170px !important;
+  width: 100% !important;
+  height: 170px !important;
+  min-height: 170px !important;
+  max-height: 170px !important;
+}
+.portal-editor-preview.portal-theme-battle-royale .portal-promo > .portal-hero,
+.portal-editor-preview.portal-theme-battle-royale .portal-promo > .portal-hero > img {
+  width: 100% !important;
+}
+.portal-editor-preview.portal-theme-battle-royale .status-panel {
+  padding: 16px 20px 8px !important;
+}
+.portal-editor-preview.portal-theme-battle-royale .portal-actions {
+  position: static !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) !important;
+}
+.portal-editor-preview.portal-theme-battle-royale .portal-actions .rates-cta {
+  width: 100% !important;
+  min-width: 0 !important;
+}
+.portal-editor-preview.portal-theme-battle-royale .rates-cta .action-copy,
+.portal-editor-preview.portal-theme-battle-royale .rates-cta .action-arrow {
+  position: static !important;
+  width: auto !important;
+  height: auto !important;
+  overflow: visible !important;
+  clip: auto !important;
+}
+
+/* Keep the site identity in its own readable strip below the banner art. */
+.promo-portal.portal-theme-battle-royale .portal-promo,
+.portal-editor-preview.portal-theme-battle-royale .portal-promo {
+  display: flex !important;
+  flex-direction: column !important;
+  position: relative !important;
+}
+
+.promo-portal.portal-theme-battle-royale .portal-promo > .portal-hero,
+.portal-editor-preview.portal-theme-battle-royale .portal-promo > .portal-hero {
+  position: relative !important;
+  flex: 1 1 auto !important;
+  width: 100% !important;
+  height: auto !important;
+  min-height: 0 !important;
+}
+
+.promo-portal.portal-theme-battle-royale .promo-shade,
+.portal-editor-preview.portal-theme-battle-royale .promo-shade {
+  inset: 0 0 auto !important;
+  height: 72% !important;
+  pointer-events: none !important;
+}
+
+.promo-portal.portal-theme-battle-royale .promo-copy,
+.portal-editor-preview.portal-theme-battle-royale .promo-copy {
+  display: grid !important;
+  grid-template-areas: "brand" "headline" "tagline" !important;
+  gap: 2px !important;
+  position: relative !important;
+  inset: auto !important;
+  flex: 0 0 auto !important;
+  width: 100% !important;
+  max-width: none !important;
+  padding: 10px clamp(16px, 3vw, 32px) 12px !important;
+  color: var(--v5-text) !important;
+  background: #111e2d !important;
+  text-align: left !important;
+  transform: none !important;
+}
+
+.promo-portal.portal-theme-battle-royale .promo-brand,
+.portal-editor-preview.portal-theme-battle-royale .promo-brand {
+  grid-area: brand !important;
+  gap: 7px !important;
+  align-items: center !important;
+}
+
+.promo-portal.portal-theme-battle-royale .promo-brand .brand-mark,
+.portal-editor-preview.portal-theme-battle-royale .promo-brand .brand-mark {
+  width: 24px !important;
+  height: 24px !important;
+  flex-basis: 24px !important;
+  border-radius: 4px !important;
+}
+
+.promo-portal.portal-theme-battle-royale .promo-brand strong,
+.portal-editor-preview.portal-theme-battle-royale .promo-brand strong {
+  color: #70d5ff !important;
+  font-size: .66rem !important;
+  letter-spacing: .12em !important;
+}
+
+.promo-portal.portal-theme-battle-royale .promo-copy h1,
+.portal-editor-preview.portal-theme-battle-royale .promo-copy h1 {
+  grid-area: headline !important;
+  max-width: 100% !important;
+  margin: 1px 0 0 !important;
+  font-size: clamp(1.1rem, 3vw, 1.7rem) !important;
+  line-height: 1.05 !important;
+  letter-spacing: .01em !important;
+}
+
+.promo-portal.portal-theme-battle-royale .promo-copy > p,
+.portal-editor-preview.portal-theme-battle-royale .promo-copy > p {
+  grid-area: tagline !important;
+  margin: 1px 0 0 !important;
+  color: var(--v5-muted) !important;
+  font-size: .62rem !important;
+  letter-spacing: .08em !important;
+}
+
+.portal-editor-preview.portal-theme-battle-royale .portal-promo,
+.portal-editor-preview.portal-theme-battle-royale .portal-promo.hidden {
+  flex-basis: 210px !important;
+  height: 210px !important;
+  min-height: 210px !important;
+  max-height: 210px !important;
+}
+
+.portal-editor-preview.portal-theme-battle-royale .promo-copy {
+  padding: 8px 14px !important;
+}
+
+@media (max-width: 600px) {
+  .promo-portal.portal-theme-battle-royale .portal-card {
+    grid-template-rows: minmax(165px, 32svh) auto auto auto minmax(20px, 1fr) !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .portal-promo,
+  .promo-portal.portal-theme-battle-royale .portal-promo.hidden {
+    flex: 0 0 auto !important;
+    height: 100% !important;
+    min-height: 0 !important;
+    max-height: none !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .promo-copy {
+    padding: 6px 16px 8px !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .promo-copy h1 {
+    font-size: clamp(1rem, 5vw, 1.35rem) !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .promo-copy > p {
+    font-size: .54rem !important;
+  }
+}
+
+/* Shared spacing and section hierarchy. */
+.promo-portal.portal-theme-battle-royale .portal-promo > .portal-hero {
+  border-bottom: 3px solid var(--v5-accent) !important;
+}
+
+.promo-portal.portal-theme-battle-royale .portal-promo {
+  border-bottom: 0 !important;
+}
+
+.promo-portal.portal-theme-battle-royale .promo-copy {
+  gap: 3px !important;
+}
+
+.promo-portal.portal-theme-battle-royale .status-panel {
+  padding-top: clamp(22px, 4vh, 42px) !important;
+}
+
+.promo-portal.portal-theme-battle-royale .credit-label {
+  margin-top: 16px !important;
+}
+
+.promo-portal.portal-theme-battle-royale .portal-actions {
+  gap: 8px !important;
+}
+
+.promo-portal.portal-theme-battle-royale .portal-actions .rates-cta {
+  border-color: #42627e !important;
+  color: #f4f8ff !important;
+  background: #1c3851 !important;
+}
+
+.promo-portal.portal-theme-battle-royale .voucher-form {
+  border-top: 1px solid var(--v5-line) !important;
+  padding-top: 14px !important;
+}
+
+.promo-portal.portal-theme-battle-royale .voucher-form label {
+  font-size: .7rem !important;
+  font-weight: 800 !important;
+  letter-spacing: .08em !important;
+}
+
+.promo-portal.portal-theme-battle-royale .portal-footer {
+  border-top: 1px solid #ffffff12 !important;
+}
+
+@media (max-width: 600px) {
+  .promo-portal.portal-theme-battle-royale .status-panel {
+    padding-top: 8px !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .credit-label {
+    margin-top: 7px !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .voucher-form {
+    padding-top: 6px !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .portal-footer {
+    padding-top: 4px !important;
+  }
+}
+
+/* Compact portrait treatment based on the supplied sample portal. */
+@media (max-width: 600px) {
+  .promo-portal.portal-theme-battle-royale {
+    --v5-bg: #eef2f5;
+    --v5-panel: #ffffff;
+    --v5-text: #172a3b;
+    --v5-muted: #64788b;
+    --v5-line: #c5d1db;
+    background: #eef2f5 !important;
+    color: var(--v5-text) !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .portal-shell {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    background: #fff !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .portal-card {
+    width: 100% !important;
+    border: 0 !important;
+    background: #fff !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .portal-promo > .portal-hero {
+    border-bottom: 0 !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .promo-shade {
+    height: 48% !important;
+    background: linear-gradient(180deg, #08132105 30%, #081321a8) !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .portal-promo .status-pill {
+    top: 10px !important;
+    right: 10px !important;
+    padding: 6px 9px !important;
+    border: 1px solid #ffffff70 !important;
+    border-radius: 999px !important;
+    font-size: .62rem !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .promo-copy {
+    justify-items: center !important;
+    gap: 2px !important;
+    padding: 5px 16px 8px !important;
+    color: #173b58 !important;
+    background: #fff !important;
+    text-align: center !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .promo-brand {
+    justify-content: center !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .promo-brand .brand-mark {
+    width: 20px !important;
+    height: 20px !important;
+    flex-basis: 20px !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .promo-brand strong {
+    color: #173b58 !important;
+    font-size: .62rem !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .promo-copy h1 {
+    margin: 0 !important;
+    color: #173b58 !important;
+    font-family: system-ui, sans-serif !important;
+    font-size: clamp(.95rem, 4.5vw, 1.2rem) !important;
+    font-weight: 850 !important;
+    letter-spacing: .01em !important;
+    text-transform: uppercase !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .promo-copy > p {
+    margin: 0 !important;
+    color: #637b8d !important;
+    font-size: .52rem !important;
+    letter-spacing: .12em !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .status-panel {
+    padding: 5px 22px 4px !important;
+    color: #173b58 !important;
+    text-align: center !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .command-status {
+    grid-template-columns: 1fr !important;
+    grid-template-areas: "eyebrow" "title" "detail" !important;
+    gap: 3px !important;
+    text-align: center !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .status-orb { display: none !important; }
+
+  .promo-portal.portal-theme-battle-royale .command-status .eyebrow {
+    color: #637b8d !important;
+    font-size: .53rem !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .status-panel h2 {
+    color: var(--battle-state) !important;
+    font-family: Impact, "Arial Black", system-ui, sans-serif !important;
+    font-size: clamp(1.65rem, 8vw, 2.3rem) !important;
+    letter-spacing: .04em !important;
+    text-shadow: 0 2px 0 #9c3434 !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale #commandStatusDetail {
+    color: #637b8d !important;
+    font-size: .62rem !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .credit-label {
+    margin: 6px 0 4px !important;
+    color: #173b58 !important;
+    font-size: .58rem !important;
+    font-weight: 900 !important;
+    letter-spacing: .1em !important;
+    text-align: center !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .time-display.digit-time {
+    gap: 7px !important;
+    margin: 2px auto 4px !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .time-display.digit-time > span {
+    gap: 3px !important;
+    padding: 5px 2px !important;
+    border: 1px solid #7894aa !important;
+    border-top: 2px solid #aec1d0 !important;
+    border-radius: 7px !important;
+    color: #f6fbff !important;
+    background: linear-gradient(145deg, #315b7b, #173c5b) !important;
+    box-shadow: inset 0 2px 5px #071d3040 !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .time-display.digit-time strong {
+    font-size: clamp(1.25rem, 6vw, 1.65rem) !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .time-display.digit-time small {
+    color: #c9d8e4 !important;
+    font-size: .45rem !important;
+    letter-spacing: .06em !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .portal-actions {
+    gap: 7px !important;
+    padding: 6px 22px 5px !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .portal-actions .button,
+  .promo-portal.portal-theme-battle-royale .portal-actions .rates-cta {
+    justify-content: center !important;
+    min-height: 46px !important;
+    border: 1px solid #7591a7 !important;
+    border-radius: 999px !important;
+    color: #fff !important;
+    background: linear-gradient(180deg, #214e71, #153c5d) !important;
+    box-shadow: inset 0 1px #ffffff22, 0 2px 4px #0a243522 !important;
+    text-align: center !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .portal-actions .coin-cta {
+    min-height: 52px !important;
+    border: 2px solid #93c9ec !important;
+    color: #fff !important;
+    background: linear-gradient(180deg, #1679b2, #07517f) !important;
+    box-shadow: inset 0 1px #ffffff45, 0 3px 9px #07517f40 !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .portal-actions .coin-cta .button-icon {
+    width: 27px !important;
+    height: 27px !important;
+    flex-basis: 27px !important;
+    border: 1px solid #ffffffaa !important;
+    color: #fff !important;
+    background: #ffffff15 !important;
+    font-size: .9rem !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .portal-actions .coin-cta .action-copy {
+    gap: 2px !important;
+    text-align: center !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .portal-actions .coin-cta .action-copy strong,
+  .promo-portal.portal-theme-battle-royale .portal-actions .rates-cta .action-copy strong {
+    color: #fff !important;
+    font-size: .85rem !important;
+    font-weight: 950 !important;
+    letter-spacing: .08em !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .portal-actions .coin-cta .action-copy small {
+    color: #d9efff !important;
+    font-size: .55rem !important;
+    font-weight: 700 !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .portal-actions .rates-cta .action-copy,
+  .promo-portal.portal-theme-battle-royale .portal-actions .rates-cta .action-arrow {
+    position: static !important;
+    width: auto !important;
+    height: auto !important;
+    overflow: visible !important;
+    clip: auto !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .portal-actions .rates-cta .button-icon,
+  .promo-portal.portal-theme-battle-royale .portal-actions .rates-cta .action-arrow {
+    display: none !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .portal-actions .rates-cta .action-copy small {
+    display: none !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .voucher-form {
+    padding: 5px 22px 7px !important;
+    border-top: 0 !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .voucher-form label {
+    margin: 0 0 3px !important;
+    color: #526d82 !important;
+    font-size: .57rem !important;
+    text-align: center !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .voucher-row {
+    grid-template-columns: minmax(0, 1fr) auto !important;
+    border: 1px solid #8ba0b1 !important;
+    border-radius: 999px !important;
+    background: #fff !important;
+    box-shadow: inset 0 1px 3px #102d4218 !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .voucher-row input {
+    height: 42px !important;
+    padding: 0 14px !important;
+    color: #183c58 !important;
+    background: transparent !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .voucher-row .button {
+    min-width: 88px !important;
+    height: 42px !important;
+    border: 0 !important;
+    border-left: 1px solid #c5d1db !important;
+    border-radius: 0 999px 999px 0 !important;
+    color: #fff !important;
+    background: #173f60 !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .portal-footer {
+    align-self: stretch !important;
+    padding: 5px 14px max(5px, env(safe-area-inset-bottom)) !important;
+    border: 0 !important;
+    color: #fff !important;
+    background: #73808a !important;
+    font-size: .55rem !important;
+    text-align: center !important;
+  }
+}
+
+/* Final viewport constraints keep the complete mobile flow visible. */
+@media (max-width: 600px) {
+  .promo-portal.portal-theme-battle-royale,
+  .promo-portal.portal-theme-battle-royale .portal-shell {
+    height: 100dvh !important;
+    min-height: 0 !important;
+    max-height: 100dvh !important;
+    overflow: hidden !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .portal-card {
+    grid-template-rows: minmax(135px, 31svh) auto auto auto auto !important;
+    align-content: space-between !important;
+    gap: 0 !important;
+    min-height: 0 !important;
+    height: 100% !important;
+    padding-top: env(safe-area-inset-top) !important;
+    padding-bottom: env(safe-area-inset-bottom) !important;
+  }
+}
+
+@media (max-width: 600px) and (max-height: 640px) {
+  .promo-portal.portal-theme-battle-royale .portal-card {
+    grid-template-rows: minmax(112px, 23svh) auto auto auto auto !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .status-panel {
+    padding: 3px 18px 2px !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .status-panel h2 {
+    font-size: clamp(1.35rem, 7vw, 1.8rem) !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .credit-label {
+    margin: 3px 0 !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .time-display.digit-time {
+    margin: 1px auto 2px !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .time-display.digit-time > span {
+    padding: 3px 2px !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .portal-actions {
+    gap: 4px !important;
+    padding-block: 3px !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .portal-actions .coin-cta {
+    min-height: 46px !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .portal-actions .rates-cta {
+    min-height: 38px !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .voucher-form {
+    padding-block: 3px !important;
+  }
+
+  .promo-portal.portal-theme-battle-royale .voucher-row input,
+  .promo-portal.portal-theme-battle-royale .voucher-row .button {
+    height: 38px !important;
+    min-height: 38px !important;
+  }
+}

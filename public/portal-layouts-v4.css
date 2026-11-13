@@ -1,0 +1,182 @@
+/* VendoOS portal layouts v4
+   These are separate compositions, not one template recolored. */
+
+/* 01 Neon Arena — a magenta gaming HUD. */
+.portal-theme-dark{--arena:#f20a88;--arena-dark:#14000f;background:radial-gradient(circle at 50% 12%,#5d073d,#090007 55%,#020103)!important}
+.portal-theme-dark .portal-card{clip-path:polygon(18px 0,calc(100% - 18px) 0,100% 18px,100% calc(100% - 18px),calc(100% - 18px) 100%,18px 100%,0 calc(100% - 18px),0 18px)}
+.portal-theme-dark .portal-promo{border-color:#c61072!important}
+.portal-theme-dark .status-panel{border-left:4px solid var(--arena)!important}
+.portal-theme-dark .access-title{border-style:dashed}
+.portal-theme-dark .portal-actions .button{clip-path:polygon(10px 0,100% 0,100% calc(100% - 10px),calc(100% - 10px) 100%,0 100%,0 10px)}
+.portal-theme-dark .voucher-form{border-top:1px dashed #8c235e!important}
+
+/* 02 Access Ticket — almost no decorative card chrome. */
+.portal-theme-lite{background:linear-gradient(150deg,#d6f2ec,#f7fbfa 50%,#cae9e2)!important}
+.portal-theme-lite .portal-card{border:0!important;border-radius:26px!important;box-shadow:0 22px 60px #2d6c5e24!important}
+.portal-theme-lite .portal-promo{height:104px!important;margin:0!important;border-radius:0!important}
+.portal-theme-lite .promo-copy h1,.portal-theme-lite .promo-copy>p{display:none}
+.portal-theme-lite .announcement{display:none}
+.portal-theme-lite .status-panel{margin:16px!important;padding:14px!important;border:1px solid #c8e1db!important;border-radius:18px!important;background:#fff!important}
+.portal-theme-lite .portal-actions{grid-template-columns:1.35fr .65fr!important;padding:0 16px!important}
+.portal-theme-lite .portal-actions .coin-hint{grid-column:1/-1;grid-row:2}
+.portal-theme-lite .portal-actions .rates-cta .action-copy small,.portal-theme-lite .portal-actions .rates-cta .action-arrow{display:none}
+.portal-theme-lite .portal-actions .rates-cta{min-height:66px!important}
+.portal-theme-lite .voucher-form{margin:10px 16px 0!important;padding:10px 0 16px!important;border-top:1px dashed #b9d8d0!important}
+.portal-theme-lite .voucher-row{border-radius:10px!important}
+
+/* 03 Quest Map — illustrated world and parchment quest board. */
+.portal-theme-storybook-adventure .portal-card{background:linear-gradient(90deg,#daa25f,#f7d99f 7% 93%,#daa25f)!important}
+.portal-theme-storybook-adventure .portal-promo{clip-path:polygon(0 0,100% 0,100% 92%,84% 96%,67% 91%,50% 98%,33% 91%,16% 96%,0 92%)}
+.portal-theme-storybook-adventure .announcement{transform:rotate(-1deg)}
+.portal-theme-storybook-adventure .status-panel{transform:rotate(.35deg)}
+.portal-theme-storybook-adventure .portal-actions .coin-cta{transform:rotate(-.45deg)}
+.portal-theme-storybook-adventure .portal-actions .rates-cta{transform:rotate(.45deg)}
+.portal-theme-storybook-adventure .voucher-form::before{content:"VOUCHER SCROLL";display:block;margin-bottom:7px;color:#6a3718;font:900 .58rem/1 Georgia,serif;letter-spacing:.16em}
+
+/* 04 Christmas Gift Box — wrapped panel with ribbon actions. */
+.portal-theme-holiday-christmas{background:repeating-linear-gradient(45deg,#0a2a1d 0 18px,#103b2a 18px 36px)!important}
+.portal-theme-holiday-christmas .portal-card{border:8px solid #d7b74d!important;background:#f7edd7!important;box-shadow:0 0 0 4px #a51e2c,0 30px 80px #0008!important}
+.portal-theme-holiday-christmas .portal-card::after{content:"";position:absolute;z-index:1;top:0;bottom:0;left:50%;width:16px;transform:translateX(-50%);pointer-events:none;background:#b82131;opacity:.1}
+.portal-theme-holiday-christmas .status-panel{border-radius:2px!important}
+.portal-theme-holiday-christmas .portal-actions{grid-template-columns:1fr 1fr!important}
+.portal-theme-holiday-christmas .portal-actions .coin-hint{grid-column:1/-1;grid-row:2}
+.portal-theme-holiday-christmas .portal-actions .button{min-width:0;min-height:76px!important}
+.portal-theme-holiday-christmas .action-copy small{white-space:normal}
+
+/* 05 Midnight Countdown Stage — billboard hero and floating timer deck. */
+.portal-theme-holiday-new-year{background:radial-gradient(circle at 50% 0,#213f88,#050817 55%)!important}
+.portal-theme-holiday-new-year .portal-card{border:1px solid #d7b048!important;border-radius:32px!important;background:#08122d!important}
+.portal-theme-holiday-new-year .portal-promo{height:238px!important;border:0!important}
+.portal-theme-holiday-new-year .announcement{display:none}
+.portal-theme-holiday-new-year .status-panel{z-index:5;margin:-54px 22px 0!important;border:1px solid #d9b54d!important;background:#0d1939f2!important;box-shadow:0 20px 50px #0009!important}
+.portal-theme-holiday-new-year .command-status{min-height:44px}
+.portal-theme-holiday-new-year .time-display.digit-time>span{background:#050c20!important}
+.portal-theme-holiday-new-year .portal-actions{grid-template-columns:1fr 1fr!important;padding-inline:22px!important}
+.portal-theme-holiday-new-year .portal-actions .coin-hint{grid-column:1/-1;grid-row:2}
+.portal-theme-holiday-new-year .voucher-form{margin-inline:22px!important}
+
+/* 06 Valentine Split Card — invitation composition with a picture side. */
+.portal-theme-holiday-valentine{background:radial-gradient(circle at 12% 10%,#ffd5e1,#9e2d57 48%,#4e1029)!important}
+.portal-theme-holiday-valentine .portal-card{border:10px solid #fff4f7!important;border-radius:44px!important}
+.portal-theme-holiday-valentine .portal-promo{border-radius:34px 34px 10px 10px!important}
+.portal-theme-holiday-valentine .announcement{display:none}
+.portal-theme-holiday-valentine .status-panel{border:1px solid #f0b3c6!important}
+.portal-theme-holiday-valentine .access-title strong::before{content:"LOVE PASS · ";color:#d93668}
+.portal-theme-holiday-valentine .portal-actions .coin-cta{background:linear-gradient(120deg,#ef5b86,#c5225d)!important}
+.portal-theme-holiday-valentine .portal-actions .rates-cta{color:#81304d!important;background:#ffe4ec!important}
+.portal-theme-holiday-valentine .rates-cta .button-icon{border-color:#b94a70!important;color:#a4345b!important}
+
+/* 07 Lucky Red Envelope — narrow ceremonial form and medallion timer. */
+.portal-theme-holiday-lunar{background:radial-gradient(circle at 50% 0,#db392f,#750710 54%,#310205)!important}
+.portal-theme-holiday-lunar .portal-shell{max-width:470px}
+.portal-theme-holiday-lunar .portal-card{border:7px double #f0c34e!important;border-radius:0!important;background:#a50e1a!important}
+.portal-theme-holiday-lunar .portal-promo{height:185px!important;clip-path:polygon(0 0,100% 0,100% 88%,50% 100%,0 88%)}
+.portal-theme-holiday-lunar .announcement{border:0!important;color:#64100c!important;background:#f3ca68!important}
+.portal-theme-holiday-lunar .status-panel{border:3px solid #e9bc46!important;background:#fff0c8!important}
+.portal-theme-holiday-lunar .time-display.digit-time>span{aspect-ratio:1;border-radius:50%!important;padding:7px 2px!important}
+.portal-theme-holiday-lunar .portal-actions .button,.portal-theme-holiday-lunar .voucher-row{border-radius:0!important}
+.portal-theme-holiday-lunar .portal-footer{color:#ffe598!important;background:#7d0912!important}
+
+/* 08 Spring Sticker Bento — intentionally modular, playful tiles. */
+.portal-theme-holiday-easter{background:radial-gradient(circle at 10% 10%,#ffd6e4 0 9%,transparent 10%),radial-gradient(circle at 90% 18%,#b9ead7 0 11%,transparent 12%),linear-gradient(145deg,#ece4fa,#d8f1e7)!important}
+.portal-theme-holiday-easter .portal-card{border:0!important;background:transparent!important;box-shadow:none!important}
+.portal-theme-holiday-easter .portal-promo{border:8px solid #fff!important;border-radius:30px!important;box-shadow:0 14px 35px #66538c25}
+.portal-theme-holiday-easter .announcement{border:6px solid #fff!important;border-radius:999px!important;box-shadow:0 8px 22px #66538c1d}
+.portal-theme-holiday-easter .status-panel{border:7px solid #fff!important;border-radius:30px!important;background:#fffafddd!important}
+.portal-theme-holiday-easter .portal-actions{grid-template-columns:1fr 1fr!important}
+.portal-theme-holiday-easter .portal-actions .coin-hint{grid-column:1/-1;grid-row:2}
+.portal-theme-holiday-easter .portal-actions .button{min-width:0;min-height:90px!important;border:7px solid #fff!important;border-radius:28px!important;box-shadow:0 11px 25px #66538c22!important}
+.portal-theme-holiday-easter .voucher-form{padding:12px!important;border:6px solid #fff!important;border-radius:24px;background:#ffffffa8}
+.portal-theme-holiday-easter .portal-footer{border:0!important;background:transparent!important}
+
+/* 09 Emerald Archway — a quiet architectural portal. */
+.portal-theme-holiday-eid{background:radial-gradient(circle at 50% 10%,#247e68,#062b23 60%,#02110e)!important}
+.portal-theme-holiday-eid .portal-shell{max-width:510px}
+.portal-theme-holiday-eid .portal-card{border:4px solid #cbb05c!important;border-radius:240px 240px 30px 30px!important;background:#f6efd9!important}
+.portal-theme-holiday-eid .portal-promo{height:240px!important;border-radius:230px 230px 0 0!important;clip-path:ellipse(74% 100% at 50% 0)}
+.portal-theme-holiday-eid .promo-copy{left:50%!important;right:auto!important;width:78%;transform:translateX(-50%);text-align:center}
+.portal-theme-holiday-eid .promo-brand{justify-content:center}
+.portal-theme-holiday-eid .announcement{margin-top:-8px!important;border:0!important;background:transparent!important}
+.portal-theme-holiday-eid .status-panel{border-radius:90px 90px 24px 24px!important}
+.portal-theme-holiday-eid .portal-actions .button{border-radius:30px 30px 8px 8px!important}
+
+/* 10 Haunted Arcade — an uneven cabinet with offset controls. */
+.portal-theme-holiday-halloween{background:radial-gradient(circle at 80% 14%,#9d3a0e 0 7%,transparent 8%),linear-gradient(145deg,#09030c,#271030 62%,#0d0711)!important}
+.portal-theme-holiday-halloween .portal-card{border:4px solid #f47a22!important;clip-path:polygon(0 22px,22px 0,72% 0,78% 12px,100% 12px,100% calc(100% - 20px),calc(100% - 20px) 100%,0 100%)!important}
+.portal-theme-holiday-halloween .portal-promo{height:224px!important}
+.portal-theme-holiday-halloween .announcement{transform:translateX(-7px) rotate(-1deg)}
+.portal-theme-holiday-halloween .status-panel{transform:translateX(7px) rotate(.7deg)!important}
+.portal-theme-holiday-halloween .portal-actions .coin-cta{transform:translateX(-8px) skewX(-3deg)!important}
+.portal-theme-holiday-halloween .portal-actions .rates-cta{transform:translateX(8px) skewX(3deg)!important}
+.portal-theme-holiday-halloween .voucher-form{transform:rotate(-.5deg)}
+
+/* 11 Fiesta Street Poster — full-width banner, alternating color blocks. */
+.portal-theme-holiday-fiesta{background:linear-gradient(135deg,#075b80 0 25%,#ee443b 25% 28%,#f4c83c 28% 31%,#0e8ca3 31% 100%)!important}
+.portal-theme-holiday-fiesta .portal-card{border:8px solid #fff0a0!important;border-radius:0!important;background:#fff0ba!important;box-shadow:12px 12px 0 #d93632,24px 24px 0 #087b98!important}
+.portal-theme-holiday-fiesta .portal-promo{height:230px!important;border-bottom:12px solid #e83f38!important}
+.portal-theme-holiday-fiesta .announcement{transform:rotate(-1deg);border-radius:0!important}
+.portal-theme-holiday-fiesta .status-panel{transform:rotate(.5deg);border-radius:0!important}
+.portal-theme-holiday-fiesta .portal-actions .coin-cta{transform:rotate(-.8deg);border-radius:0!important}
+.portal-theme-holiday-fiesta .portal-actions .rates-cta{transform:rotate(.8deg);border-radius:0!important}
+.portal-theme-holiday-fiesta .voucher-row{border-radius:0!important}
+
+/* Desktop compositions are intentionally unrelated. */
+@media(min-width:900px){
+  body.portal-page.portal-theme-lite .portal-shell{width:min(520px,100%)}
+  body.portal-page.portal-theme-lite .portal-card{display:block;min-height:0}
+  body.portal-page.portal-theme-lite .portal-promo{min-height:104px!important;border:0}
+
+  body.portal-page.portal-theme-storybook-adventure .portal-shell{width:min(1000px,100%)}
+  body.portal-page.portal-theme-storybook-adventure .portal-card{grid-template-columns:1.05fr .95fr;grid-template-areas:"hero hero" "announcement announcement" "status actions" "status voucher" "notice voucher" "footer footer";min-height:0}
+  body.portal-page.portal-theme-storybook-adventure .portal-promo{min-height:285px!important;height:285px!important;border:0;border-bottom:6px solid #713714}
+
+  body.portal-page.portal-theme-holiday-christmas .portal-shell{width:min(920px,100%)}
+  body.portal-page.portal-theme-holiday-christmas .portal-card{grid-template-columns:340px 1fr;grid-template-areas:"hero announcement" "hero status" "hero actions" "hero voucher" "hero notice" "hero footer";min-height:680px}
+  body.portal-page.portal-theme-holiday-christmas .portal-promo{min-height:100%!important;border-right:6px solid #b92b36}
+
+  body.portal-page.portal-theme-holiday-new-year .portal-shell{width:min(1040px,100%)}
+  body.portal-page.portal-theme-holiday-new-year .portal-card{grid-template-columns:1fr 1fr;grid-template-areas:"hero hero" "status actions" "status voucher" "notice voucher" "footer footer";min-height:0}
+  body.portal-page.portal-theme-holiday-new-year .portal-promo{height:330px!important;min-height:330px!important;border:0}
+  body.portal-page.portal-theme-holiday-new-year .status-panel{margin:-74px 24px 20px!important}
+
+  body.portal-page.portal-theme-holiday-valentine .portal-shell{width:min(940px,100%)}
+  body.portal-page.portal-theme-holiday-valentine .portal-card{grid-template-columns:1fr 1fr;grid-template-areas:"status hero" "actions hero" "voucher hero" "notice hero" "footer hero";min-height:670px}
+  body.portal-page.portal-theme-holiday-valentine .portal-promo{grid-area:hero;min-height:100%!important;border:0;border-left:10px solid #fff4f7;border-radius:0!important}
+
+  body.portal-page.portal-theme-holiday-lunar .portal-shell{width:min(470px,100%)}
+  body.portal-page.portal-theme-holiday-lunar .portal-card{display:block;min-height:0}
+  body.portal-page.portal-theme-holiday-lunar .portal-promo{min-height:185px!important}
+
+  body.portal-page.portal-theme-holiday-easter .portal-shell{width:min(1020px,100%)}
+  body.portal-page.portal-theme-holiday-easter .portal-card{grid-template-columns:1.1fr .9fr;grid-template-areas:"hero announcement" "hero status" "actions voucher" "footer notice";gap:12px;min-height:0;overflow:visible}
+  body.portal-page.portal-theme-holiday-easter .portal-promo{min-height:410px!important;height:410px!important}
+  body.portal-page.portal-theme-holiday-easter .status-panel{align-self:start}
+
+  body.portal-page.portal-theme-holiday-eid .portal-shell{width:min(510px,100%)}
+  body.portal-page.portal-theme-holiday-eid .portal-card{display:block;min-height:0}
+  body.portal-page.portal-theme-holiday-eid .portal-promo{min-height:240px!important}
+
+  body.portal-page.portal-theme-holiday-halloween .portal-shell{width:min(1040px,100%)}
+  body.portal-page.portal-theme-holiday-halloween .portal-card{grid-template-columns:1.12fr .88fr;grid-template-areas:"hero status" "hero actions" "hero voucher" "hero notice" "hero footer";min-height:690px}
+  body.portal-page.portal-theme-holiday-halloween .portal-promo{min-height:100%!important;border-right:4px solid #f47a22}
+
+  body.portal-page.portal-theme-holiday-fiesta .portal-shell{width:min(1000px,100%)}
+  body.portal-page.portal-theme-holiday-fiesta .portal-card{grid-template-columns:1fr 1fr;grid-template-areas:"hero hero" "announcement announcement" "status actions" "status voucher" "notice voucher" "footer footer";min-height:0}
+  body.portal-page.portal-theme-holiday-fiesta .portal-promo{height:300px!important;min-height:300px!important;border:0;border-bottom:12px solid #e83f38}
+}
+
+@media(max-width:899px){
+  .portal-theme-holiday-christmas .portal-actions .button,
+  .portal-theme-holiday-easter .portal-actions .button{padding-inline:8px}
+}
+@media(max-width:520px){
+  .portal-theme-dark .portal-card,.portal-theme-holiday-halloween .portal-card{clip-path:none!important}
+  .portal-theme-holiday-christmas .portal-card{border-width:0!important}
+  .portal-theme-holiday-fiesta .portal-card{box-shadow:none!important}
+  .portal-theme-holiday-eid .portal-card{border-radius:0!important}
+  .portal-theme-holiday-eid .portal-promo{border-radius:0!important;clip-path:ellipse(88% 100% at 50% 0)}
+}
+@media(max-width:350px){
+  .portal-theme-lite .portal-actions,.portal-theme-holiday-christmas .portal-actions,.portal-theme-holiday-easter .portal-actions{grid-template-columns:1fr!important}
+  .portal-theme-lite .portal-actions .coin-hint,.portal-theme-holiday-christmas .portal-actions .coin-hint,.portal-theme-holiday-easter .portal-actions .coin-hint{grid-column:1;grid-row:auto}
+}

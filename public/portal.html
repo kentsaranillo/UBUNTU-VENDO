@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#eef2f5">
+  <title>VendoOS WiFi</title>
+  <link rel="stylesheet" href="/assets/portal.css?v=0.9.15">
+  <link rel="stylesheet" href="/assets/portal-theme-worlds-v2.css?v=2">
+  <link rel="stylesheet" href="/assets/portal-experience-v3.css?v=1">
+  <link rel="stylesheet" href="/assets/portal-layouts-v4.css?v=1">
+  <link rel="stylesheet" href="/assets/portal-immersive-v5.css?v=3">
+  <link rel="stylesheet" href="/assets/portal-battle-royale.css?v=16">
+  <link rel="stylesheet" href="/assets/portal-neon.css?v=3">
+  <link rel="stylesheet" href="/assets/portal-ad-showcase.css?v=3">
+  <link rel="stylesheet" href="/assets/portal-lite.css?v=9">
+  <script src="/assets/app.js?v=0.9.33" defer></script>
+  <!-- Previous revision markers retained for upgrade-test compatibility: portal.css?v=0.9.13 app.js?v=0.9.11 -->
+</head>
+<body class="portal-page promo-portal" data-access-state="ready" data-station-state="checking">
+  <main class="portal-shell">
+    <section class="portal-card" aria-label="WiFi access portal">
+      <img id="liteLogo" class="lite-logo" alt="WiFi" width="220" height="172" hidden>
+      <div class="theme-ornaments" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+      <div id="portalBanner" class="portal-promo hidden">
+        <div class="portal-hero"><img id="portalBannerImage" alt="" width="960" height="480" decoding="async" fetchpriority="high"></div>
+        <div class="promo-shade" aria-hidden="true"></div>
+        <section id="adPromo" class="ad-promo hidden" aria-label="Sponsored promotion">
+          <div class="ad-promo-brand"><span>SPONSORED</span><strong id="adPromoBrand">VendoOS WiFi</strong></div>
+          <h2 id="adPromoHeadline">Fast WiFi. Fair rates.</h2>
+          <p id="adPromoTagline"></p>
+          <p id="adPromoMessage" class="ad-promo-message"></p>
+        </section>
+      </div>
+
+      <section id="campaignShowcase" class="campaign-showcase hidden" aria-label="Sponsored offers"></section>
+
+      <p id="portalAnnouncement" class="announcement">Reliable internet, ready when you are.</p>
+      <div class="status-panel" aria-live="polite">
+        <div class="command-status">
+          <span id="statusIcon" class="status-orb">&#8769;</span>
+          <p class="eyebrow">CONNECTION STATUS</p>
+          <h2 id="connectionStatus">Finding your WiFi station</h2>
+          <small id="commandStatusDetail">Checking customer access</small>
+        </div>
+        <p class="lite-meta" id="liteDevice"></p>
+        <p class="lite-meta" id="liteBalance"></p>
+        <div class="access-title" aria-hidden="true"><strong>ACCESS DETAILS</strong><span>＋</span></div>
+        <p id="creditLabel" class="credit-label">REMAINING TIME</p>
+        <div id="remainingTime" class="time-display">00d 00h 00m 00s</div>
+        <p id="expiryText" class="muted">Please wait</p>
+        <button id="pauseButton" class="button secondary quiet" disabled><span class="pause-icon" aria-hidden="true">Ⅱ</span><span id="pauseLabel">PAUSE &amp; DISCONNECT</span></button>
+      </div>
+
+      <div id="stationPicker" class="field hidden">
+        <label for="machineSelect">Coin station near you</label>
+        <select id="machineSelect"></select>
+      </div>
+
+      <div class="portal-actions">
+        <button id="coinButton" class="button primary coin-cta" disabled><span class="button-icon" aria-hidden="true">&#8369;</span><span class="action-copy"><strong>INSERT COIN / ADD TIME</strong></span><span class="action-arrow" aria-hidden="true">›</span></button>
+        <p class="coin-hint">Connect to this station's WiFi to insert coins.</p>
+        <button id="ratesButton" class="button secondary rates-cta"><span class="button-icon" aria-hidden="true">&#8767;</span><span class="action-copy"><strong>WIFI RATES</strong><small>View available WiFi rates</small></span><span class="action-arrow" aria-hidden="true">›</span></button>
+      </div>
+
+      <form id="voucherForm" class="voucher-form">
+        <label for="voucherCode">Have a voucher?</label>
+        <div class="voucher-row">
+          <input id="voucherCode" name="code" autocomplete="off" maxlength="64" placeholder="Enter voucher code" required>
+          <button id="redeemButton" class="button primary" type="submit">REDEEM</button>
+        </div>
+      </form>
+      <p id="loyaltyBalance" class="loyalty-balance" hidden></p>
+      <p id="portalNotice" class="notice" role="status"></p>
+      <div class="portal-spectrum" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+      <footer class="portal-footer" aria-label="Portal footer">
+        <span>Powered by <strong>VendoOS</strong></span>
+        <small>© 2026 All rights reserved</small>
+      </footer>
+    </section>
+  </main>
+
+  <div id="voucherToast" class="voucher-toast" role="status" aria-live="assertive" aria-atomic="true" hidden>
+    <span id="voucherToastIcon" class="voucher-toast-icon" aria-hidden="true">!</span>
+    <div><strong id="voucherToastTitle">Voucher not accepted</strong><p id="voucherToastMessage"></p></div>
+    <button id="voucherToastClose" class="voucher-toast-close" type="button" aria-label="Dismiss voucher message">&times;</button>
+  </div>
+
+  <div id="ratesModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="ratesTitle" aria-hidden="true">
+    <div class="modal-card"><button class="icon-button modal-close" aria-label="Close">&times;</button><p class="eyebrow">PACKAGES</p><h2 id="ratesTitle">WiFi rates</h2><div id="ratesList" class="rates-grid"></div></div>
+  </div>
+  <div id="coinModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="coinTitle" aria-hidden="true">
+    <div class="modal-card coin-modal-card"><button class="icon-button modal-close" aria-label="Cancel coin session">&times;</button><span class="coin-animation" aria-hidden="true">&#8369;</span><p class="eyebrow">COIN SLOT ACTIVE</p><h2 id="coinTitle">Insert coins now</h2><div id="coinAmount" class="coin-total">&#8369;0.00</div><p id="coinCredit" class="muted">Waiting for a coin pulse</p><div class="lease"><span>Slot closes in</span><strong id="leaseTimer">00d 00h 00m 00s</strong></div><button id="doneButton" class="button primary" disabled>DONE &mdash; CONNECT NOW</button></div>
+  </div>
+  <audio id="insertCoinAudio" preload="none" loop></audio>
+  <audio id="coinReceivedAudio" preload="none"></audio>
+</body>
+</html>

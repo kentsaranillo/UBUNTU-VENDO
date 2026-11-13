@@ -1,0 +1,1 @@
+vendo ALL=(root) NOPASSWD: /usr/local/sbin/vendoos-power reboot, /usr/local/sbin/vendoos-power shutdown

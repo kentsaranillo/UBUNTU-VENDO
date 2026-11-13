@@ -1,0 +1,60 @@
+table inet vendo {
+  set allowed_macs {
+    type ether_addr
+    flags timeout
+    timeout 1h
+  }
+
+  set customer_interfaces {
+    type ifname
+    elements = { "__CUSTOMER_IF__" }
+  }
+
+  set wan_interfaces {
+    type ifname
+    elements = { "__WAN_IF__" }
+  }
+
+  # Per-client counters are keyed by the DHCP address. access-sync.js keeps
+  # these sets aligned with active entitlements and persists counter deltas.
+  set accounting_upload {
+    type ipv4_addr
+    counter
+  }
+
+  set accounting_download {
+    type ipv4_addr
+    counter
+  }
+
+  chain protect_controller {
+    type filter hook input priority filter; policy accept;
+    iifname @wan_interfaces ip saddr __MANAGEMENT_CIDR__ tcp dport 3080 accept
+    iifname @wan_interfaces tcp dport 3080 drop
+  }
+
+  chain captive_redirect {
+    type nat hook prerouting priority dstnat; policy accept;
+    iifname @customer_interfaces ip daddr 10.0.0.1 tcp dport 80 redirect to :3080
+    iifname @customer_interfaces ether saddr @allowed_macs return
+    iifname @customer_interfaces tcp dport 80 redirect to :3080
+  }
+
+  chain customer_forward {
+    type filter hook forward priority filter; policy accept;
+    ct state invalid drop
+    iifname @customer_interfaces ip saddr @accounting_upload
+    oifname @customer_interfaces ip daddr @accounting_download
+    ct state established,related accept
+    iifname @customer_interfaces oifname @wan_interfaces tcp flags syn tcp option maxseg size set rt mtu
+    iifname @customer_interfaces ip daddr { 8.8.8.8, 1.1.1.1 } udp dport 53 accept
+    iifname @customer_interfaces ip daddr { 8.8.8.8, 1.1.1.1 } tcp dport 53 accept
+    iifname @customer_interfaces oifname @wan_interfaces ether saddr @allowed_macs accept
+    iifname @customer_interfaces drop
+  }
+
+  chain internet_nat {
+    type nat hook postrouting priority srcnat; policy accept;
+    oifname @wan_interfaces masquerade
+  }
+}

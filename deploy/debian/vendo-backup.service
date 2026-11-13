@@ -1,0 +1,6 @@
+[Unit]
+Description=Back up the VendoOS database
+
+[Service]
+Type=oneshot
+ExecStart=/opt/debian-vendoos/deploy/debian/backup.sh

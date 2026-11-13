@@ -1,0 +1,160 @@
+/* VendoOS portal experience v3
+   One behavioral contract, distinct visual worlds, explicit access states. */
+
+.promo-portal{
+  --state:#ffbe3f;
+  --state-soft:color-mix(in srgb,var(--state) 14%,transparent);
+  min-height:100dvh;
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+.promo-portal[data-access-state="active"]{--state:#22c983}
+.promo-portal[data-access-state="paused"]{--state:#ffb934}
+.promo-portal[data-access-state="offline"]{--state:#ff5d68}
+.promo-portal[data-access-state="coin"]{--state:var(--primary,var(--portal-primary))}
+.promo-portal .portal-shell{position:relative;z-index:0;margin:auto}
+.promo-portal .portal-card{isolation:isolate}
+.promo-portal .portal-card::before{
+  content:"";position:absolute;z-index:-1;inset:0;pointer-events:none;
+  background:linear-gradient(130deg,color-mix(in srgb,var(--line) 7%,transparent),transparent 32% 70%,color-mix(in srgb,var(--primary) 7%,transparent));
+}
+
+/* State is the first thing a customer should understand. */
+.promo-portal .command-status h2{display:flex;align-items:center;justify-content:center;gap:8px}
+.promo-portal .command-status h2::before{
+  content:"";width:9px;height:9px;flex:0 0 9px;border-radius:50%;
+  background:var(--state);box-shadow:0 0 0 5px var(--state-soft),0 0 18px color-mix(in srgb,var(--state) 55%,transparent);
+}
+.promo-portal .status-pill{border-color:color-mix(in srgb,var(--state) 70%,var(--line))!important}
+.promo-portal[data-access-state="active"] .status-pill,
+.promo-portal[data-access-state="paused"] .status-pill,
+.promo-portal[data-access-state="offline"] .status-pill{color:var(--state)!important}
+.promo-portal[data-access-state="paused"] .status-panel{box-shadow:0 10px 30px color-mix(in srgb,var(--state) 18%,transparent)}
+.promo-portal[data-access-state="offline"] .status-orb{color:#fff;background:var(--state)}
+.promo-portal[data-access-state="offline"] .coin-cta{filter:saturate(.4)}
+
+/* Readable DD / HR / MIN / SEC timer shared by every design. */
+.promo-portal .time-display.digit-time{
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;width:100%;margin:10px 0 8px;
+}
+.promo-portal .time-display.digit-time>span{
+  display:flex;align-items:baseline;justify-content:center;gap:3px;min-width:0;padding:10px 3px 9px;
+  border:1px solid color-mix(in srgb,var(--line) 72%,transparent);border-radius:11px;
+  color:var(--ink);background:color-mix(in srgb,var(--panel) 92%,var(--primary));
+}
+.promo-portal .time-display.digit-time strong{color:var(--primary);font-size:clamp(1.45rem,7vw,2.15rem);font-weight:950;line-height:1;font-variant-numeric:tabular-nums}
+.promo-portal .time-display.digit-time small{color:var(--muted);font-size:.52rem;font-weight:900;letter-spacing:.04em}
+.promo-portal[data-access-state="active"] .time-display.digit-time strong{color:var(--state)}
+.promo-portal[data-access-state="paused"] .time-display.digit-time strong{color:var(--state)}
+
+/* Actions: one unmistakable primary action and quieter supporting actions. */
+.promo-portal .portal-actions .button,.promo-portal .voucher-row .button,.promo-portal #pauseButton{min-height:48px}
+.promo-portal .portal-actions .coin-cta{min-height:66px!important;font-weight:900}
+.promo-portal .portal-actions .coin-cta:not(:disabled){box-shadow:0 8px 0 color-mix(in srgb,var(--primary) 55%,#000),0 16px 30px color-mix(in srgb,var(--primary) 30%,transparent)}
+.promo-portal .portal-actions .button:active:not(:disabled){transform:translateY(3px);box-shadow:0 3px 0 color-mix(in srgb,var(--primary) 55%,#000)}
+.promo-portal .action-copy strong{font-size:.8rem;letter-spacing:.045em}
+.promo-portal .action-copy small{margin-top:3px;font-size:.61rem}
+.promo-portal .voucher-row input{min-width:0;font-size:16px}
+.promo-portal .voucher-row .button{min-width:104px}
+.promo-portal .button:focus-visible,.promo-portal input:focus-visible,.promo-portal select:focus-visible{outline:3px solid var(--accent,var(--portal-accent));outline-offset:3px}
+
+/* Coin payment is a purposeful transaction screen, not a generic dialog. */
+.promo-portal #coinModal{background:color-mix(in srgb,#050708 84%,var(--primary));backdrop-filter:blur(8px)}
+.promo-portal .coin-modal-card{overflow:hidden;border-width:2px;border-radius:24px;text-align:center}
+.promo-portal .coin-modal-card::before{content:"INSERT COINS NOW";display:block;margin:-1.25rem -1.25rem 1rem;padding:18px 54px 16px;color:#fff;background:linear-gradient(135deg,var(--primary),color-mix(in srgb,var(--primary) 55%,#111));font-size:.76rem;font-weight:950;letter-spacing:.1em}
+.promo-portal .coin-animation{display:grid;place-items:center;width:76px;height:76px;margin:4px auto 12px;border:2px solid var(--primary);border-radius:50%;color:var(--primary);background:color-mix(in srgb,var(--primary) 12%,transparent);font-size:2rem;box-shadow:0 0 0 9px color-mix(in srgb,var(--primary) 8%,transparent)}
+.promo-portal .coin-total{font-size:clamp(2.4rem,12vw,4rem);font-variant-numeric:tabular-nums}
+.promo-portal .lease{border-radius:14px}
+
+/* Desktop becomes a complete presentation instead of a tiny phone in empty space. */
+@media(min-width:900px){
+  body.portal-page.promo-portal{display:grid;place-items:center;padding:34px}
+  body.portal-page.promo-portal .portal-shell{width:min(1120px,100%)}
+  body.portal-page.promo-portal .portal-card{
+    display:grid;grid-template-columns:minmax(390px,1.15fr) minmax(390px,440px);
+    grid-template-areas:"hero announcement" "hero status" "hero picker" "hero actions" "hero voucher" "hero notice" "hero footer";
+    align-content:center;min-height:min(780px,calc(100dvh - 68px));overflow:hidden;
+  }
+  body.portal-page.promo-portal .portal-promo{grid-area:hero;width:100%;height:100%!important;min-height:710px;margin:0;border:0;border-right:2px solid var(--line);border-radius:0}
+  body.portal-page.promo-portal .portal-promo>.portal-hero>img{object-position:center}
+  body.portal-page.promo-portal .promo-copy{inset:auto 34px 34px;max-width:500px}
+  body.portal-page.promo-portal .promo-copy h1{font-size:clamp(2rem,3vw,3.4rem)}
+  body.portal-page.promo-portal .status-pill{top:24px;right:24px}
+  body.portal-page.promo-portal .announcement{grid-area:announcement;margin:20px 20px 0}
+  body.portal-page.promo-portal .status-panel{grid-area:status;margin:12px 20px 0}
+  body.portal-page.promo-portal #stationPicker{grid-area:picker;margin:10px 20px 0}
+  body.portal-page.promo-portal .portal-actions{grid-area:actions;margin:0;padding:12px 20px 0}
+  body.portal-page.promo-portal .voucher-form{grid-area:voucher;margin:12px 20px 0}
+  body.portal-page.promo-portal .notice{grid-area:notice;margin-inline:20px}
+  body.portal-page.promo-portal .portal-footer{grid-area:footer}
+  body.portal-page.promo-portal .theme-ornaments{grid-column:2}
+}
+
+/* Theme art direction: shared behavior, intentionally different composition. */
+.promo-portal.portal-theme-dark .portal-card{background:#120b16}
+.promo-portal.portal-theme-dark .portal-promo{background-image:linear-gradient(180deg,#16001210,#26001788),url("/assets/portal-world-premium.webp")!important}
+.promo-portal.portal-theme-dark .status-panel{background:#211022f2;border-color:#8e235b}
+.promo-portal.portal-theme-dark .portal-actions .coin-cta{background:linear-gradient(100deg,#f20d89,#a40062)}
+.promo-portal.portal-theme-dark .portal-actions .rates-cta{background:#291126;border-color:#873266}
+.promo-portal.portal-theme-dark .time-display.digit-time>span{border-radius:5px;background:#160b18}
+
+.promo-portal.portal-theme-lite .portal-card{background:#f7fffc}
+.promo-portal.portal-theme-lite .portal-promo{background-image:linear-gradient(180deg,#ffffff08,#0c695650),url("/assets/portal-world-adventure.webp")!important}
+.promo-portal.portal-theme-lite .status-panel{border-radius:24px}
+.promo-portal.portal-theme-lite .time-display.digit-time>span{border:0;background:#e5f5f0}
+.promo-portal.portal-theme-lite .portal-actions .coin-cta{background:linear-gradient(135deg,#16a889,#087961)}
+
+.promo-portal.portal-theme-storybook-adventure .time-display.digit-time>span{border:2px solid #8a542b;border-radius:6px;background:#f4c97e;box-shadow:inset 0 0 0 2px #ffe8b8}
+.promo-portal.portal-theme-storybook-adventure .portal-actions .button{text-transform:uppercase;letter-spacing:.06em}
+
+.promo-portal.portal-theme-holiday-christmas .time-display.digit-time>span{border:2px solid #c89d3d;border-radius:4px;background:#fff8e9}
+.promo-portal.portal-theme-holiday-christmas .portal-actions .coin-cta{background:linear-gradient(#d83b45,#a81d29)}
+
+.promo-portal.portal-theme-holiday-new-year .time-display.digit-time>span{border-color:#cfaa49;background:#09132f}
+.promo-portal.portal-theme-holiday-new-year .time-display.digit-time strong{color:#f5d573}
+.promo-portal.portal-theme-holiday-new-year .portal-actions .button{clip-path:polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%,0 8px)}
+
+.promo-portal.portal-theme-holiday-valentine .time-display.digit-time>span{border:0;border-radius:18px;background:#ffe1ea}
+.promo-portal.portal-theme-holiday-valentine .portal-actions .button{border-radius:999px}
+
+.promo-portal.portal-theme-holiday-lunar .time-display.digit-time>span{border:2px solid #d49a24;border-radius:2px;background:#fff0c7}
+.promo-portal.portal-theme-holiday-lunar .portal-actions .button{text-transform:uppercase;letter-spacing:.08em}
+
+.promo-portal.portal-theme-holiday-easter .time-display.digit-time{gap:9px}
+.promo-portal.portal-theme-holiday-easter .time-display.digit-time>span{border:0;border-radius:20px;background:#f5eafa;transform:rotate(-1deg)}
+.promo-portal.portal-theme-holiday-easter .time-display.digit-time>span:nth-child(even){background:#e4f5ee;transform:rotate(1deg)}
+
+.promo-portal.portal-theme-holiday-eid .time-display.digit-time>span{border-color:#b99a42;border-radius:18px 18px 6px 6px;background:#fff9e9}
+.promo-portal.portal-theme-holiday-eid .portal-actions .button{border-radius:18px 18px 6px 6px}
+
+.promo-portal.portal-theme-holiday-halloween .time-display.digit-time>span{border:2px solid #6f388e;border-radius:2px;background:#0d0712;box-shadow:5px 5px 0 #060308}
+.promo-portal.portal-theme-holiday-halloween .time-display.digit-time strong{color:#ff8b32}
+
+.promo-portal.portal-theme-holiday-fiesta .time-display.digit-time>span{border:3px solid #087f9f;border-radius:4px;background:#fff6d8;box-shadow:3px 3px 0 #e44639}
+.promo-portal.portal-theme-holiday-fiesta .portal-actions .coin-cta{background:linear-gradient(135deg,#f15a42,#d92f37)}
+.promo-portal.portal-theme-holiday-fiesta .portal-actions .rates-cta{background:linear-gradient(135deg,#159bb5,#08738e)}
+
+@media(max-width:899px){
+  body.portal-page.promo-portal{padding:14px 10px}
+  body.portal-page.promo-portal .portal-shell{width:min(100%,440px)}
+}
+@media(max-width:520px){
+  body.portal-page.promo-portal{padding:0}
+  body.portal-page.promo-portal .portal-shell{width:100%}
+  body.portal-page.promo-portal .portal-card{min-height:100dvh;border-width:0!important;border-radius:0!important;box-shadow:none!important;clip-path:none!important}
+  .promo-portal .portal-promo{height:clamp(168px,48vw,205px)!important;margin:0!important;border-radius:0!important}
+  .promo-portal .promo-copy{inset:auto 16px 14px}
+  .promo-portal .promo-copy h1{font-size:1.25rem}
+  .promo-portal .announcement{margin-inline:14px}
+  .promo-portal .status-panel{margin-inline:14px}
+  .promo-portal .portal-actions{padding-inline:14px}
+  .promo-portal .voucher-form{margin-inline:14px}
+}
+@media(max-width:350px){
+  .promo-portal .time-display.digit-time{gap:4px}
+  .promo-portal .time-display.digit-time>span{padding-inline:1px}
+  .promo-portal .time-display.digit-time strong{font-size:1.25rem}
+  .promo-portal .voucher-row .button{min-width:88px;padding-inline:10px}
+}
+@media(prefers-reduced-motion:reduce){
+  .promo-portal *{animation:none!important;scroll-behavior:auto!important;transition:none!important}
+}

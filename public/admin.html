@@ -1,0 +1,1280 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#202428">
+<title>VendoOS Central</title>
+<link rel="stylesheet" href="/assets/style.css?v=0.8.36">
+<link rel="stylesheet" href="/assets/portal-theme-worlds-v2.css?v=2">
+<link rel="stylesheet" href="/assets/portal-experience-v3.css?v=1">
+<link rel="stylesheet" href="/assets/portal-layouts-v4.css?v=1">
+<link rel="stylesheet" href="/assets/portal-immersive-v5.css?v=3">
+<link rel="stylesheet" href="/assets/portal-battle-royale.css?v=16">
+<link rel="stylesheet" href="/assets/portal-neon.css?v=3">
+<link rel="stylesheet" href="/assets/portal-ad-showcase.css?v=3">
+<link rel="stylesheet" href="/assets/portal-lite.css?v=9">
+<script src="/assets/admin.js?v=0.10.55" defer>
+</script>
+<script src="/assets/admin-campaigns.js?v=2" defer></script>
+<!-- Previous asset revision markers retained for upgrade-test compatibility: style.css?v=0.8.6 admin.js?v=0.8.6 -->
+<!-- Previous portal-theme revision markers: style.css?v=0.8.33 admin.js?v=0.10.22 -->
+</head>
+<body class="admin-page">
+<section id="loginView" class="login-view">
+<form id="loginForm" class="login-card">
+<div class="brand-mark">V</div>
+<p class="eyebrow">VENDOOS CENTRAL</p>
+<h1>Administrator login</h1>
+<p class="muted">One dashboard for customers, coin stations, revenue and gateway health.</p>
+<label>Username<input id="adminUsername" type="text" autocomplete="username" value="admin" maxlength="64" required>
+</label>
+<label>Password<input id="adminPassword" type="password" autocomplete="current-password" minlength="12" required>
+</label>
+<button class="button primary">SIGN IN</button>
+<p id="loginError" class="error" role="alert">
+</p>
+</form>
+</section>
+<div id="adminApp" class="admin-shell hidden">
+<aside class="sidebar">
+<a class="admin-brand" href="#overview">
+<span class="brand-mark">V</span>
+<strong>VendoOS</strong>
+</a>
+<nav aria-label="Main navigation">
+<button data-tab="overview" class="nav-button active">Overview</button>
+<button data-tab="sessions" class="nav-button">Live users</button>
+<button data-tab="stations" class="nav-button">Stations</button>
+<button data-tab="rates" class="nav-button">WiFi rates</button>
+<button data-tab="vouchers" class="nav-button">Vouchers</button>
+<button data-tab="sellers" class="nav-button">Sellers</button>
+<button data-tab="sales" class="nav-button">Sales</button>
+<button data-tab="collections" class="nav-button">Collections</button>
+<button data-tab="network" class="nav-button">Network</button>
+<button data-tab="system" class="nav-button">System</button>
+<button data-tab="activity" class="nav-button">Activity</button>
+</nav>
+<button id="logoutButton" class="nav-button logout">Log out</button>
+</aside>
+<main class="admin-main">
+<header class="admin-header">
+<div>
+<p class="eyebrow">CENTRAL OPERATIONS</p>
+<h1 id="pageTitle">Fleet overview</h1>
+</div>
+<div class="header-actions">
+<span id="currentAdminIdentity" class="admin-identity" aria-label="Signed-in administrator"></span>
+<span id="healthPill" class="status-pill neutral">Checking system</span>
+<button id="refreshButton" class="button secondary compact">Refresh</button>
+</div>
+</header>
+<p id="adminNotice" class="notice" role="status">
+</p>
+<section id="overviewTab" class="tab-panel active">
+<div id="kpiGrid" class="kpi-grid">
+</div>
+<div class="dashboard-grid">
+<article class="panel">
+<div class="panel-head">
+<div>
+<p class="eyebrow">14 DAYS</p>
+<h2>Sales performance</h2>
+</div>
+</div>
+<div id="salesChart" class="bar-chart">
+</div>
+</article>
+<article class="panel">
+<div class="panel-head">
+<div>
+<p class="eyebrow">FLEET</p>
+<h2>Station health</h2>
+</div>
+</div>
+<div id="stationHealth" class="health-list">
+</div>
+</article>
+</div>
+<div id="usageGrid" class="dashboard-grid usage-grid section-gap">
+<article class="panel">
+<div class="panel-head">
+<div>
+<p class="eyebrow">SERVER</p>
+<h2>Hardware usage</h2>
+</div>
+</div>
+<div id="hardwareUsageChart" class="usage-chart" aria-label="CPU and memory usage history">
+</div>
+</article>
+<article class="panel">
+<div class="panel-head">
+<div>
+<p class="eyebrow">WAN</p>
+<h2>Network usage</h2>
+</div>
+</div>
+<div id="networkUsageChart" class="usage-chart" aria-label="Download and upload usage history">
+</div>
+</article>
+<article class="panel">
+<div class="panel-head">
+<div>
+<p class="eyebrow">CAPACITY</p>
+<h2>Gateway performance</h2>
+</div>
+</div>
+<div id="gatewayCapacity" class="usage-chart" aria-live="polite"><p class="muted">Collecting gateway metrics…</p></div>
+</article>
+<article class="panel interface-traffic-panel">
+<div class="panel-head">
+<div>
+<p class="eyebrow">INTERFACES</p>
+<h2>Interface traffic</h2>
+</div>
+<label class="interface-chart-filter" for="interfaceUsageSelect">Interface<select id="interfaceUsageSelect" aria-label="Select network interface"></select></label>
+</div>
+<div id="interfaceUsageChart" class="usage-chart interface-usage-chart" aria-label="Selected interface download and upload history">
+</div>
+</article>
+</div>
+<article class="panel section-gap">
+<div class="panel-head">
+<div>
+<p class="eyebrow">RECENT</p>
+<h2>Latest transactions</h2>
+</div>
+</div>
+<div id="recentSales">
+</div>
+</article>
+</section>
+<section id="sessionsTab" class="tab-panel">
+<article class="panel">
+<div class="panel-head">
+<div>
+<p class="eyebrow">REAL TIME</p>
+<h2>Connected customers</h2>
+</div>
+<input id="sessionSearch" class="search-input" placeholder="Search MAC, IP or station">
+</div>
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+<th>Customer</th>
+<th>Station</th>
+<th>Status</th>
+<th>Remaining</th>
+<th>Speed</th>
+<th>Usage</th>
+<th>Actions</th>
+</tr>
+</thead>
+<tbody id="sessionsBody">
+</tbody>
+</table>
+</div>
+</article>
+<div id="extendSessionModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="extendSessionTitle">
+<form id="extendSessionForm" class="modal-card form-panel">
+<button type="button" class="icon-button modal-close" data-extend-close aria-label="Close">×</button>
+<input name="session_id" type="hidden">
+<p class="eyebrow">CUSTOMER ACCESS</p>
+<h2 id="extendSessionTitle">Add time</h2>
+<p id="extendSessionCustomer" class="muted"></p>
+<fieldset class="duration-fieldset">
+<legend>Time to add · DD / HR / MIN</legend>
+<div class="duration-input-grid duration-input-grid-three">
+<label>Days<input name="days" type="number" min="0" max="365" value="0" required></label>
+<label>Hours<input name="hours" type="number" min="0" max="23" value="1" required></label>
+<label>Minutes<input name="minutes" type="number" min="0" max="59" value="0" required></label>
+</div>
+</fieldset>
+<div class="extend-validity" aria-live="polite">
+<span>Current remaining<strong id="extendCurrentTime">00D 00HR 00MIN</strong></span>
+<span>Validity after adding<strong id="extendNewValidity">00D 01HR 00MIN</strong></span>
+<small id="extendExpiryDate">Expires —</small>
+</div>
+<p id="extendSessionError" class="error" role="alert"></p>
+<div class="table-actions">
+<button type="button" class="button secondary" data-extend-close>Cancel</button>
+<button class="button primary">ADD TIME</button>
+</div>
+</form>
+</div>
+</section>
+<section id="stationsTab" class="tab-panel">
+<article class="panel">
+<p class="eyebrow">PLUG & PLAY</p>
+<h2>Automatic ESP enrollment</h2>
+<p class="muted">Power a fleet ESP on any configured customer network. It discovers this gateway, registers its hardware ID, inherits D4 coin pulse and D8 enable pins, and appears below automatically. No hardware ID entry is required.</p>
+</article>
+<details class="panel enroll-panel section-gap">
+<summary>
+<strong>＋ Create customer VLAN</strong>
+<span class="muted">Create one VLAN or a consecutive range</span>
+</summary>
+<form id="stationEnrollForm" class="form-panel section-gap" novalidate>
+<div class="form-row">
+<label>Start VLAN<input name="vlan_id" type="number" min="1" max="4094" value="1" required>
+</label>
+<label>End VLAN (optional)<input name="vlan_end" type="number" min="1" max="4094" placeholder="Up to 4094">
+</label>
+</div>
+<label>Zone name or range prefix (optional)<input name="zone_name" placeholder="Customer VLAN">
+</label>
+<p class="muted">Choose any range from VLAN 1 through 4094. Start 1 and end 4094 creates the maximum 4,094 VLANs in one operation. VLANs 1–254 retain 10.VLAN.0.0/24; higher VLANs receive a unique private /24 automatically.</p>
+<details>
+<summary>
+<strong>Advanced settings</strong>
+<span class="muted">Available for single-VLAN creation</span>
+</summary>
+<div class="form-row section-gap">
+<label>Parent interface<input name="parent_if" placeholder="Use configured customer trunk">
+</label>
+<label>Subnet (CIDR)<input name="subnet" placeholder="Automatic">
+</label>
+</div>
+<div class="form-row">
+<label>Gateway<input name="gateway" placeholder="Automatic">
+</label>
+<label>DHCP start<input name="dhcp_start" placeholder="Automatic">
+</label>
+</div>
+<div class="form-row">
+<label>DHCP end<input name="dhcp_end" placeholder="Automatic">
+</label>
+<label>Station label (optional)<input name="name" maxlength="80" placeholder="Automatically named">
+</label>
+</div>
+<div class="form-row">
+<label>Existing ESP ID (optional)<input name="hardware_id" maxlength="80" placeholder="Leave blank">
+</label>
+<label>Location (optional)<input name="location" maxlength="120">
+</label>
+</div>
+<div class="form-row">
+<label>Coin pulse pin<select name="coin_pin">
+<option value="5">D1 (GPIO5)</option><option value="4">D2 (GPIO4)</option><option value="0">D3 (GPIO0)</option><option value="2" selected>D4 (GPIO2)</option><option value="14">D5 (GPIO14)</option><option value="12">D6 (GPIO12)</option><option value="13">D7 (GPIO13)</option>
+</select></label>
+<label>Coin enable pin<select name="enable_pin">
+<option value="5">D1 (GPIO5)</option><option value="4">D2 (GPIO4)</option><option value="0">D3 (GPIO0)</option><option value="2">D4 (GPIO2)</option><option value="14">D5 (GPIO14)</option><option value="12">D6 (GPIO12)</option><option value="13">D7 (GPIO13)</option><option value="15" selected>D8 (GPIO15)</option><option value="16">D0 (GPIO16)</option>
+</select></label>
+<small class="muted">ESP8266 labels match the D0–D8 names printed on the board.</small>
+</div>
+</details>
+<button class="button primary section-gap">CREATE VLAN / RANGE</button>
+</form>
+</details>
+<article class="panel section-gap">
+<div class="panel-head">
+<div>
+<p class="eyebrow">HARDWARE FLEET</p>
+<h2>Vendo stations</h2>
+</div>
+<input id="stationSearch" class="search-input" placeholder="Search stations">
+</div>
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+<th>Station</th>
+<th>VLAN / status</th>
+<th>Network</th>
+<th>Cash waiting</th>
+<th>Sales today</th>
+<th>Station uptime</th>
+<th>Heartbeat</th>
+<th>Actions</th>
+</tr>
+</thead>
+<tbody id="stationsBody">
+</tbody>
+</table>
+</div>
+</article>
+<article class="panel section-gap">
+<div class="panel-head">
+<div>
+<p class="eyebrow">CUSTOMER NETWORKS</p>
+<h2>Managed VLANs</h2>
+</div>
+<button id="checkVlans" type="button" class="button secondary compact">CHECK VLANS</button>
+</div>
+<div id="vlanHealthSummary" class="vlan-health-summary" aria-live="polite"><p class="muted">Checking VLAN interfaces, gateways and DHCP…</p></div>
+<div id="zoneList" class="health-list">
+</div>
+</article>
+</section>
+<section id="ratesTab" class="tab-panel">
+<article class="panel rate-management">
+<div class="rate-toolbar">
+<label>Station<select id="rateMachineSelect">
+<option value="">Default rates</option>
+</select>
+</label>
+<div>
+<span class="field-label">Functions</span>
+<div class="rate-actions">
+<button id="addRate" class="button primary compact">＋ Rate</button>
+<button id="resetRateSelection" class="button secondary compact">↻ Reset</button>
+<button id="saveAssignments" class="button secondary compact">Save station rates</button>
+<button id="setDefaultRates" class="button secondary compact">Set as default</button>
+<button id="useDefaultRates" class="button secondary compact">Use default</button>
+<button id="applyRatesAll" class="button warning compact">Apply to all vendos</button>
+</div>
+</div>
+</div>
+<div class="table-tools">
+<label>Show<select id="ratePageSize">
+<option>10</option>
+<option>25</option>
+<option>50</option>
+</select> entries</label>
+<label>Search<input id="rateSearch" type="search" placeholder="Search rates">
+</label>
+</div>
+<div class="table-wrap">
+<table class="rate-table">
+<thead>
+<tr>
+<th>Select</th>
+<th>No.</th>
+<th>Amount</th>
+<th>Time</th>
+<th>Expiry</th>
+<th>Pause limit</th>
+<th>Points</th>
+<th>Mode</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody id="adminRates">
+</tbody>
+</table>
+</div>
+<small id="rateCount" class="muted">
+</small>
+</article>
+<article class="panel section-gap">
+<div class="panel-head">
+<div>
+<p class="eyebrow">LOYALTY</p>
+<h2>Points</h2>
+</div>
+<button id="addPointsRate" class="button primary compact">＋ Points</button>
+</div>
+<div class="table-tools">
+<span class="muted">Rates that award customer points</span>
+<label>Search<input id="pointsSearch" type="search" placeholder="Search points">
+</label>
+</div>
+<div class="table-wrap">
+<table class="rate-table">
+<thead>
+<tr>
+<th>No.</th>
+<th>Points</th>
+<th>Time</th>
+<th>Expiry</th>
+<th>Pause limit</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody id="pointsRates">
+</tbody>
+</table>
+</div>
+</article>
+<div id="rateModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="rateModalTitle">
+<form id="rateForm" class="modal-card form-panel">
+<button type="button" class="icon-button modal-close" data-rate-close aria-label="Close">×</button>
+<input name="id" type="hidden">
+<p class="eyebrow">RATE & BANDWIDTH</p>
+<h2 id="rateModalTitle">Add WiFi rate</h2>
+<label>Package name<input name="name" required maxlength="80" placeholder="PHP 5 / 3 hours">
+</label>
+<label>Price (PHP)<input name="price" type="number" min="1" step="1" required>
+</label>
+<fieldset class="duration-fieldset">
+<legend>Access time</legend>
+<div class="duration-input-grid">
+<label>Days<input name="duration_days" type="number" min="0" max="365" value="0" required></label>
+<label>Hours<input name="duration_hours" type="number" min="0" max="23" value="0" required></label>
+<label>Minutes<input name="duration_minutes" type="number" min="0" max="59" value="0" required></label>
+<label>Seconds<input name="duration_seconds" type="number" min="0" max="59" value="0" required></label>
+</div>
+<small class="muted">Format: D / HR / MIN / SEC. Total access time must be at least one second.</small>
+</fieldset>
+<div class="form-row">
+<label>Expiry (hours)<input name="expiry_hours" type="number" min="0" value="24">
+</label>
+<label>Pause limit<input name="pause_limit" type="number" min="0" value="0">
+</label>
+</div>
+<div class="form-row">
+<label>Points awarded<input name="points" type="number" min="0" value="0">
+</label>
+<label>Rate limit<input name="rate_limit" value="5M/5M">
+</label>
+</div>
+<label>Display order<input name="sort_order" type="number" min="0" value="0">
+</label>
+<div class="form-row">
+<label class="check-row">
+<input name="pausable" type="checkbox" checked> Pausable time</label>
+<label class="check-row">
+<input name="is_default" type="checkbox" checked> Default rate</label>
+</div>
+<div class="table-actions">
+<button type="button" class="button secondary" data-rate-close>Cancel</button>
+<button class="button primary">SAVE RATE</button>
+</div>
+</form>
+</div>
+</section>
+<section id="vouchersTab" class="tab-panel">
+<div class="split-layout">
+<form id="voucherGenerateForm" class="panel form-panel">
+<p class="eyebrow">BATCH</p>
+<h2>Generate vouchers</h2>
+<div class="form-row">
+<label>Quantity<input name="quantity" type="number" min="1" max="500" value="10" required>
+</label>
+<label>Value (PHP)<input name="price" type="number" min="0" value="0">
+</label>
+</div>
+<fieldset class="voucher-time-fieldset">
+<legend>Access time <span>DD / HR / MIN / SEC</span></legend>
+<div class="voucher-time-grid">
+<label>Days<input name="duration_days" type="number" min="0" max="365" value="0" required></label>
+<label>Hours<input name="duration_hours" type="number" min="0" max="23" value="1" required></label>
+<label>Minutes<input name="duration_minutes" type="number" min="0" max="59" value="0" required></label>
+<label>Seconds<input name="duration_seconds" type="number" min="0" max="59" value="0" required></label>
+</div>
+</fieldset>
+<fieldset class="voucher-time-fieldset">
+<legend>Voucher validity <span>DD / HR / MIN / SEC</span></legend>
+<div class="voucher-time-grid">
+<label>Days<input name="validity_days" type="number" min="0" max="3650" value="30" required></label>
+<label>Hours<input name="validity_hours" type="number" min="0" max="23" value="0" required></label>
+<label>Minutes<input name="validity_minutes" type="number" min="0" max="59" value="0" required></label>
+<label>Seconds<input name="validity_seconds" type="number" min="0" max="59" value="0" required></label>
+</div>
+<small class="muted">Set all validity fields to zero for vouchers that never expire.</small>
+</fieldset>
+<label>Batch code
+<span class="batch-code-control"><input name="batch_code" maxlength="30" autocomplete="off" aria-describedby="batchCodeHint"><button id="newVoucherBatchCode" type="button" class="button secondary compact" title="Generate another batch code" aria-label="Generate another batch code">↻</button></span>
+<small id="batchCodeHint" class="muted">Generated automatically. You may replace it with your own code.</small>
+</label>
+<label>Seller<select name="seller_code" id="voucherSeller">
+<option value="">Unassigned</option>
+</select>
+</label>
+<button class="button primary">GENERATE</button>
+</form>
+<article class="panel">
+<div class="panel-head">
+<div>
+<p class="eyebrow">PRINT</p>
+<h2>New voucher sheet</h2>
+</div>
+<button id="printVouchers" class="button secondary compact" disabled>Print</button>
+</div>
+<div id="voucherOutput" class="voucher-output muted">Generate a batch to display compact printable codes.</div>
+</article>
+</div>
+<article class="panel section-gap">
+<div class="filter-bar voucher-tools">
+<input id="voucherBatchFilter" placeholder="Batch code">
+<select id="voucherStatusFilter">
+<option value="">All status</option>
+<option>unused</option>
+<option>used</option>
+<option>disabled</option>
+</select>
+<button id="filterVouchers" class="button secondary compact">Filter</button>
+<button id="printSelectedVouchers" class="button secondary compact" type="button" disabled>Print selected</button>
+<label class="quantity-control">PCS<input id="voucherDeleteCount" type="number" min="1" max="500" value="1" aria-label="Number of unused vouchers to delete">
+</label>
+<button id="deleteVoucherCount" class="button secondary compact">Delete pcs</button>
+<button id="deleteSelectedVouchers" class="button secondary compact" disabled>Delete selected</button>
+<button id="deleteVoucherBatch" class="button secondary compact">Delete batch</button>
+<button id="exportVouchers" class="button secondary compact">Export CSV</button>
+</div>
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+<th class="selection-column">
+<input id="voucherSelectAll" type="checkbox" aria-label="Select all displayed vouchers">
+</th>
+<th>Code</th>
+<th>Batch</th>
+<th>Seller</th>
+<th>Value</th>
+<th>Time</th>
+<th>Validity</th>
+<th>Status</th>
+<th>Used by</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody id="vouchersBody">
+</tbody>
+</table>
+</div>
+<small id="voucherSelectionCount" class="muted">0 selected</small>
+</article>
+</section>
+<section id="sellersTab" class="tab-panel">
+<div class="split-layout">
+<form id="sellerForm" class="panel form-panel">
+<p class="eyebrow">RESELLER</p>
+<h2>Add seller</h2>
+<label>Seller code<input name="code" required maxlength="30">
+</label>
+<label>Name<input name="name" required maxlength="80">
+</label>
+<label>Contact<input name="contact" maxlength="100">
+</label>
+<label>Location<input name="location" maxlength="120">
+</label>
+<button class="button primary">SAVE SELLER</button>
+</form>
+<article class="panel">
+<div class="panel-head">
+<div>
+<p class="eyebrow">CHANNEL</p>
+<h2>Seller performance</h2>
+</div>
+</div>
+<div id="sellerList" class="health-list">
+</div>
+</article>
+</div>
+</section>
+<section id="salesTab" class="tab-panel">
+<article class="panel">
+<div class="filter-bar">
+<input id="salesFrom" type="date">
+<input id="salesTo" type="date">
+<select id="salesMachine">
+<option value="">All stations</option>
+</select>
+<select id="salesMethod">
+<option value="">All methods</option>
+<option>coin</option>
+<option>voucher</option>
+<option>manual</option>
+</select>
+<button id="filterSales" class="button secondary compact">Apply</button>
+<button id="exportSales" class="button secondary compact">Export CSV</button>
+<button id="resetSales" class="button danger compact">Reset sales</button>
+</div>
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+<th>Date</th>
+<th>Station</th>
+<th>Method</th>
+<th>Client</th>
+<th>Amount</th>
+<th>Time</th>
+</tr>
+</thead>
+<tbody id="salesBody">
+</tbody>
+</table>
+</div>
+</article>
+</section>
+<section id="collectionsTab" class="tab-panel">
+<div class="split-layout">
+<form id="collectionForm" class="panel form-panel">
+<p class="eyebrow">CASH COUNT</p>
+<h2>Record collection</h2>
+<label>Station<select name="machine_id" id="collectionMachine" required>
+</select>
+</label>
+<label>Actual cash (PHP)<input name="actual" type="number" min="0" step=".01" required>
+</label>
+<label>Collector<input name="collector" maxlength="80">
+</label>
+<label>Notes<input name="notes" maxlength="500">
+</label>
+<button class="button primary">RECORD & RESET CASH</button>
+</form>
+<article class="panel">
+<div class="panel-head">
+<div>
+<p class="eyebrow">CONTROL</p>
+<h2>System vs actual variance</h2>
+</div>
+</div>
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+<th>Date</th>
+<th>Station</th>
+<th>System</th>
+<th>Actual</th>
+<th>Variance</th>
+</tr>
+</thead>
+<tbody id="collectionsBody">
+</tbody>
+</table>
+</div>
+</article>
+</div>
+</section>
+<section id="networkTab" class="tab-panel">
+<article id="networkOverviewPanel" class="panel network-command-center">
+  <div class="panel-head network-command-head">
+    <div>
+      <p class="eyebrow">NETWORK COMMAND CENTER</p>
+      <h2>Internet, customers and traffic at a glance</h2>
+      <p class="muted">Check network health first, then open the task you need. Changes remain in their focused sections.</p>
+    </div>
+    <span id="networkOverviewStatus" class="badge offline" role="status" aria-live="polite">Checking</span>
+  </div>
+  <div id="networkOverviewStats" class="network-overview-stats" aria-label="Network status summary"></div>
+  <div class="network-overview-layout">
+    <section class="network-overview-block" aria-labelledby="networkPathHeading">
+      <div class="network-block-head"><h3 id="networkPathHeading">Network path</h3><span class="muted">Current configuration</span></div>
+      <dl id="networkDetailGrid" class="network-detail-grid"></dl>
+    </section>
+    <section class="network-overview-block" aria-labelledby="networkHealthHeading">
+      <div class="network-block-head"><h3 id="networkHealthHeading">Health checks</h3><span class="muted">What needs attention</span></div>
+      <div id="networkHealthList" class="network-health-list" role="list"></div>
+    </section>
+  </div>
+  <nav class="network-quick-actions" aria-label="Common network tasks">
+    <button type="button" class="network-task-button" data-network-section="interfaces"><span class="network-task-icon" aria-hidden="true">↔</span><span><strong>Interfaces</strong><small>IP, gateway, DNS &amp; PPPoE</small></span></button>
+    <button type="button" class="network-task-button" data-network-section="multiwan"><span class="network-task-icon" aria-hidden="true">⇄</span><span><strong>WAN &amp; failover</strong><small>Balance and monitor uplinks</small></span></button>
+    <button type="button" class="network-task-button" data-network-section="bandwidth"><span class="network-task-icon" aria-hidden="true">⌁</span><span><strong>QoS &amp; speed</strong><small>CAKE, FQ-CoDel and limits</small></span></button>
+    <button type="button" class="network-task-button" data-network-section="vlans"><span class="network-task-icon" aria-hidden="true">▦</span><span><strong>Customer VLANs</strong><small>Create and manage networks</small></span></button>
+  </nav>
+</article>
+<article id="multiWanPanel" class="panel">
+  <div class="panel-head">
+    <div><p class="eyebrow">UPLINKS</p><h2>Multi-WAN load balancing</h2></div>
+    <span id="multiWanSummary" class="badge offline">Disabled</span>
+  </div>
+  <form id="multiWanForm" class="form-panel">
+    <label class="check-row"><input name="enabled" type="checkbox"> Enable weighted load balancing and automatic failover</label>
+    <p class="muted">Traffic is distributed per connection. A failed WAN is removed after two failed health checks and automatically restored when healthy.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Enabled</th><th>Interface</th><th>Gateway</th><th>Weight</th><th>Health target</th><th>Status</th><th>Action</th></tr></thead>
+        <tbody id="multiWanBody"></tbody>
+      </table>
+    </div>
+    <div class="table-actions">
+      <button id="addWan" type="button" class="button secondary compact">＋ Add WAN</button>
+      <button class="button primary compact">SAVE MULTI-WAN</button>
+    </div>
+  </form>
+</article>
+
+<article id="pbrPanel" class="panel">
+<div class="panel-head"><div><p class="eyebrow">TRAFFIC STEERING</p><h2>Policy-based routing</h2></div><span id="pbrSummary" class="badge offline">Disabled</span></div>
+<form id="pbrForm" class="form-panel">
+<label class="check-row"><input name="enabled" type="checkbox"> Enable policy-based routing</label>
+<p class="muted">Send selected traffic through a preferred ISP. If that ISP is offline, the policy automatically falls back to the normal route.</p>
+<div class="table-wrap"><table><thead><tr><th>On</th><th>Name</th><th>Traffic</th><th>Preferred ISP</th><th>Match</th><th>Priority</th><th>Action</th></tr></thead><tbody id="pbrBody"></tbody></table></div>
+<div class="table-actions"><button id="addPbrPolicy" type="button" class="button secondary">+ ADD POLICY</button><button class="button primary">SAVE PBR</button></div>
+<p id="pbrStatusDetail" class="pbr-status-detail muted" role="status" aria-live="polite"></p>
+<p class="muted pbr-help"><strong>Browsing</strong> matches HTTP, HTTPS and QUIC. <strong>Gaming</strong> uses editable ports. <strong>Streaming</strong> needs provider destination CIDRs because encrypted HTTPS cannot identify video by itself. Lower priority numbers run first.</p>
+</form>
+</article>
+
+<details id="networkRolesPanel" class="panel" open>
+<summary>
+<strong>Interface roles & baseline shaping</strong>
+<span class="muted">WAN, customer network, AP bridge, VLAN trunk and Smart Queue defaults</span>
+</summary>
+<form id="networkSettingsForm" class="form-panel section-gap">
+<div class="form-row">
+<label>WAN / internet interface<select name="network_wan_if" id="networkWan" required>
+</select>
+</label>
+<label>Customer LAN / trunk interface<select name="network_customer_if" id="networkCustomer" required>
+</select>
+</label>
+</div>
+<div class="form-row">
+<label>Customer mode<select name="network_mode">
+<option value="lan">Dedicated LAN</option>
+<option value="bridge">Existing AP bridge</option>
+<option value="vlan">802.1Q VLAN trunk</option>
+</select>
+</label>
+<label>AP bridge interface<select name="network_bridge_if" id="networkBridge">
+<option value="">Not used</option>
+</select>
+</label>
+</div>
+<label class="check-row">
+<input name="cake_enabled" type="checkbox"> Enable Smart Queue Management</label>
+<div class="form-row">
+<label>Download capacity (Mbps)<input name="cake_download_mbps" type="number" min="1" value="100">
+</label>
+<label>Upload capacity (Mbps)<input name="cake_upload_mbps" type="number" min="1" value="50">
+</label>
+</div>
+<p class="muted">Set capacity slightly below the measured ISP speed for consistently low latency under load.</p>
+<button class="button primary">SAVE & APPLY NETWORK</button>
+</form>
+</details>
+<form id="userSpeedForm" class="panel form-panel section-gap">
+<div class="panel-head"><div><p class="eyebrow">CUSTOMER BANDWIDTH</p><h2>Default user speed</h2><p class="muted">Set one download and upload speed for every customer. Individual limits can still be changed under Live users.</p></div><span id="userSpeedStatus" class="badge offline">Rate-specific</span></div>
+<label class="check-row"><input name="enabled" type="checkbox"> Use this speed for all new and renewed customer access</label>
+<div class="form-row">
+<label>Download per user (Mbps)<input name="download_mbps" type="number" min="0.1" max="100000" step="0.1" value="5" required></label>
+<label>Upload per user (Mbps)<input name="upload_mbps" type="number" min="0.1" max="100000" step="0.1" value="5" required></label>
+</div>
+<label class="check-row"><input name="apply_to_all_users" type="checkbox"> Apply this speed to all active and paused users now</label>
+<button class="button primary">SAVE USER SPEED</button>
+</form>
+<div id="networkCards" class="kpi-grid section-gap">
+</div>
+<article id="dhcpPanel" class="panel section-gap">
+<div class="panel-head">
+<div>
+<p class="eyebrow">DHCP</p>
+<h2>Customer devices</h2>
+</div>
+</div>
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+<th>Hostname</th>
+<th>MAC</th>
+<th>IP</th>
+<th>Lease expires</th>
+</tr>
+</thead>
+<tbody id="dhcpBody">
+</tbody>
+</table>
+</div>
+</article>
+<div id="interfacePanel" class="interface-layout">
+<article id="interfaceLinksPanel" class="panel">
+<div class="panel-head">
+<div>
+<p class="eyebrow">LINKS</p>
+<h2>WAN and network interfaces</h2>
+<p class="muted">Use <strong>Edit WAN</strong> to select DHCP, static IP, or PPPoE for a physical internet interface.</p>
+</div>
+<div class="table-actions interface-list-toolbar"><label class="muted">Rows <select id="interfacePageSize" aria-label="Network interfaces per page"><option value="100">100</option><option value="500">500</option><option value="1000">1000</option></select></label>
+<span id="interfaceRefreshTime" class="muted"></span>
+</div>
+</div>
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+<th>Interface</th>
+<th>Role</th>
+<th>Status</th>
+<th>Addresses</th>
+<th>Link speed</th>
+<th>MTU</th>
+<th>Traffic</th>
+<th>Actions</th>
+</tr>
+</thead>
+<tbody id="interfacesBody">
+</tbody>
+</table>
+</div>
+<div class="table-actions section-gap interface-pagination">
+<span id="interfacePageInfo" class="muted" aria-live="polite"></span>
+<button id="interfacePagePrevious" type="button" class="mini-button">Previous</button>
+<button id="interfacePageNext" type="button" class="mini-button">Next</button>
+</div>
+</article>
+<form id="interfaceSpeedForm" class="panel form-panel">
+<p class="eyebrow">TRAFFIC OPTIMIZATION</p>
+<div class="panel-head"><div><h2>Smart QoS &amp; SQM</h2><p class="muted">Control bufferbloat, keep latency low, and share bandwidth fairly during congestion.</p></div><span id="cakeStatus" class="badge offline">Disabled</span></div>
+<section class="sqm-runtime" aria-labelledby="sqmRuntimeTitle">
+<div class="sqm-runtime-head"><div><h3 id="sqmRuntimeTitle">Live queue health</h3><p class="muted">Current traffic and Linux queue-discipline counters update automatically.</p></div><span id="sqmRuntimeUpdated" class="muted">Waiting for telemetry</span></div>
+<div id="sqmRuntimeStats" class="sqm-runtime-stats" aria-label="Smart QoS statistics"></div>
+<div id="sqmCapacityBars" class="sqm-capacity-bars" aria-label="Configured bandwidth utilization"></div>
+<div class="table-wrap sqm-table-wrap">
+<table>
+<thead><tr><th>Interface</th><th>Queue</th><th>Live traffic</th><th>Processed</th><th>Drops</th><th>Backlog</th><th>Health</th></tr></thead>
+<tbody id="sqmInterfacesBody"><tr><td colspan="7" class="muted">Enable SQM to start queue telemetry.</td></tr></tbody>
+</table>
+</div>
+<div id="sqmRuntimeMeta" class="sqm-runtime-meta"></div>
+</section>
+<label>WAN interface<select name="network_wan_if" id="interfaceSpeedWan" required>
+</select>
+</label>
+<label class="check-row">
+<input name="cake_enabled" type="checkbox"> Enable traffic shaping and Smart Queue Management</label>
+<div class="form-row">
+<label>Smart QoS preset<select name="sqm_preset"><option value="balanced">Balanced · recommended</option><option value="gaming">Gaming · lowest latency</option><option value="streaming">Streaming · sustained throughput</option><option value="compatibility">Compatibility · FQ-CoDel</option><option value="custom">Custom settings</option></select></label>
+<label>Queue algorithm<select name="sqm_algorithm"><option value="cake">CAKE · best fairness</option><option value="fq_codel">FQ-CoDel · lightweight</option></select></label>
+</div>
+<div class="form-row">
+<label>Download capacity (Mbps)<input name="cake_download_mbps" type="number" min="1" max="100000" required>
+</label>
+<label>Upload capacity (Mbps)<input name="cake_upload_mbps" type="number" min="1" max="100000" required>
+</label>
+</div>
+<div id="cakeAdvancedFields" class="sqm-algorithm-fields">
+<div class="form-row">
+<label>Traffic profile<select name="cake_profile"><option value="diffserv4">Diffserv 4 · recommended</option><option value="diffserv3">Diffserv 3</option><option value="diffserv8">Diffserv 8</option><option value="besteffort">Best effort</option></select></label>
+<label>Internet RTT (ms)<input name="cake_rtt_ms" type="number" min="1" max="1000" value="100" required></label>
+</div>
+<label>Link overhead (bytes)<input name="cake_overhead_bytes" type="number" min="-64" max="256" value="0" required></label>
+<div class="form-row"><label class="check-row"><input name="cake_nat" type="checkbox" checked> NAT-aware fairness</label><label class="check-row"><input name="cake_ack_filter" type="checkbox" checked> Upload ACK filtering</label></div>
+</div>
+<div id="fqCodelFields" class="sqm-algorithm-fields hidden">
+<div class="form-row"><label>Target latency (ms)<input name="fq_codel_target_ms" type="number" min="1" max="100" value="5" required></label><label>Queue interval (ms)<input name="fq_codel_interval_ms" type="number" min="10" max="1000" value="100" required></label></div>
+<label class="check-row"><input name="fq_codel_ecn" type="checkbox" checked> Use ECN when supported</label>
+</div>
+<div class="optimization-summary"><span><strong>Routing</strong> Loose reverse-path validation prevents multi-WAN drops.</span><span><strong>NAT</strong> MSS clamping avoids PPPoE and tunnel fragmentation.</span><span><strong>TCP</strong> MTU probing repairs broken path-MTU discovery.</span></div>
+<p id="cakeStatusDetail" class="muted" role="status" aria-live="polite">Set capacity to 90–95% of the measured ISP speed for consistently low latency.</p>
+<button class="button primary">SAVE &amp; APPLY SMART QOS</button>
+</form>
+</div>
+</section>
+<section id="systemTab" class="tab-panel">
+  <article id="accessControlPanel" class="panel section-gap">
+    <div class="panel-head">
+      <div>
+        <p class="eyebrow">ACCESS CONTROL</p>
+        <h2>Team access</h2>
+        <p class="muted">Give each operator only the modules and actions needed for their job.</p>
+      </div>
+      <span id="currentAdminRole" class="badge online">Administrator</span>
+    </div>
+    <form id="userCreateForm" class="filter-bar access-user-form">
+      <label><span>Username</span><input name="username" minlength="3" maxlength="64" pattern="[a-zA-Z0-9._-]+" autocomplete="off" required></label>
+      <label><span>Temporary password</span><input name="password" type="password" minlength="12" autocomplete="new-password" required></label>
+      <label><span>Role</span><select name="role" required><option value="viewer">Viewer · read only</option><option value="seller">Seller · vouchers</option><option value="collector">Collector · cash collection</option><option value="technician">Technician · fleet and network</option><option value="admin">Admin · full access</option><option value="owner">Owner · full access</option></select></label>
+      <button class="button primary compact">ADD USER</button>
+    </form>
+    <div class="role-guide" aria-label="Role permission guide">
+      <span><strong>Technician</strong> stations, customers, VLANs and firmware</span>
+      <span><strong>Collector</strong> collections and sales totals</span>
+      <span><strong>Seller</strong> voucher generation and sales visibility</span>
+      <span><strong>Viewer</strong> read-only monitoring</span>
+    </div>
+    <div class="table-wrap section-gap-small">
+      <table>
+        <thead><tr><th>User</th><th>Role</th><th>Status</th><th>Reset password</th><th>Last updated</th><th>Actions</th></tr></thead>
+        <tbody id="adminUsersBody"><tr><td colspan="6" class="muted">Loading users…</td></tr></tbody>
+      </table>
+    </div>
+  </article>
+  <div id="portalEditorPanel" class="portal-editor-layout">
+    <form id="settingsForm" class="panel form-panel">
+      <p class="eyebrow">PORTAL EDITOR</p>
+<h2>Brand and customer messages</h2>
+<p class="muted">Changes appear on every customer portal after saving.</p>
+      <fieldset class="portal-theme-picker">
+<legend>Portal theme</legend>
+<div class="portal-theme-options">
+
+
+<label class="portal-theme-option">
+<input type="radio" name="portal_theme" value="battle-royale">
+<span class="theme-thumbnail theme-thumbnail-battle-royale" aria-hidden="true"><i></i><b></b><em></em></span>
+<span class="theme-option-copy"><strong>Battle Royale</strong><small>Tactical game artwork, a four-part timer and full-width controls</small></span>
+</label>
+<label class="portal-theme-option">
+<input type="radio" name="portal_theme" value="neon">
+<span class="theme-thumbnail theme-thumbnail-neon" aria-hidden="true"><i></i><b></b><em></em></span>
+<span class="theme-option-copy"><strong>Neon Nights</strong><small>Cyberpunk city artwork with electric cyan and magenta controls</small></span>
+</label>
+<label class="portal-theme-option">
+<input type="radio" name="portal_theme" value="lite">
+<span class="theme-thumbnail theme-thumbnail-lite" aria-hidden="true"><i></i><b></b><em></em></span>
+<span class="theme-option-copy"><strong>Lite</strong><small>White background, black buttons, and a compact WiFi layout</small></span>
+</label>
+<label class="portal-theme-option">
+<input type="radio" name="portal_theme" value="ad-showcase">
+<span class="theme-thumbnail theme-thumbnail-ad-showcase" aria-hidden="true"><i></i><b></b><em></em></span>
+<span class="theme-option-copy"><strong>Ad Showcase</strong><small>Show a sponsor banner with a bold offer and a clear WiFi call to action</small></span>
+</label>
+
+
+
+
+
+
+
+
+
+</div>
+</fieldset>
+      <aside id="adThemeGuide" class="ad-theme-guide" hidden>
+        <p class="eyebrow">HOW YOUR AD APPEARS</p>
+        <ol>
+          <li><strong>Upload a banner</strong><span>Use a bright product, shop, or service photo in Media Assets.</span></li>
+          <li><strong>Write the offer</strong><span>Brand name, headline, and tagline appear over the banner.</span></li>
+          <li><strong>Add a short message</strong><span>Announcement becomes the highlighted offer line.</span></li>
+          <li><strong>Save and preview</strong><span>The ad sits above connection status and Insert Coin.</span></li>
+        </ol>
+        <div class="ad-guide-example"><span>EXAMPLE</span><strong>VendoOS WiFi</strong><b>Fast WiFi. Fair rates.</b><small>Connect · Stream · Play</small></div>
+        <button id="useSampleAdCopy" class="button secondary compact" type="button">USE SAMPLE AD COPY</button>
+      </aside>
+      <fieldset class="portal-theme-picker">
+<legend>Customer access</legend>
+<label class="check-row"><input type="checkbox" name="auto_pause_reconnect_enabled" value="1"> <span><strong>Automatic pause &amp; reconnect</strong><small>Allow admins to pause paid time and reconnect that customer automatically when the device returns to the portal.</small></span></label>
+</fieldset>
+      <label>Brand name<input name="brand_name" maxlength="80" placeholder="VendoOS WiFi">
+</label>
+      <label>Portal headline<input name="portal_headline" maxlength="100" placeholder="Fast WiFi. Fair rates.">
+</label>
+      <label>Short tagline<input name="portal_tagline" maxlength="100" placeholder="CONNECT · STREAM · PLAY">
+</label>
+      <label>Announcement<input name="portal_announcement" maxlength="180" placeholder="Reliable internet, ready when you are.">
+</label>
+      <label>Support message<input name="support_text" maxlength="180" placeholder="Optional support message">
+</label>
+      <div class="form-row">
+<label>Primary color<input name="portal_primary_color" type="color" value="#ff5351">
+</label>
+<label>Accent color<input name="portal_accent_color" type="color" value="#ffc14d">
+</label>
+</div>
+      <label>Timezone<input name="timezone">
+</label>
+<button class="button primary">SAVE SETTINGS</button>
+    </form>
+    <article class="panel portal-preview-panel">
+<div class="panel-head">
+<div>
+<p class="eyebrow">LIVE PREVIEW</p>
+<h2>Mobile portal</h2>
+</div>
+<div class="table-actions"><a class="button secondary compact" href="/portal" target="_blank" rel="noopener">Open portal</a></div>
+</div>
+<div id="portalEditorPreview" class="portal-editor-preview promo-portal" data-access-state="ready" data-station-state="online">
+<div class="portal-shell">
+<div class="portal-card">
+<img id="previewLiteLogo" class="lite-logo" alt="WiFi logo preview" width="220" height="172" hidden>
+<div class="theme-ornaments" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+<div class="portal-promo">
+<div class="portal-hero">
+<img id="previewBanner" alt="Portal banner preview" width="960" height="480">
+</div>
+<div class="promo-shade">
+</div>
+<section id="previewAdPromo" class="ad-promo hidden" aria-label="Sponsored promotion preview">
+<div class="ad-promo-brand"><span>SPONSORED</span><strong id="previewAdBrand">VendoOS WiFi</strong></div>
+<h2 id="previewAdHeadline">Fast WiFi. Fair rates.</h2>
+<p id="previewAdTagline"></p>
+<p id="previewAdMessage" class="ad-promo-message"></p>
+</section>
+</div>
+<p id="previewAnnouncement" class="announcement">Reliable internet, ready when you are.</p>
+<div class="status-panel">
+<div class="command-status">
+<span class="status-orb">&#8769;</span>
+<p class="eyebrow">CONNECTION STATUS</p>
+<h2 id="previewConnectionStatus">READY TO CONNECT</h2>
+<small id="previewStatusDetail">Insert coins or redeem a voucher</small>
+</div>
+<p class="lite-meta">MAC: 02:00:00:00:00:01 | IP: 10.0.0.202</p>
+<p class="lite-meta">COINS: &#8369;0 | POINTS: 0</p>
+<div class="access-title"><strong>ACCESS DETAILS</strong><span>＋</span></div>
+<p id="previewCreditLabel" class="credit-label">REMAINING TIME</p>
+<div id="previewRemainingTime" class="time-display" aria-label="No remaining time">00:00:00</div>
+<p class="muted">Insert coins or redeem a voucher</p>
+<div class="button secondary quiet preview-pause"><span class="pause-icon">Ⅱ</span><span id="previewPauseLabel">PAUSE &amp; DISCONNECT</span></div>
+</div>
+<div class="portal-actions">
+<div id="previewCoinButton" class="button primary coin-cta">
+<span class="button-icon">&#8369;</span>
+<span class="action-copy"><strong>INSERT COIN</strong></span><span class="action-arrow">›</span>
+</div>
+<div class="button secondary rates-cta">
+<span class="button-icon">&#8767;</span>
+<span class="action-copy"><strong>WIFI RATES</strong><small>View available WiFi rates</small></span><span class="action-arrow">›</span>
+</div>
+</div>
+<div class="voucher-form">
+<label>Have a voucher?</label>
+<div class="voucher-row">
+<input tabindex="-1" placeholder="Enter voucher code" readonly>
+<button class="button primary" type="button" tabindex="-1">REDEEM</button>
+</div>
+</div>
+<div class="portal-spectrum">
+<i>
+</i>
+<i>
+</i>
+<i>
+</i>
+<i>
+</i>
+<i>
+</i>
+</div>
+</div>
+</div>
+</div>
+</article>
+  </div>
+  <form id="portalAssetsForm" class="panel form-panel section-gap">
+    <div class="panel-head">
+<div>
+<p class="eyebrow">MEDIA ASSETS</p>
+<h2>Logo, banner and sounds</h2>
+</div>
+<button class="button primary compact">UPLOAD SELECTED</button>
+</div>
+    <p class="muted">Optimized formats: PNG/WebP logo under 2 MB, JPG/WebP banner under 5 MB, and MP3 audio. Sounds begin only after the customer taps Insert Coin.</p>
+    <div class="portal-assets-grid">
+      <label class="asset-field">
+<span>Portal logo</span>
+<input name="logo" type="file" accept="image/png,image/jpeg,image/webp">
+<small id="logoAssetStatus" class="muted">Default mark</small>
+<button type="button" class="mini-button danger" data-remove-portal-asset="logo">Remove</button>
+</label>
+      <label class="asset-field">
+<span>Banner image</span>
+<input name="banner" type="file" accept="image/png,image/jpeg,image/webp">
+<small id="bannerAssetStatus" class="muted">No banner</small>
+<button type="button" class="mini-button danger" data-remove-portal-asset="banner">Remove</button>
+</label>
+      <label class="asset-field">
+<span>Insert coin background</span>
+<input name="insert-sound" type="file" accept="audio/mpeg,.mp3">
+<small id="insertSoundAssetStatus" class="muted">No sound</small>
+<div class="table-actions">
+<button type="button" class="mini-button" data-test-portal-audio="portal_insert_sound_url">Play</button>
+<button type="button" class="mini-button danger" data-remove-portal-asset="insert-sound">Remove</button>
+</div>
+</label>
+      <label class="asset-field">
+<span>Coin received sound</span>
+<input name="coin-sound" type="file" accept="audio/mpeg,.mp3">
+<small id="coinSoundAssetStatus" class="muted">No sound</small>
+<div class="table-actions">
+<button type="button" class="mini-button" data-test-portal-audio="portal_coin_sound_url">Play</button>
+<button type="button" class="mini-button danger" data-remove-portal-asset="coin-sound">Remove</button>
+</div>
+</label>
+    </div>
+  </form>
+  <article id="campaignPanel" class="panel section-gap">
+    <div class="panel-head"><div><p class="eyebrow">ADVERTISING</p><h2>Sponsored WiFi campaigns</h2><p class="muted">Schedule offers, target a WiFi zone, and track portal views and clicks.</p></div></div>
+    <form id="campaignForm" class="campaign-admin-form">
+      <input name="id" type="hidden">
+      <label>Campaign name<input name="name" maxlength="80" required></label>
+      <label>Sponsor<input name="sponsor" maxlength="80" placeholder="Business name"></label>
+      <label>Portal headline<input name="headline" maxlength="120" required></label>
+      <label>Offer details<input name="body" maxlength="300" placeholder="Short customer-facing offer"></label>
+      <label>Image URL<input name="image_url" maxlength="500" placeholder="/assets/uploads/offer.webp"></label>
+      <label>Destination (HTTPS)<input name="target_url" type="url" maxlength="500" placeholder="https://business.example/offer"></label>
+      <label>WiFi zone<select name="zone_id"><option value="">All zones</option></select></label>
+      <label>Starts<input name="starts_at" type="datetime-local"></label>
+      <label>Ends<input name="ends_at" type="datetime-local"></label>
+      <div class="table-actions"><button class="button primary compact">SAVE CAMPAIGN</button><button id="campaignReset" type="button" class="button secondary compact">CLEAR</button></div>
+    </form>
+    <div id="campaignList" class="health-list"></div>
+  </article>
+  <article id="paymentsPanel" class="panel section-gap">
+    <div class="panel-head"><div><p class="eyebrow">GCASH &amp; MAYA</p><h2>PayMongo voucher checkout</h2><p class="muted">Hosted checkout keeps card and wallet details off the VendoOS server. Orders are fulfilled after PayMongo confirms payment.</p></div><span id="paymentsStatus" class="badge offline">Not configured</span></div>
+    <p id="paymentsDetail" class="muted">Set PAYMONGO_SECRET_KEY, PAYMONGO_WEBHOOK_SECRET, and PAYMONGO_RETURN_BASE_URL in the server environment. Then register the webhook URL below for checkout_session.payment.paid.</p>
+    <form id="paymentSettingsForm" class="payment-settings-form">
+      <label>Public HTTPS return URL<input name="return_base_url" type="url" placeholder="https://wifi.example.com" autocomplete="url" required></label>
+      <label>PayMongo secret key<input name="secret_key" type="password" placeholder="sk_test_… or sk_live_…" autocomplete="new-password"><small>Leave blank to keep the stored key. The value is encrypted on this server and never shown again.</small></label>
+      <label>Webhook signing secret<input name="webhook_secret" type="password" placeholder="PayMongo webhook secret" autocomplete="new-password"><small>Leave blank to keep the stored signing secret.</small></label>
+      <label class="check-row"><input name="clear_secret_key" type="checkbox"> Remove stored API secret</label>
+      <label class="check-row"><input name="clear_webhook_secret" type="checkbox"> Remove stored webhook secret</label>
+      <label class="check-row"><input name="enabled" type="checkbox"> Enable customer checkout</label>
+      <div class="table-actions"><button class="button primary compact">SAVE PAYMENT SETTINGS</button></div>
+    </form>
+    <div class="payment-setup"><code id="paymentWebhookUrl">/api/webhooks/paymongo</code><span>Use a public HTTPS domain that routes to this server. Configure test keys first, then switch to live keys after a successful test payment.</span></div>
+    <div id="paymentOrderStats" class="campaign-stats"></div>
+  </article>
+  <article id="systemPowerPanel" class="panel section-gap system-power-panel">
+    <div class="panel-head">
+      <div>
+        <p class="eyebrow">SERVER POWER</p>
+        <h2>Reboot or shut down</h2>
+      </div>
+      <span id="powerServerStatus" class="badge online">Online</span>
+    </div>
+    <div class="power-summary" aria-label="Server status">
+      <div><span>Server</span><strong id="powerHostname">Loading…</strong></div>
+      <div><span>Uptime</span><strong id="powerUptime">Loading…</strong></div>
+    </div>
+    <p class="muted power-warning">Both actions immediately interrupt the customer portal, active sessions, and network services. Reboot starts them again automatically; shutdown requires the server to be powered on manually.</p>
+    <div class="power-actions">
+      <button id="rebootServer" type="button" class="button warning">REBOOT SERVER</button>
+      <button id="shutdownServer" type="button" class="button danger">SHUT DOWN SERVER</button>
+    </div>
+    <p id="powerActionStatus" class="power-action-status" role="status" aria-live="polite"></p>
+  </article>
+  <article id="backupPanel" class="panel section-gap">
+<div class="panel-head">
+<div>
+<p class="eyebrow">RECOVERY</p>
+<h2>Backups</h2>
+</div>
+<button id="backupNow" class="button secondary compact">Backup now</button>
+</div>
+<p class="muted">Automatic daily backups are integrity-checked. Download a copy below, or choose <strong>Restore</strong> to replace the full VendoOS database. Restore pauses customer access briefly, saves a safety copy first, and asks you to type <strong>RESTORE</strong>. You can also test a backup without changing live data over SSH with <code>sudo /opt/debian-vendoos/deploy/debian/restore.sh --test BACKUP.db</code>.</p>
+<div class="table-actions backup-batch-actions"><label class="check-label"><input id="selectAllBackups" type="checkbox"> Select all shown</label><button id="deleteSelectedBackups" type="button" class="button danger compact" disabled>Delete selected <span id="selectedBackupCount">0</span></button></div>
+<div id="backupList" class="health-list">
+</div>
+</article>
+  <article id="firmwarePanel" class="panel section-gap">
+<div class="panel-head">
+<div>
+<p class="eyebrow">OTA</p>
+<h2>ESP fleet updates</h2>
+<p class="muted">Upload one release per board type, then update compatible stations securely over the network.</p>
+</div>
+<div class="table-actions">
+<button id="refreshFirmwareStatus" type="button" class="button secondary compact">Refresh status</button>
+<button id="deployAllFirmware" type="button" class="button primary compact">Start safe rollout</button>
+</div>
+</div>
+<div id="firmwareSummary" class="ota-summary" aria-live="polite"></div>
+<div id="firmwareRollouts" class="ota-rollouts" aria-live="polite"></div>
+<form id="firmwareForm" class="filter-bar ota-upload-form">
+<label><span>Version</span><input name="version" placeholder="0.3.1" pattern="[0-9]+\.[0-9]+\.[0-9]+.*" required></label>
+<label><span>Target board</span><select name="board" required><option value="ESP8266">ESP8266 WiFi</option><option value="ESP32">ESP32 WiFi</option><option value="ESP8266-W5500">ESP8266 + W5500 LAN</option></select></label>
+<label class="ota-file"><span>Firmware BIN</span>
+<input name="file" type="file" accept=".bin" required>
+</label>
+<button class="button primary compact">Upload BIN</button>
+</form>
+<h3 class="ota-section-title">Available releases</h3>
+<div id="firmwareList" class="health-list">
+</div>
+<h3 class="ota-section-title">Station update status</h3>
+<div class="table-wrap">
+<table class="ota-table">
+<thead><tr><th>Station</th><th>Board</th><th>Installed</th><th>Target</th><th>State</th><th>Last heartbeat</th><th>Action</th></tr></thead>
+<tbody id="firmwareStatusBody"><tr><td colspan="7" class="muted">No ESP stations detected.</td></tr></tbody>
+</table>
+</div>
+</article>
+</section>
+<section id="activityTab" class="tab-panel">
+<article class="panel">
+<div class="panel-head">
+<div>
+<p class="eyebrow">AUDIT LOG</p>
+<h2>System activity</h2>
+</div>
+</div>
+<div id="eventList" class="activity-list">
+</div>
+</article>
+</section>
+</main>
+<div id="zoneModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="zoneModalTitle">
+<form id="zoneForm" class="modal-card form-panel">
+<button type="button" class="icon-button modal-close" data-zone-close aria-label="Close">×</button>
+<input name="id" type="hidden">
+<p class="eyebrow">MANAGED VLAN</p>
+<h2 id="zoneModalTitle">Edit customer VLAN</h2>
+<label>Name<input name="name" maxlength="80" required>
+</label>
+<label>Description<textarea name="description" maxlength="240" rows="2" placeholder="Location, purpose or operator notes">
+</textarea>
+</label>
+<div class="form-row">
+<label>VLAN ID<input name="vlan_id" disabled>
+</label>
+<label>Parent interface<input name="parent_if" maxlength="30" required>
+</label>
+</div>
+<label>Subnet (CIDR)<input name="subnet" maxlength="30" required>
+</label>
+<div class="form-row">
+<label>Gateway<input name="gateway" maxlength="20" required>
+</label>
+<label>DHCP start<input name="dhcp_start" maxlength="20" required>
+</label>
+</div>
+<label>DHCP end<input name="dhcp_end" maxlength="20" required>
+</label>
+<label>Stations assigned to this VLAN<select name="machine_ids" id="zoneStations" multiple size="5">
+</select>
+<small class="muted">Selected stations move here. Deselected stations move to the default customer network.</small>
+</label>
+<label class="check-row">
+<input name="enabled" type="checkbox"> VLAN enabled</label>
+<div class="table-actions">
+<button type="button" class="button secondary" data-zone-close>Cancel</button>
+<button class="button primary">SAVE VLAN</button>
+</div>
+</form>
+</div>
+
+<div id="machineModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="machineModalTitle">
+<form id="machineForm" class="modal-card form-panel">
+<button type="button" class="icon-button modal-close" data-machine-close aria-label="Close">×</button>
+<input name="id" type="hidden">
+<p class="eyebrow">VENDO HARDWARE</p>
+<h2 id="machineModalTitle">Edit station</h2>
+<label>Station name<input name="name" maxlength="80" required></label>
+<label>Location<input name="location" maxlength="120" placeholder="Optional"></label>
+<div class="form-row">
+<label>Coin pulse pin<select name="coin_pin" required></select></label>
+<label>Coin enable pin<select name="enable_pin" required></select></label>
+</div>
+<p id="machinePinHelp" class="muted"></p>
+<p class="warning-copy">Pin changes are delivered automatically on the next heartbeat. The coin slot remains disabled while the ESP applies its new configuration.</p>
+<div class="table-actions">
+<button type="button" class="button secondary" data-machine-close>Cancel</button>
+<button class="button primary">SAVE PINS</button>
+</div>
+</form>
+</div>
+
+<div id="interfaceConfigModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="interfaceConfigTitle">
+<form id="interfaceConfigForm" class="modal-card form-panel">
+<button type="button" class="icon-button modal-close" data-interface-config-close aria-label="Close">×</button>
+<input name="interface" type="hidden">
+<p class="eyebrow">NETWORK INTERFACE</p>
+<h2 id="interfaceConfigTitle">IP settings</h2>
+<p id="interfaceConfigName" class="interface-config-name"></p>
+<label>Internet source<select name="mode" required><option value="dhcp">Automatic (DHCP)</option><option value="static">Static IPv4</option><option value="pppoe">PPPoE</option></select></label>
+<div id="interfaceStaticFields">
+<label>Static IP address / prefix<input name="address" maxlength="50" placeholder="172.16.20.9/28"></label>
+<label>Default gateway<input name="gateway" maxlength="45" placeholder="172.16.20.1"></label>
+</div>
+<div id="interfacePppoeFields" hidden>
+<label>PPPoE username<input name="pppoe_username" maxlength="128" autocomplete="username" placeholder="ISP account username"></label>
+<label>PPPoE password<input name="pppoe_password" type="password" maxlength="256" autocomplete="new-password" placeholder="Enter password"><small id="interfacePppoePasswordHint" class="muted">Required when PPPoE is configured for the first time.</small></label>
+<div class="form-row">
+<label>Service name <span class="muted">(optional)</span><input name="pppoe_service" maxlength="64" placeholder="Leave blank unless required by ISP"></label>
+<label>MTU<input name="mtu" type="number" min="576" max="1492" value="1492"></label>
+</div>
+</div>
+<div class="form-row">
+<label>Primary DNS<input name="dns1" maxlength="45" placeholder="1.1.1.1"></label>
+<label>Secondary DNS<input name="dns2" maxlength="45" placeholder="8.8.8.8"></label>
+</div>
+<label>Route cost<input name="cost" type="number" min="1" max="65535" value="100" required><small class="muted">Lower cost is preferred when more than one route is available.</small></label>
+<p class="warning-copy">Applying changes can briefly interrupt this interface. If you change the interface used for admin access, reconnect using its new address.</p>
+<div id="interfaceConfigStatus" class="muted"></div>
+<div class="table-actions"><button type="button" class="button secondary" data-interface-config-close>Cancel</button><button class="button primary">APPLY WAN SETTINGS</button></div>
+</form>
+</div>
+
+</div>
+</body>
+</html>

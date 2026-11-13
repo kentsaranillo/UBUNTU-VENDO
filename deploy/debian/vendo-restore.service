@@ -1,0 +1,14 @@
+[Unit]
+Description=Apply an administrator-approved VendoOS database restore
+After=local-fs.target
+
+[Service]
+Type=oneshot
+User=root
+Group=root
+ExecStart=/opt/debian-vendoos/deploy/debian/restore-request.sh
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/debian-vendoos /var/backups/debian-vendoos /run/debian-vendoos/restore-requests /run/debian-vendoos/restore-processing /run/debian-vendoos/restore-status
