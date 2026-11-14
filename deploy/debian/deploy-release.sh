@@ -31,8 +31,8 @@ trap 'exit 1' INT TERM
 # Reject traversal, links, runtime data and unrelated top-level paths.
 python3 - "$1" "$stage" <<'PY'
 import pathlib, sys, tarfile
-allowed = {'server.js', 'access-sync.js', 'multiwan-sync.js', 'vlan-sync.js',
-           'package.json', 'public', 'deploy', 'docs', 'firmware', 'tools',
+allowed = {'server.js', 'access-sync.js', 'multiwan-sync.js', 'vlan-sync.js', 'staff-portals.js',
+           'package.json', 'public', 'deploy', 'docs', 'firmware', 'tools', 'test',
            'README.md', '.gitignore', '.gitattributes'}
 with tarfile.open(sys.argv[1]) as archive:
     for member in archive.getmembers():
@@ -43,7 +43,7 @@ with tarfile.open(sys.argv[1]) as archive:
             raise ValueError('Links and special files are forbidden')
     archive.extractall(sys.argv[2], filter='data')
 PY
-for file in server.js access-sync.js multiwan-sync.js vlan-sync.js; do
+for file in server.js access-sync.js multiwan-sync.js vlan-sync.js staff-portals.js; do
   [ ! -f "$stage/$file" ] || /usr/local/bin/node --check "$stage/$file"
 done
 if [ -d "$stage/deploy" ]; then

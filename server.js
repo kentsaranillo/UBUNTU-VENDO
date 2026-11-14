@@ -1334,6 +1334,7 @@ function adminRoleProfile(row) {
 function adminCan(row, method, pathname) {
   const role = normalizedAdminRole(row.role); const group = adminEndpointGroup(pathname);
   if (pathname === '/api/admin/me') return method === 'GET';
+  if (role === 'seller' || role === 'collector') return false;
   if (group === 'users') return FULL_ACCESS_ROLES.has(role);
   if (FULL_ACCESS_ROLES.has(role)) return true;
   if (method === 'GET') {
@@ -1345,6 +1346,7 @@ function adminCan(row, method, pathname) {
   if (role === 'seller') return method === 'POST' && pathname === '/api/admin/vouchers/generate';
   return false;
 }
+const staffRoute = require('./staff-portals')({ db, adminAuth, json, readBody, nowIso, futureIso, sha, event });
 function machineAuth(req, res) {
   const hardwareId = cleanText(req.headers['x-vendo-device'], 80);
   const token = bearer(req);
@@ -1487,6 +1489,7 @@ async function route(req, res) {
     return sendFile(req, res, path.join(PUBLIC_DIR, 'portal.html'), { litePortal });
   }
   if (method === 'GET' && pathname === '/admin') return sendFile(req, res, path.join(PUBLIC_DIR, 'admin.html'));
+  if (method === 'GET' && ['/seller','/collector'].includes(pathname)) return sendFile(req, res, path.join(PUBLIC_DIR, 'staff.html'));
   if (method === 'GET' && pathname.startsWith('/assets/')) {
     const relative = pathname.slice('/assets/'.length);
     const uploadRelative=relative.startsWith('uploads/')?relative.slice('uploads/'.length):'';
@@ -1761,6 +1764,7 @@ async function route(req, res) {
   if (method === 'POST' && pathname === '/api/admin/logout') {
     if (!adminAuth(req, res)) return; db.prepare('DELETE FROM admin_sessions WHERE token_hash=?').run(sha(bearer(req))); return json(res, 200, { ok: true });
   }
+  if (pathname.startsWith('/api/staff/')) return staffRoute(req, res, method, pathname);
   let currentAdmin = null;
   if (pathname.startsWith('/api/admin/')) {
     currentAdmin = adminAuth(req, res); if (!currentAdmin) return;

@@ -11,6 +11,6 @@
     "start": "node server.js",
     "sync-access": "node access-sync.js",
     "check": "node --check server.js && node --check access-sync.js && node --check vlan-sync.js && node --check multiwan-sync.js && node --check public/app.js && node --check public/admin.js",
-    "test": "node --test test/e2e.test.js"
+    "test": "node --test test/e2e.test.js test/staff-portals.test.js"
   }
 }

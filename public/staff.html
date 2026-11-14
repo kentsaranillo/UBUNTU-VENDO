@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>KINGSLINK Staff</title><link rel="stylesheet" href="/assets/staff.css?v=1"><script src="/assets/staff.js?v=1" defer></script></head>
+<body><main>
+<header><div><p class="eyebrow">KINGSLINK</p><h1 id="title">Staff portal</h1><p id="identity">Sign in to continue</p></div><button id="logout" hidden>Sign out</button></header>
+<form id="login" class="card login"><h2 id="loginTitle">Staff sign in</h2><label>Username<input name="username" autocomplete="username" required></label><label>Password<input name="password" type="password" autocomplete="current-password" required></label><button class="primary">Sign in</button><nav><a href="/seller">Seller portal</a><a href="/collector">Collector portal</a></nav></form>
+<p id="notice" role="status" aria-live="polite"></p>
+<section id="workspace" hidden>
+<div class="toolbar"><input id="search" placeholder="Search codes, batches or stations" aria-label="Search records"><button id="refresh">Refresh</button></div>
+<div id="stats" class="stats"></div>
+<section id="seller" hidden>
+<form id="issue" class="card"><h2>Issue vouchers</h2><p>Prices and access time follow the Admin rate list.</p><div class="fields"><label>Rate<select name="rate_id" required></select></label><label>Quantity<input name="quantity" type="number" value="1" min="1" max="100" required></label></div><button class="primary">Generate vouchers</button></form>
+<article class="card"><div class="toolbar"><h2>My vouchers</h2><button id="print" disabled>Print selected</button></div><div class="table"><table><thead><tr><th><input id="selectAll" type="checkbox" aria-label="Select displayed vouchers"></th><th>Code / batch</th><th>Time</th><th>Price</th><th>Status</th><th>Sale</th></tr></thead><tbody id="vouchers"></tbody></table></div><p class="hint">Sale totals count vouchers you explicitly mark as sold. Issuing a voucher does not record payment.</p></article>
+</section>
+<section id="collector" hidden>
+<article class="card"><h2>Assigned stations</h2><div id="stations" class="stations"></div></article>
+<form id="collect" class="card" hidden><h2>Count and record cash</h2><p id="collectionExpected"></p><input name="machine_id" type="hidden"><input name="expected_amount_centavos" type="hidden"><label>Counted cash (PHP)<input name="amount" type="number" min="0" max="1000000" step=".01" required></label><label>Collection notes<textarea name="notes" maxlength="500"></textarea></label><p>Saving records a collection receipt and resets the station cash balance. Close active coin sessions first.</p><button class="primary">Confirm collection</button><button id="cancelCollection" type="button">Cancel</button></form>
+<article class="card"><h2>My collection receipts</h2><div class="table"><table><thead><tr><th>Receipt / date</th><th>Station</th><th>Expected</th><th>Counted</th><th>Variance</th></tr></thead><tbody id="collections"></tbody></table></div></article>
+</section>
+</section>
+</main></body></html>
