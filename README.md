@@ -49,7 +49,7 @@ Debian performs all gateway duties:
 
 ## Network layout
 
-Seller and collector accounts have dedicated mobile portals at `/seller` and `/collector`. An Owner or Admin creates those accounts under System → Team access. The Staff portal access form links a seller code or assigns collector stations. Reload accounts in that form after creating a new account.
+All roles sign in at `/admin` with their own credentials. Seller accounts automatically open `/seller`, Collector accounts open `/collector`, and administrative roles open their permitted dashboard modules. An Owner or Admin creates those accounts under System → Team access. The Staff portal access form links a seller code or assigns collector stations. Reload accounts in that form after creating a new account.
 
 Sellers issue vouchers using enabled Admin rates, print their own stock, and record received payments with Mark sold. Issued voucher face value is separate from recorded sales. Collectors see assigned station balances and record counted cash, variance and notes. Collection receipts belong to the signed-in collector. Submissions use idempotency keys to prevent duplicate financial operations on retries. These roles use dedicated scoped APIs and are redirected from the Admin dashboard.
 

@@ -15,7 +15,8 @@ async function api(path,body) {
   const response = await fetch(path,{cache:'no-store',method:body?'POST':'GET',headers:{'content-type':'application/json',authorization:'Bearer '+token},body:body?JSON.stringify(body):undefined});
   const data = await response.json();
   if (!response.ok) {
-    if(response.status===401){token='';sessionStorage.removeItem('vendo_staff_token');$('login').hidden=false;$('workspace').hidden=true;}
+    if(response.status===401){token='';sessionStorage.removeItem('vendo_staff_token');location.replace('/admin');}
+    if(response.status===403 && path==='/api/staff/context')location.replace('/admin');
     throw new Error(data.error || 'Request failed');
   }
   return data;
@@ -52,15 +53,10 @@ function render() {
 async function refresh(){
   context=await api('/api/staff/context');
   if(context.user.role!==portalRole){location.replace('/'+context.user.role);return;}
-  $('login').hidden=true;$('workspace').hidden=false;$('logout').hidden=false;render();
+  $('workspace').hidden=false;$('logout').hidden=false;render();
 }
 $('title').textContent=portalRole==='seller'?'Seller portal':'Collector portal';
-$('loginTitle').textContent='Sign in as '+portalRole;
-$('login').onsubmit=async event=>{
-  event.preventDefault();const button=event.submitter;button.disabled=true;
-  try{const result=await api('/api/admin/login',Object.fromEntries(new FormData(event.target)));if(result.user.role!==portalRole){await fetch('/api/admin/logout',{method:'POST',headers:{authorization:'Bearer '+result.token}});throw new Error('Use a '+portalRole+' account for this portal');}token=result.token;sessionStorage.setItem('vendo_staff_token',token);event.target.reset();await refresh();notice('Signed in.');}catch(e){notice(e.message,true)}finally{button.disabled=false}
-};
-$('logout').onclick=async()=>{try{await api('/api/admin/logout',{})}finally{sessionStorage.removeItem('vendo_staff_token');location.reload()}};
+$('logout').onclick=async()=>{try{await api('/api/admin/logout',{})}finally{sessionStorage.removeItem('vendo_staff_token');localStorage.removeItem('vendo_admin_token');location.replace('/admin')}};
 $('refresh').onclick=()=>refresh().catch(e=>notice(e.message,true));
 $('search').oninput=()=>{if(context)render()};
 $('issue').onsubmit=async event=>{
@@ -97,3 +93,4 @@ $('collect').onsubmit=async event=>{
   try{const fields=Object.fromEntries(new FormData(form));const r=await action('/api/staff/collect',{machine_id:Number(fields.machine_id),expected_amount_centavos:Number(fields.expected_amount_centavos),actual_amount_centavos:Math.round(Number(fields.amount)*100),notes:fields.notes});form.hidden=true;await refresh();notice('Receipt #'+r.id+' saved. Variance '+money(r.variance_centavos));}catch(e){notice(e.message,true)}finally{button.disabled=false}
 };
 if(token)refresh().catch(e=>notice(e.message,true));
+else location.replace('/admin');
